@@ -6,5 +6,5 @@ public interface IWeapon : IModule
 {
     public int damage { get; set; }
     public float shootCooldown { get; set; }
-    public void ExecuteModule();
+    public new void ExecuteModule();
 }
