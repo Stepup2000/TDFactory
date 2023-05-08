@@ -16,10 +16,10 @@ public class DamageModule : MonoBehaviour, IStatModifier
 
     private void Start()
     {
-        ApplyMod();
+        ExecuteMod();
     }
 
-    public void ApplyMod()
+    public void ExecuteMod()
     {
         Dictionary<string, float> modifier = new Dictionary<string, float>();
         modifier[Tower.DAMAGE_STAT] = _damageModifier;

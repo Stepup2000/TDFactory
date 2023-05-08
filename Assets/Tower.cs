@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour, ISerializationCallbackReceiver
 {
+    public delegate void EnemyEvent(BaseEnemy enemy);
+    public event EnemyEvent OnEnemyDetectedEvent;
+
     [SerializeField] private List<string> _statKeys;
     [SerializeField] private List<float> _statValues;
 
@@ -31,9 +34,9 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         return new Dictionary<string, float>(_stats);
     }
 
+    // Changes stats based on a Dictionary, the key is the stat name, the value is the amount it will change
     public void ModifyStats(Dictionary<string, float> modifiers)
-    {
-        // Changes stats based on a Dictionary, the key is the stat name, the value is the amount it will change
+    {        
         foreach (var modifier in modifiers)
         {
             if (_stats.ContainsKey(modifier.Key))
@@ -47,6 +50,7 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         }
     }
 
+    
     #region ShowDictionary
     // This method is called before the object is serialized
     public void OnBeforeSerialize()
