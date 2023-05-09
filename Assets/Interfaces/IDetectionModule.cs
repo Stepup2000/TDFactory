@@ -6,5 +6,4 @@ public interface IDetectionModule : IModule
 {
     void EnemyDetected(BaseEnemy enemy);
     void EnemyLost(BaseEnemy enemy);
-    new void ExecuteModule();
 }

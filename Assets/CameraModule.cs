@@ -69,9 +69,4 @@ public class CameraModule : MonoBehaviour, IDetectionModule
         BaseEnemy enemy = GetFurthestEnemy();
         _parentTower.AddTarget(enemy);
     }
-
-    public void ExecuteModule()
-    {
-
-    }
 }
