@@ -109,6 +109,7 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         }
     }
 
+    //Method for DetectionModules to add their prefered enemytarget to the hashset of the tower
     public void AddTarget(BaseEnemy enemy)
     {
         if (_detectedEnemies != null && enemy != null) _detectedEnemies.Add(enemy);
@@ -133,10 +134,14 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         _lastEnemy = furthestEnemy;
     }
 
-    //Invokes an event that a enemy has been detected
+    //Invokes an event if an enemy has been detected
     private void TryFireWeapons()
     {
-        OnEnemyDetectedEvent?.Invoke(_lastEnemy);
+        if (_detectedEnemies.Count != 0)
+        {
+            OnEnemyDetectedEvent?.Invoke(_lastEnemy);
+            Debug.Log("TryToFire");
+        }        
     }
 
     #region ShowDictionary

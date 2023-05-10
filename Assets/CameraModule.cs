@@ -64,6 +64,7 @@ public class CameraModule : MonoBehaviour, IDetectionModule
         return furthestEnemy;
     }
 
+    //Sends the furthestenemy to the parent tower
     private void SendFurthestEnemy()
     {
         BaseEnemy enemy = GetFurthestEnemy();
