@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEnemy : MonoBehaviour
+public class BaseEnemy : MonoBehaviour, IDamageable
 {
     [field: SerializeField] public int maxHealth { get; private set; }
     [field: SerializeField] public int spawnCost { get; private set; }
@@ -19,9 +19,19 @@ public class BaseEnemy : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    private void Move()
+    protected void Move()
     {
         _myMovement?.TryMove();
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currentHealth -= amount;
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
     }
 
     private void Update()

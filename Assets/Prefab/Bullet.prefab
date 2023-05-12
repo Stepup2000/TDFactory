@@ -110,5 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786d71d9579d1ef48a82d4b125e17153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <damageMultiplier>k__BackingField: 1
   <speed>k__BackingField: 20
+  <damage>k__BackingField: 1
+  _lifeTime: 2

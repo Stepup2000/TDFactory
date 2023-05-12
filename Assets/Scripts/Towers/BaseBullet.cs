@@ -6,9 +6,11 @@ public class BaseBullet : MonoBehaviour, IBullet
 {
     [field: SerializeField] public float speed { get; set; }
     [field: SerializeField] public float damage { get; set; }
+    [SerializeField] private float _lifeTime = 2;
     public void Initialize(float pDamage) 
     {
         damage = pDamage;
+        Invoke(nameof(DestroySelf), _lifeTime);
     }
 
     private void Move()
@@ -18,6 +20,16 @@ public class BaseBullet : MonoBehaviour, IBullet
 
         // Move the object in the forward direction
         transform.position += direction * speed * Time.deltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out IDamageable foundDamageAble)) DestroySelf();
+    }
+
+    private void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 
     private void Update()
