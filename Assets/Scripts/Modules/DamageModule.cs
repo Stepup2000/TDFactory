@@ -21,7 +21,7 @@ public class DamageModule : MonoBehaviour, IStatModifier
 
     public void ExecuteModule()
     {
-        Dictionary<string, float> modifier = new Dictionary<string, float>();
+        Dictionary<string, float> modifier = new();
         modifier[Tower.DAMAGE_STAT] = _damageModifier;
         _parentTower.ModifyStats(modifier);
     }

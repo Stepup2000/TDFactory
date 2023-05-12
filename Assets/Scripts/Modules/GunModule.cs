@@ -10,7 +10,7 @@ public class GunModule : MonoBehaviour, IWeapon
 
     private bool _isReloading = false;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (_parentTower != null) _parentTower.OnEnemyDetectedEvent += AttemptFire;
     }
@@ -20,6 +20,7 @@ public class GunModule : MonoBehaviour, IWeapon
         if (_parentTower != null) _parentTower.OnEnemyDetectedEvent -= AttemptFire;
     }
 
+    //Try to fire when not reloading
     private void AttemptFire(BaseEnemy enemy)
     {
         if (!_isReloading)

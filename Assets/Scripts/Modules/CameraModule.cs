@@ -9,13 +9,13 @@ public class CameraModule : MonoBehaviour, IDetectionModule
     [SerializeField] private Tower _parentTower;
 
     //Subscribe to the EnemyRequestEvent
-    private void Awake()
+    private void OnEnable()
     {
         if (_parentTower != null) _parentTower.EnemyRequestEvent += SendFurthestEnemy;
     }
 
     //UnSubscribe to the EnemyRequestEvent
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (_parentTower != null) _parentTower.EnemyRequestEvent -= SendFurthestEnemy;
     }

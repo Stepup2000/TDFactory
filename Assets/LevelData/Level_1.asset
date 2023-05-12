@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb2c236cba53db47af0ef9eae27af93, type: 3}
+  m_Name: Level_1
+  m_EditorClassIdentifier: 
+  availableEnemyPrefabs:
+  - {fileID: 8997381108114727520, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
+  - {fileID: 4379712667110534169, guid: e818608220cd3da40a86eb50e43a5fe7, type: 3}
+  AmountOfWaves: 25
+  StartingCurrency: 100
+  StartingHealth: 10
+  EnemyStartingBudget: 100
+  EnemyBudgetMultiplier: 1.1
