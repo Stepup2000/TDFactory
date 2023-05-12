@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IWeapon : IModule
 {
-    public int damage { get; set; }
+    public float damageMultiplier { get; set; }
     public float shootCooldown { get; set; }
 }

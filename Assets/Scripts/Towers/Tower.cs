@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour, ISerializationCallbackReceiver
 {
-    //Declare delegate type for events that use an enemy type
-    public delegate void EnemyEvent(BaseEnemy enemy);
+    //Declare delegate type for events that use an enemy type and damage
+    public delegate void EnemyEvent(BaseEnemy enemy, float damage);
     public event EnemyEvent OnEnemyDetectedEvent;
 
     //Declare delegate type without parameters
@@ -36,7 +36,7 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         {
             { DAMAGE_STAT, 1f },
             { RANGE_STAT, 5f },
-            { RELOADSPEED_STAT, 0.5f }
+            { RELOADSPEED_STAT, 0.25f }
         };
     }
 
@@ -139,8 +139,7 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
     {
         if (_detectedEnemies.Count != 0)
         {
-            OnEnemyDetectedEvent?.Invoke(_lastEnemy);
-            Debug.Log("TryToFire");
+            OnEnemyDetectedEvent?.Invoke(_lastEnemy, _stats[DAMAGE_STAT]);
         }        
     }
 

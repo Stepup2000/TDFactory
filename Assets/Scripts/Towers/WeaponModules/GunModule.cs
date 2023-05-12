@@ -5,7 +5,8 @@ using UnityEngine;
 public class GunModule : MonoBehaviour, IWeapon
 {
     [SerializeField] private Tower _parentTower;
-    [field: SerializeField] public int damage { get; set; }
+    [SerializeField] private BaseBullet _bulletPrefab;
+    [field: SerializeField] public float damageMultiplier { get; set; }
     [field: SerializeField] public float shootCooldown { get; set; }
 
     private bool _isReloading = false;
@@ -21,15 +22,23 @@ public class GunModule : MonoBehaviour, IWeapon
     }
 
     //Try to fire when not reloading
-    private void AttemptFire(BaseEnemy enemy)
+    private void AttemptFire(BaseEnemy enemy, float damage)
     {
         if (!_isReloading)
         {
-            Debug.Log("fire");
-
+            CreateBullet(damage * damageMultiplier);
             _isReloading = true;
             StartCoroutine(Reload());
         }
+    }
+
+    private void CreateBullet(float damage)
+    {
+        if (_bulletPrefab != null)
+        {
+            IBullet bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation.normalized);
+            bullet.Initialize(damage);
+        }        
     }
 
     private IEnumerator Reload()
