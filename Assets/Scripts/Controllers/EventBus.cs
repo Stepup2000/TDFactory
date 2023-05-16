@@ -22,6 +22,26 @@ public class EventBus<T> where T : Event
     }
 }
 
+//Sends out an event with all the information for the new level
+public class InitializeLevel : Event
+{
+    public readonly LevelData data;
+    public InitializeLevel(LevelData newData)
+    {
+        data = newData;
+    }
+}
+
+//Sends out an event to let everything know a new wave has started
+public class WaveStarted : Event
+{
+    public readonly float value;
+    public WaveStarted(float newValue)
+    {
+        value = newValue;
+    }
+}
+
 //Sends out an event to spawn a specific type of enemy
 public class SpawnEnemyEvent : Event
 {
@@ -37,5 +57,45 @@ public class StoppedSpawningEvent : Event
 {
     public StoppedSpawningEvent()
     {
+    }
+}
+
+//Sends out an event to change the current money
+public class ChangeMoneyEvent : Event
+{
+    public readonly float amount;
+    public ChangeMoneyEvent(float newAmount)
+    {
+        amount = newAmount;
+    }
+}
+
+//Sends out an event to let everything know the current money balance has been changed
+public class TotalMoneyChangedEvent : Event
+{
+    public readonly float value;
+    public TotalMoneyChangedEvent(float newValue)
+    {
+        value = newValue;
+    }
+}
+
+//Sends out an event to change the current health
+public class ChangeHealthEvent : Event
+{
+    public readonly float amount;
+    public ChangeHealthEvent(float newAmount)
+    {
+        amount = newAmount;
+    }
+}
+
+//Sends out an event to let everything know the current health balance has been changed
+public class TotalHealthChangedEvent : Event
+{
+    public readonly float value;
+    public TotalHealthChangedEvent(float newValue)
+    {
+        value = newValue;
     }
 }

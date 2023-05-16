@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaveController : MonoBehaviour
 {
-    [SerializeField] private LevelData _levelData;
+    private LevelData _levelData;
     private enum WaveState { Start, Spawning, Fighting, End }
     private WaveState waveState = WaveState.Start;
 
@@ -35,28 +35,26 @@ public class WaveController : MonoBehaviour
     private void OnEnable()
     {
         EventBus<StoppedSpawningEvent>.Subscribe(SetWaveToFighting);
-        Invoke("StartGameLoop", 0.5f);
+        EventBus<InitializeLevel>.Subscribe(StartGameLoop);
     }
 
     private void OnDisable()
     {
         EventBus<StoppedSpawningEvent>.UnSubscribe(SetWaveToFighting);
         StopCoroutine(GameLoop());
+        EventBus<InitializeLevel>.UnSubscribe(StartGameLoop);
     }
 
-    void Start()
+    private void StartGameLoop(InitializeLevel pEvent)
     {
-        ValidateLevelData();
-    }
-
-    private void StartGameLoop()
-    {
+        ValidateLevelData(pEvent);
         if (_levelData != null) StartCoroutine(GameLoop());
         else Debug.LogWarning("No LevelData have been assigned in the controller");
     }
 
-    private void ValidateLevelData()
+    private void ValidateLevelData(InitializeLevel pEvent)
     {
+        _levelData = pEvent.data;
         if (_levelData == null) Debug.LogWarning("No LevelDataLoaded");
         if (_levelData.availableEnemyPrefabs == null || _levelData.availableEnemyPrefabs.Length <= 0) Debug.LogWarning("No EnemyPrefabsLoaded");
         if (_levelData.AmountOfWaves <= 0) Debug.LogWarning("WaveAmount too little");
@@ -75,6 +73,7 @@ public class WaveController : MonoBehaviour
                 case WaveState.Start:
                     SpawnWave();
                     waveState = WaveState.Spawning;
+                    EventBus<WaveStarted>.Publish(new WaveStarted(_waveIndex));
                     break;
 
                 case WaveState.Spawning:

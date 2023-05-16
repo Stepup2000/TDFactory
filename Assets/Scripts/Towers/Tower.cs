@@ -55,9 +55,17 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
     }
 
     //Get the current stats of the tower
-    public Dictionary<string, float> GetStats()
+    public float GetStats(string statName)
     {
-        return new Dictionary<string, float>(_stats);
+        if (_stats.TryGetValue(statName, out float value))
+        {
+            return value;
+        }
+        else
+        {
+            Debug.LogWarning($"Stat {statName} not found in tower {statName}");
+            return 0f;
+        }
     }
 
     // Modify the stats of the tower based on the input modifiers dictionary.

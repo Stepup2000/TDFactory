@@ -12,6 +12,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 682591645290824574, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
+      propertyPath: <heldMoney>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 682591645290824574, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
       propertyPath: <maxHealth>k__BackingField
       value: 5
       objectReference: {fileID: 0}

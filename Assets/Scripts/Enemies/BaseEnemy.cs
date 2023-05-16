@@ -10,6 +10,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
 
     [field: SerializeField] public float maxHealth { get; set; }
     [field: SerializeField] public int spawnCost { get; private set; }
+    [field: SerializeField] public float heldMoney { get; private set; }
     public float currentHealth { get; private set; }
     public float travelledDistance { get; private set; }
     private Transform[] _myPath;
@@ -43,8 +44,17 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
 
     public bool IsStillAlive() => currentHealth > 0;
 
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<EndPoint>(out EndPoint endPoint))
+        {
+            Death();
+        }
+    }
+
     public void Death()
     {
+        EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(heldMoney));
         Destroy(gameObject);
     }
 
