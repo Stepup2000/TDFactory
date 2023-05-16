@@ -76,5 +76,6 @@ public class EnemySpawner : MonoBehaviour
         // Create the enemy and set its path
         BaseEnemy createdEnemy = Instantiate<BaseEnemy>(enemyPrefab, newPosition, Quaternion.identity);
         createdEnemy.Initialize(_myPath);
+        createdEnemy.transform.SetParent(GameObject.Find("EnemiesCanvas").transform);
     }
 }

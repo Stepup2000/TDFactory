@@ -20,6 +20,7 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
     private Dictionary<string, float> _stats;
 
     // Define the keys for your stats constants
+    public const string PRICE_STAT = "Price";
     public const string DAMAGE_STAT = "BaseDamage";
     public const string RANGE_STAT = "BaseRange";
     public const string RELOADSPEED_STAT = "BaseReloadSpeed";
@@ -34,6 +35,7 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         // Initialize the stats dictionary with default values
         _stats = new Dictionary<string, float>()
         {
+            { PRICE_STAT, 100f },
             { DAMAGE_STAT, 1f },
             { RANGE_STAT, 5f },
             { RELOADSPEED_STAT, 0.25f }

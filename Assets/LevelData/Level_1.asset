@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level_1
   m_EditorClassIdentifier: 
   availableEnemyPrefabs:
-  - {fileID: 8997381108114727520, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
-  - {fileID: 4379712667110534169, guid: e818608220cd3da40a86eb50e43a5fe7, type: 3}
+  - {fileID: 5410311810089712800, guid: 1a603bf6e5fed9b4880bd93d81bb3c7a, type: 3}
+  - {fileID: 1270914045928172548, guid: bf4d87cef03cdad48afec647e030d4fb, type: 3}
   AmountOfWaves: 25
   StartingCurrency: 100
   StartingHealth: 10
-  EnemyStartingBudget: 100
+  EnemyStartingBudget: 130
   EnemyBudgetMultiplier: 1.1

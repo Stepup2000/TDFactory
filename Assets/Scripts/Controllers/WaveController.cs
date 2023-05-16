@@ -119,7 +119,7 @@ public class WaveController : MonoBehaviour
 
     private void SpawnWave()
     {
-        int enemybudget = Mathf.RoundToInt(_levelData.StartingCurrency * ( 1 + ((_levelData.EnemyBudgetMultiplier - 1) * _waveIndex)));
+        int enemybudget = Mathf.RoundToInt(_levelData.EnemyStartingBudget * ( 1 + ((_levelData.EnemyBudgetMultiplier - 1) * _waveIndex)));
         BaseEnemy[] enemiesToSpawn = EnemyWaveGenerator.GenerateEnemyWave(_levelData.availableEnemyPrefabs, enemybudget);
         if (enemiesToSpawn != null && enemiesToSpawn.Length > 0) EventBus<SpawnEnemyEvent>.Publish(new SpawnEnemyEvent(enemiesToSpawn));
     }
