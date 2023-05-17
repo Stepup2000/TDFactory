@@ -47,6 +47,6 @@ public class MoneyController : MonoBehaviour
 
     public bool CanAfford(float cost)
     {
-        return cost < _currentMoney;
+        return cost <= _currentMoney;
     }
 }

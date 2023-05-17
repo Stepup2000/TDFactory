@@ -6,8 +6,10 @@ using TMPro;
 
 public class ShopButton : MonoBehaviour
 {
-    [SerializeField] Currency _goldCurrency;
-    [SerializeField] Tower _towerPrefab;
+    [SerializeField] private Currency _goldCurrency;
+    [SerializeField] private Tower _towerPrefab;
+    [SerializeField] private DraggableTower _draggablePrefab;
+    private DraggableTower createdDraggable = null;
 
     private Button _button;
 
@@ -19,14 +21,20 @@ public class ShopButton : MonoBehaviour
 
     public void TryBuyTower()
     {
-        if (_towerPrefab != null && _goldCurrency != null)
+        if (_draggablePrefab != null && _towerPrefab != null && _goldCurrency != null)
         {
             float cost = _towerPrefab.GetStats(Tower.PRICE_STAT);
+            Debug.Log(cost);
             if (MoneyController.Instance.CanAfford(cost))
             {
-                Instantiate<Tower>(_towerPrefab, transform.position, Quaternion.identity);
-                EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(cost));
-            }
+                if (createdDraggable == null)
+                {
+                    createdDraggable = Instantiate<DraggableTower>(_draggablePrefab, transform.position, Quaternion.identity);
+                    createdDraggable.SetTowerPrefab(_towerPrefab);
+                    EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(cost));
+                }
+                else Destroy(createdDraggable.gameObject);
+            }            
         }
     }
 }

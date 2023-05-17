@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class DraggableTower : MonoBehaviour
 {
-    [SerializeField] private float _gridSize = 1f;
     private Tower _towerPrefab;
+    private Tower createdTower;
+    private bool _canPlace = false;
+
+    private void Start()
+    {
+        SpawnTower();
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Send raycast to know where the collisonCheck will be
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity) && hit.transform.CompareTag("Ground"))
+        if (createdTower != null)
         {
-            Vector3 newPosition = hit.point;
-            float newX = _gridSize * Mathf.RoundToInt(newPosition.x / _gridSize);
-            float newY = 1;
-            float newZ = _gridSize * Mathf.RoundToInt(newPosition.z / _gridSize);
-
-            //Checks to see if the current position is not filled with another tower
-            if (CheckForTowerCollision(newPosition)) return;
-            transform.position = new Vector3(newX, newY, newZ);
-            if (Input.GetMouseButton(0)) CreateTower();
-        }
+            //Send raycast to know where the collisonCheck will be
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity) && hit.transform.CompareTag("Ground"))
+            {
+                _canPlace = true;
+                createdTower.transform.position = hit.point;
+            }
+            if (Input.GetMouseButton(0)) ActivateTower();
+        }        
     }
 
     public void SetTowerPrefab(Tower prefab)
@@ -33,25 +36,20 @@ public class DraggableTower : MonoBehaviour
     }
 
     // Create the tower and deduct money through the eventbus
-    private void CreateTower()
+    private void SpawnTower()
     {
-        if (_towerPrefab == null) return;
-        EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(-_towerPrefab.GetStats(Tower.PRICE_STAT)));
-        Instantiate<Tower>(_towerPrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        Vector3 newPosition = new Vector3(transform.position.x, 0, transform.position.z);
+        createdTower = Instantiate<Tower>(_towerPrefab, newPosition, Quaternion.identity);
     }
 
-    //Checks to see if a tower is not at a position yet
-    private bool CheckForTowerCollision(Vector3 position)
+    private void ActivateTower()
     {
-        Collider[] colliders = Physics.OverlapBox(position, transform.localScale / 2, Quaternion.identity);
-        if (colliders.Length > 0)
+        if (createdTower != null && _canPlace && true)
         {
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                if (colliders[i].GetComponent<Tower>()) return true;
-            }
-        }
-        return false;
+            Debug.Log(_towerPrefab.GetStats(Tower.PRICE_STAT));
+            EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(-_towerPrefab.GetStats(Tower.PRICE_STAT)));
+            createdTower.ActivateTower();
+            Destroy(gameObject);
+        }        
     }
 }

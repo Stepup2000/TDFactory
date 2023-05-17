@@ -40,18 +40,18 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
             { RANGE_STAT, 5f },
             { RELOADSPEED_STAT, 0.25f }
         };
-    }
-
-    //Start the FiringCoroutine
-    private void Start()
-    {
-        StartCoroutine(FireRateCoroutine());
+        Debug.Log($"PRICE_STAT value: {GetStats(PRICE_STAT)}");
     }
 
     //End the FiringCoroutine
     private void OnDestroy()
     {
         StopCoroutine(FireRateCoroutine());
+    }
+
+    public void ActivateTower()
+    {
+        StartCoroutine(FireRateCoroutine());
     }
 
     //Get the current stats of the tower
@@ -63,7 +63,7 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         }
         else
         {
-            Debug.LogWarning($"Stat {statName} not found in tower {statName}");
+            Debug.LogWarning($"Stat '{statName}' not found in tower: '{gameObject.name}'");
             return 0f;
         }
     }
@@ -87,13 +87,13 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
                 if (newValue < 0f)
                 {
                     newValue = 0f;
-                    Debug.LogWarning($"Stat value for {kvp.Key} cannot be negative. Clamping to 0.");
+                    Debug.LogWarning($"Stat value for '{kvp.Key}' cannot be negative. Clamping to 0.");
                 }
                 _stats[kvp.Key] = newValue;
             }
             else
             {
-                Debug.LogWarning($"Invalid stat name: {kvp.Key}");
+                Debug.LogWarning($"Invalid stat name: '{kvp.Key}'");
             }
         }
     }
