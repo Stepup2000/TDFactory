@@ -6,7 +6,6 @@ public class DraggableTower : MonoBehaviour
 {
     [SerializeField] private int _rotationAmount = 45;
 
-    private Tower _towerPrefab;
     private Tower _createdTower;
     private bool _canPlace = false;
 
@@ -19,7 +18,7 @@ public class DraggableTower : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (_towerPrefab != null && _createdTower != null)
+        if (_createdTower != null)
         {
             // Send raycast to know where the collision check will be
             RaycastHit hit;
@@ -58,10 +57,6 @@ public class DraggableTower : MonoBehaviour
         }
     }
 
-    public void SetTowerPrefab(Tower prefab)
-    {
-        _towerPrefab = prefab;
-    }
 
     // Create the tower and deduct money through the eventbus
     private void SpawnTower(TowerBlueprint towerBlueprint)
@@ -86,7 +81,7 @@ public class DraggableTower : MonoBehaviour
     {
         if (_createdTower != null && _canPlace && true)
         {
-            EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(-_towerPrefab.GetStats(Tower.PRICE_STAT)));
+            //EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(-_towerPrefab.GetStats(Tower.PRICE_STAT)));
             _createdTower.ActivateTower();
             Destroy(gameObject);
         }        

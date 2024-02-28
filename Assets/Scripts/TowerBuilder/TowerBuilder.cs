@@ -14,6 +14,7 @@ public class TowerBuilder : MonoBehaviour
     private GameObject _towerParent;
     private DraggableModule _currentDraggableModule;
     private bool _canRotate = true;
+    private Quaternion _oldTowerRotation;
 
     //Make sure there is only one instance
     public static TowerBuilder Instance
@@ -77,7 +78,13 @@ public class TowerBuilder : MonoBehaviour
 
     private void ResetTowerShowModelRotation()
     {
+        _oldTowerRotation = _towerParent.transform.rotation;
         _towerParent.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    private void SetTowerRotationToOld()
+    {
+        _towerParent.transform.rotation = _oldTowerRotation;
     }
 
     public void CreateNewDraggable(GameObject _modulePrefab, DraggableModule draggablePrefab)
@@ -96,11 +103,40 @@ public class TowerBuilder : MonoBehaviour
         if (_currentDraggableModule != null) _currentDraggableModule.ClearDraggable();
     }
 
+    public GameObject CreateModule(GameObject modulePrefab)
+    {
+        if (modulePrefab == null)
+        {
+            Debug.LogError("Can't create module, module prefab is null.");
+            return null;
+        }
+
+        return Instantiate(modulePrefab, transform.position, Quaternion.identity);
+    }
+
+    //Actually place the created module
+    public void PlaceModule(GameObject moduleToPlace, GameObject modulePrefab)
+    {
+        moduleToPlace.transform.SetParent(_towerParent.transform);
+        ResetTowerShowModelRotation();
+
+        int cost = 0;
+        Vector3 position = moduleToPlace.transform.position;
+        Quaternion rotation = moduleToPlace.transform.rotation;
+
+        moduleToPlace.TryGetComponent<IModule>(out IModule moduleComponent);
+
+        if (moduleComponent != null) cost = moduleComponent.cost;
+
+        TowerPart towerPartToAdd = new TowerPart(modulePrefab, cost, position, rotation);
+        AddModuleToTower(towerPartToAdd, moduleToPlace);
+        SetTowerRotationToOld();
+    }
+
     public void AddModuleToTower(TowerPart towerPartToAdd, GameObject showModel)
     {
         _allTowerParts.Add(towerPartToAdd);
         _towerShowModel.Add(showModel);
-        showModel.transform.SetParent(_towerParent.transform);
     }
 
     public void RemoveModuleFromTower(TowerPart towerPartToRemove)

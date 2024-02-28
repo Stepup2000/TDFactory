@@ -14,10 +14,9 @@ public class DraggableModule : MonoBehaviour
     private GameObject _createdModule;
     private Collider _moduleCollider;
     private bool _canPlace = false;
-    private int _cost;
 
-    private MeshRenderer _myRenderer;
-    private Material _originalMaterial;
+    private MeshRenderer _towerRenderer;
+    private Material _towerOriginalMaterial;
     public float transparency = 0.5f;
 
     private void Start()
@@ -82,6 +81,16 @@ public class DraggableModule : MonoBehaviour
             Vector3 surfaceNormal = hit.normal;
             Vector3 moduleScale = _moduleCollider.transform.localScale;
             Vector3 moduleEdgePosition = hit.point + surfaceNormal * (moduleScale.y * 0.5f);
+
+            // Check if the control key is pressed
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                // Round the moduleEdgePosition to the nearest 0.1 units
+                moduleEdgePosition.x = Mathf.Round(moduleEdgePosition.x * 10) / 10;
+                moduleEdgePosition.y = Mathf.Round(moduleEdgePosition.y * 10) / 10;
+                moduleEdgePosition.z = Mathf.Round(moduleEdgePosition.z * 10) / 10;
+            }
+
             _createdModule.transform.position = moduleEdgePosition;
         }
 
@@ -91,6 +100,9 @@ public class DraggableModule : MonoBehaviour
             collider.enabled = true;
         }
     }
+
+
+
 
     //Returns the first collider that is not trigger
     private Collider GetCollider()
@@ -107,15 +119,12 @@ public class DraggableModule : MonoBehaviour
     //Create the module that will be placed
     private void CreateModule()
     {
-        _createdModule = Instantiate<GameObject>(_modulePrefab, transform.position, Quaternion.identity);
+        _createdModule = TowerBuilder.Instance.CreateModule(_modulePrefab);
         if (_createdModule != null)
         {
-            //Add the module cost to the tower
-            IModule module = _createdModule.GetComponentInChildren<IModule>();
-            if (module != null) _cost = module.cost;
-            _myRenderer = _createdModule.GetComponentInChildren<MeshRenderer>();
-            _originalMaterial = _myRenderer.material;
-        }
+            _towerRenderer = _createdModule.GetComponentInChildren<MeshRenderer>();
+            _towerOriginalMaterial = _towerRenderer.material;
+        }        
     }
 
     //Actually place the created module
@@ -123,10 +132,7 @@ public class DraggableModule : MonoBehaviour
     {
         if (_canPlace == true)
         {
-            TowerPart towerPartToAdd = new TowerPart(_modulePrefab, _cost, _createdModule.transform.position, _createdModule.transform.rotation);
-            TowerBuilder.Instance.AddModuleToTower(towerPartToAdd, _createdModule);
-            //Still have to subtract parents rotation
-            Debug.Log(_createdModule.transform.rotation);
+            TowerBuilder.Instance.PlaceModule(_createdModule, _modulePrefab);
             Destroy(gameObject);
         }
     }
@@ -158,11 +164,11 @@ public class DraggableModule : MonoBehaviour
 
     private void SetOldMaterial()
     {
-        if (_myRenderer != null && _originalMaterial != null) _myRenderer.material = _originalMaterial;
+        if (_towerRenderer != null && _towerOriginalMaterial != null) _towerRenderer.material = _towerOriginalMaterial;
     }
 
     private void SetTransparentMaterial()
     {
-        _myRenderer.material = _faultyPlacementMaterial;
+        _towerRenderer.material = _faultyPlacementMaterial;
     }
 }
