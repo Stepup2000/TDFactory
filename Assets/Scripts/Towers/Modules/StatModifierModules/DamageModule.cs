@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageModule : MonoBehaviour, IStatModifier
 {
     [SerializeField] private Tower _parentTower;
+    [field: SerializeField] public int cost { get; set; }
 
     public Tower parentTower
     {
@@ -13,6 +14,11 @@ public class DamageModule : MonoBehaviour, IStatModifier
     }
 
     private float _damageModifier = 1f;
+
+    public void SetParentTower(Tower newTower)
+    {
+        _parentTower = newTower;
+    }
 
     private void Start()
     {

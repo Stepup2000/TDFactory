@@ -3,21 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraModule : MonoBehaviour, IDetectionModule
-{    
+{
     //All detected enemies
     private HashSet<BaseEnemy> _enemiesInRange = new();
     [SerializeField] private Tower _parentTower;
+    [field: SerializeField] public int cost { get; set; }
 
     //Subscribe to the EnemyRequestEvent
     private void OnEnable()
     {
-        if (_parentTower != null) _parentTower.EnemyRequestEvent += SendFurthestEnemy;
+        Invoke("SetEnemyRequestSubscription", 0.5f);
     }
 
     //UnSubscribe to the EnemyRequestEvent
     private void OnDisable()
     {
         if (_parentTower != null) _parentTower.EnemyRequestEvent -= SendFurthestEnemy;
+    }
+
+    public void SetParentTower(Tower newTower)
+    {
+        _parentTower = newTower;
+    }
+
+    private void SetEnemyRequestSubscription()
+    {
+        if (_parentTower != null)
+        {
+            _parentTower.EnemyRequestEvent -= SendFurthestEnemy;
+            _parentTower.EnemyRequestEvent += SendFurthestEnemy;
+        }
+        else Invoke("SetEnemyRequestSubscription", 0.5f);
     }
 
     private void OnTriggerEnter(Collider other)

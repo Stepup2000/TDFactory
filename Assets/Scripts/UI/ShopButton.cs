@@ -11,12 +11,9 @@ public class ShopButton : MonoBehaviour
     [SerializeField] private DraggableTower _draggablePrefab;
     private DraggableTower createdDraggable = null;
 
-    private Button _button;
-
     private void Awake()
     {
         _goldCurrency = Resources.Load<Currency>("GoldCurrency");
-        TryGetComponent(out _button);
     }
 
     public void TryBuyTower()
@@ -24,7 +21,6 @@ public class ShopButton : MonoBehaviour
         if (_draggablePrefab != null && _towerPrefab != null && _goldCurrency != null)
         {
             float cost = _towerPrefab.GetStats(Tower.PRICE_STAT);
-            Debug.Log(cost);
             if (MoneyController.Instance.CanAfford(cost))
             {
                 if (createdDraggable == null)
