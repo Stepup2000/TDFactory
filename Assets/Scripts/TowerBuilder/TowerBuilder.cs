@@ -178,4 +178,25 @@ public class TowerBuilder : MonoBehaviour
         }
         _allTowerParts.Clear();
     }
+
+    public void SetWeaponModulebuttonsActive()
+    {
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(true));
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
+    }
+
+    public void SetDetectionModulebuttonsActive()
+    {
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(true));
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
+    }
+
+    public void SetBodyModulebuttonsActive()
+    {
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(true));
+    }
 }

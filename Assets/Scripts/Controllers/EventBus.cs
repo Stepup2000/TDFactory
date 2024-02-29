@@ -99,3 +99,28 @@ public class TotalHealthChangedEvent : Event
         value = newValue;
     }
 }
+public class ToggleWeaponModuleButtonsEvent : Event
+{
+    public readonly bool trueOrFalse;
+    public ToggleWeaponModuleButtonsEvent(bool newValue)
+    {
+        trueOrFalse = newValue;
+    }
+}
+
+public class ToggleDetectionModuleButtonsEvent : Event
+{
+    public readonly bool trueOrFalse;
+    public ToggleDetectionModuleButtonsEvent(bool newValue)
+    {
+        trueOrFalse = newValue;
+    }
+}
+public class ToggleBodyModuleButtonsEvent : Event
+{
+    public readonly bool trueOrFalse;
+    public ToggleBodyModuleButtonsEvent(bool newValue)
+    {
+        trueOrFalse = newValue;
+    }
+}
