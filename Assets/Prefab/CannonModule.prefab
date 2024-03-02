@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5069140399561435537}
   - component: {fileID: 4988709185295403668}
   m_Layer: 0
-  m_Name: Cannon
+  m_Name: CannonModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +210,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 257c6709f4c791146b5585ce33a0637a, type: 2}
+  - {fileID: 2100000, guid: fc1d4cdbebca7a949bce97c73f92fc50, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
