@@ -155,7 +155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5400844455609756930, guid: 01d103f410fdc1a4cbf308127436340e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.75
+      value: 0.75000006
       objectReference: {fileID: 0}
     - target: {fileID: 5400844455609756930, guid: 01d103f410fdc1a4cbf308127436340e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -179,11 +179,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5400844455609756930, guid: 01d103f410fdc1a4cbf308127436340e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5400844455609756930, guid: 01d103f410fdc1a4cbf308127436340e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5400844455609756930, guid: 01d103f410fdc1a4cbf308127436340e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -217,7 +217,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4735666701632387000, guid: 01d103f410fdc1a4cbf308127436340e, type: 3}
   m_PrefabInstance: {fileID: 681900105808622729}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5721071269036611794
+--- !u!114 &5729941094309724310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,3 +231,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parentTower: {fileID: 0}
   <cost>k__BackingField: 2
+  <modulePrefab>k__BackingField: {fileID: 8401419676006191154}

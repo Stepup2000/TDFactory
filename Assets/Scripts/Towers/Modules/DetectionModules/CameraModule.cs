@@ -8,17 +8,25 @@ public class CameraModule : MonoBehaviour, IDetectionModule
     private HashSet<BaseEnemy> _enemiesInRange = new();
     [SerializeField] private Tower _parentTower;
     [field: SerializeField] public int cost { get; set; }
+    [field: SerializeField] public GameObject modulePrefab { get; set; }
 
     //Subscribe to the EnemyRequestEvent
     private void OnEnable()
     {
         Invoke("SetEnemyRequestSubscription", 0.5f);
+        EventBus<RequestModuleDataEvent>.Subscribe(SendModuleData);
     }
 
     //UnSubscribe to the EnemyRequestEvent
     private void OnDisable()
     {
         if (_parentTower != null) _parentTower.EnemyRequestEvent -= SendFurthestEnemy;
+        EventBus<RequestModuleDataEvent>.UnSubscribe(SendModuleData);
+    }
+
+    private void SendModuleData(RequestModuleDataEvent requestModuleDataEvent)
+    {
+        TowerBuilder.Instance.PlaceModule(gameObject.transform.parent.gameObject, modulePrefab);
     }
 
     public void SetParentTower(Tower newTower)

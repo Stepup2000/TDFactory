@@ -8,7 +8,6 @@ public class DraggableModule : MonoBehaviour
     [SerializeField] private Material _faultyPlacementMaterial;
 
     [SerializeField] private int _rotationAmount = 45;
-    [SerializeField] private int _mouseDragAmount = 1;
 
     private GameObject _modulePrefab;
     private GameObject _createdModule;
@@ -132,7 +131,7 @@ public class DraggableModule : MonoBehaviour
     {
         if (_canPlace == true)
         {
-            TowerBuilder.Instance.PlaceModule(_createdModule, _modulePrefab);
+            TowerBuilder.Instance.QueueModulePlacement(_createdModule);
             Destroy(gameObject);
         }
     }

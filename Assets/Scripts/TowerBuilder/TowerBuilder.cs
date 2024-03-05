@@ -6,7 +6,6 @@ public class TowerBuilder : MonoBehaviour
 {
     [SerializeField] int _rotationAmount = 45;
     [SerializeField] float _rotationCooldown = 0.5f;
-    [SerializeField] float _minimumMouseDragAmount = 0.001f;
 
     private static TowerBuilder instance;
     private List<TowerPart> _allTowerParts;
@@ -15,6 +14,7 @@ public class TowerBuilder : MonoBehaviour
     private DraggableModule _currentDraggableModule;
     private bool _canRotate = true;
     private Quaternion _oldTowerRotation;
+    private int _currentTowerNumber = 0;
 
     //Make sure there is only one instance
     public static TowerBuilder Instance
@@ -37,8 +37,8 @@ public class TowerBuilder : MonoBehaviour
     private void Start()
     {
         _allTowerParts = new List<TowerPart>();
-        _towerParent = new GameObject("TowerParent");
-        _towerParent.transform.position = new Vector3(0, 1, 0);
+        CreateTowerParent();
+        SetLoadbuttonsActive();
     }
 
     private void Update()
@@ -64,6 +64,13 @@ public class TowerBuilder : MonoBehaviour
         }
     }
 
+    private void CreateTowerParent()
+    {
+        if (_towerParent != null) Destroy(_towerParent.gameObject);
+        _towerParent = new GameObject("TowerParent");
+        _towerParent.transform.position = new Vector3(0, 1, 0);
+    }
+
     private IEnumerator WaitForRotation()
     {
         _canRotate = false;
@@ -73,13 +80,16 @@ public class TowerBuilder : MonoBehaviour
 
     private void RotateTowerShowModel(int amount)
     {
-        _towerParent.transform.Rotate(_towerParent.transform.up, amount);
+        if (_towerParent != null) _towerParent.transform.Rotate(_towerParent.transform.up, amount);
     }
 
     private void ResetTowerShowModelRotation()
     {
-        _oldTowerRotation = _towerParent.transform.rotation;
-        _towerParent.transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (_towerParent != null)
+        {
+            _oldTowerRotation = _towerParent.transform.rotation;
+            _towerParent.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }            
     }
 
     private void SetTowerRotationToOld()
@@ -111,13 +121,20 @@ public class TowerBuilder : MonoBehaviour
             return null;
         }
 
-        return Instantiate(modulePrefab, transform.position, Quaternion.identity);
+        GameObject newObject = Instantiate(modulePrefab, transform.position, Quaternion.identity);
+        IModule newModule = newObject.GetComponentInChildren<IModule>();
+        if (newModule != null) newModule.modulePrefab = modulePrefab;
+        return newObject;
+    }
+
+    public void QueueModulePlacement(GameObject moduleToPlace)
+    {
+        moduleToPlace.transform.SetParent(_towerParent.transform);
     }
 
     //Actually place the created module
     public void PlaceModule(GameObject moduleToPlace, GameObject modulePrefab)
     {
-        moduleToPlace.transform.SetParent(_towerParent.transform);
         ResetTowerShowModelRotation();
 
         int cost = 0;
@@ -151,7 +168,9 @@ public class TowerBuilder : MonoBehaviour
 
     public void ConfirmTower()
     {
+        EventBus<RequestModuleDataEvent>.Publish(new RequestModuleDataEvent());
         ResetTowerShowModelRotation();
+
 
         int towerCost = 0;
         foreach (TowerPart towerPart in _allTowerParts)
@@ -159,24 +178,58 @@ public class TowerBuilder : MonoBehaviour
             towerCost += towerPart.moduleCost;
         }
 
-        if (_allTowerParts != null && _allTowerParts.Count != 0 && towerCost != 0)
+        //Potentially add cost of 0 for the check
+        if (_allTowerParts != null && _allTowerParts.Count != 0)
         {
             // Create a copy of _allTowerParts
             List<TowerPart> towerPartsCopy = new List<TowerPart>(_allTowerParts);
 
             TowerBlueprint newBlueprint = new TowerBlueprint(towerPartsCopy, towerCost);
-            PlayerDataManager.Instance.AddTowerToInventory(newBlueprint);
-            ClearWorkSpace();
+            PlayerDataManager.Instance.TryRemoveTowerFromInventory(_currentTowerNumber);
+            PlayerDataManager.Instance.AddTowerToInventory(newBlueprint, _currentTowerNumber);
         }
+        ClearWorkSpace();
     }
 
     public void ClearWorkSpace()
     {
-        foreach (GameObject model in _towerShowModel)
+        CreateTowerParent();
+        _allTowerParts = new List<TowerPart>();
+    }
+
+    public void LoadTower(int towerNumber)
+    {
+        _currentTowerNumber = towerNumber;
+        List<TowerBlueprint> allTowers = PlayerDataManager.Instance.GetAllTowers();
+        if (allTowers == null)
         {
-            Destroy(model);
+            Debug.LogWarning("No towerlist was found");
+            return;
         }
-        _allTowerParts.Clear();
+        else if (towerNumber < 0 || towerNumber >= allTowers.Count || allTowers[towerNumber] == null)
+        {
+            Debug.LogWarning("No saved tower found at index: " + towerNumber);
+            return;
+        }
+        ClearWorkSpace();
+
+        TowerBlueprint towerBlueprint = PlayerDataManager.Instance.GetAllTowers()[towerNumber];
+
+        Tower towerModule = _towerParent.AddComponent<Tower>();
+        Vector3 newPosition = new Vector3(transform.position.x, 0, transform.position.z);
+        towerModule.transform.position = newPosition;
+
+        foreach (TowerPart part in towerBlueprint.allTowerParts)
+        {
+            GameObject createdPart = Instantiate<GameObject>(part.module, newPosition + part.position, part.rotation);
+            createdPart.transform.SetParent(_towerParent.transform);
+            IModule module = createdPart.GetComponentInChildren<IModule>();
+            if (module != null)
+            {
+                module.SetParentTower(towerModule);
+                module.modulePrefab = part.module;
+            }
+        }
     }
 
     public void SetWeaponModulebuttonsActive()
@@ -184,6 +237,7 @@ public class TowerBuilder : MonoBehaviour
         EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(true));
         EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
         EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false));
     }
 
     public void SetDetectionModulebuttonsActive()
@@ -191,6 +245,7 @@ public class TowerBuilder : MonoBehaviour
         EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
         EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(true));
         EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false));
     }
 
     public void SetBodyModulebuttonsActive()
@@ -198,5 +253,19 @@ public class TowerBuilder : MonoBehaviour
         EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
         EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
         EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(true));
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false));
+    }
+
+    public void SetLoadbuttonsActive()
+    {
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(true));
+    }
+
+    public void LoadLevel()
+    {
+        LevelManager.Instance.LoadLevel("Level");
     }
 }

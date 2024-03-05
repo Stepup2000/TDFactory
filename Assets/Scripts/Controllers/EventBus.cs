@@ -124,3 +124,19 @@ public class ToggleBodyModuleButtonsEvent : Event
         trueOrFalse = newValue;
     }
 }
+
+public class ToggleLoadButtonsEvent : Event
+{
+    public readonly bool trueOrFalse;
+    public ToggleLoadButtonsEvent(bool newValue)
+    {
+        trueOrFalse = newValue;
+    }
+}
+
+public class RequestModuleDataEvent : Event
+{
+    public RequestModuleDataEvent()
+    {
+    }
+}

@@ -9,17 +9,30 @@ public class GunModule : MonoBehaviour, IWeapon
     [field: SerializeField] public float damageMultiplier { get; set; }
     [field: SerializeField] public float shootCooldown { get; set; }
     [field: SerializeField] public int cost { get; set; }
+    [field: SerializeField] public GameObject modulePrefab { get; set; }
 
     private bool _isReloading = false;
+   
 
     private void OnEnable()
     {
         Invoke("SetEnemyRequestSubscription", 0.5f);
+        EventBus<RequestModuleDataEvent>.Subscribe(SendModuleData);
+    }
+
+    private void OnDisable()
+    {
+        EventBus<RequestModuleDataEvent>.UnSubscribe(SendModuleData);
     }
 
     private void OnDestroy()
     {
         if (_parentTower != null) _parentTower.OnEnemyDetectedEvent -= AttemptFire;
+    }
+
+    private void SendModuleData(RequestModuleDataEvent requestModuleDataEvent)
+    {
+        TowerBuilder.Instance.PlaceModule(gameObject, modulePrefab);
     }
 
     public void SetParentTower(Tower newTower)
