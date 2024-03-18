@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1782941459264643553}
   m_Layer: 0
-  m_Name: EnemyModel
+  m_Name: MOD_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -48,4 +48,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _faultyPlacementMaterial: {fileID: 2100000, guid: f1cb3c03c6fa4d441bb8dbbf37ffced9, type: 2}
+  _rotationAmount: 90
   transparency: 0.5

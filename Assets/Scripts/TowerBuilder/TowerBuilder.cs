@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TowerBuilder : MonoBehaviour
 {
-    [SerializeField] int _rotationAmount = 45;
+    [SerializeField] int _rotationAmount = 90;
     [SerializeField] float _rotationCooldown = 0.5f;
 
     private static TowerBuilder instance;

@@ -7,7 +7,7 @@ public class DraggableModule : MonoBehaviour
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private Material _faultyPlacementMaterial;
 
-    [SerializeField] private int _rotationAmount = 45;
+    [SerializeField] private int _rotationAmount = 90;
 
     private GameObject _modulePrefab;
     private GameObject _createdModule;
@@ -82,12 +82,12 @@ public class DraggableModule : MonoBehaviour
             Vector3 moduleEdgePosition = hit.point + surfaceNormal * (moduleScale.y * 0.5f);
 
             // Check if the control key is pressed
-            if (Input.GetKey(KeyCode.LeftControl))
+            //if (Input.GetKey(KeyCode.LeftControl))
             {
-                // Round the moduleEdgePosition to the nearest 0.1 units
-                moduleEdgePosition.x = Mathf.Round(moduleEdgePosition.x * 10) / 10;
-                moduleEdgePosition.y = Mathf.Round(moduleEdgePosition.y * 10) / 10;
-                moduleEdgePosition.z = Mathf.Round(moduleEdgePosition.z * 10) / 10;
+                // Round the moduleEdgePosition to the nearest 1 units
+                moduleEdgePosition.x = Mathf.Round(moduleEdgePosition.x * 1) / 1;
+                moduleEdgePosition.y = Mathf.Round(moduleEdgePosition.y * 1) / 1;
+                moduleEdgePosition.z = Mathf.Round(moduleEdgePosition.z * 1) / 1;
             }
 
             _createdModule.transform.position = moduleEdgePosition;
