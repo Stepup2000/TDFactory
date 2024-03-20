@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     // The rate at which enemies will be spawned
-    [SerializeField] private float _spawnSpeed = 1;
+    [SerializeField] private float _spawnSpeed = 5;
     // The path that spawned enemies will follow
     private Transform[] _myPath;
     // Queue of enemies to be spawned
