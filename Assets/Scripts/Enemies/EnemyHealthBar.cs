@@ -69,5 +69,10 @@ public class EnemyHealthBar : MonoBehaviour
             transform.rotation = _mainCamera.transform.rotation * originalRotation;
         }
     }
+
+    private void Update()
+    {
+        TurnToCamera();
+    }
 }
 

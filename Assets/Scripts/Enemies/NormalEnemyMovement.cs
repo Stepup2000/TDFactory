@@ -1,31 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class NormalEnemyMovement : MonoBehaviour, IMoveable
+public class NavMeshEnemyMovement : MonoBehaviour, IMoveable
 {
     [SerializeField] private float _speed = 1;
 
+    private NavMeshAgent _navMeshAgent;
     private Transform[] _myPath;
-    private Transform _target;
     private int _waypointIndex = 0;
-    private Vector3 _targetPosition = new Vector3();
 
     public void Initialize(Transform[] pPath)
     {
         _myPath = pPath;
-    }
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        UpdateTarget();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshAgent.autoBraking = false; // Disable auto braking to ensure continuous movement
+        _navMeshAgent.speed = _speed;
+        SetCurrentWaypoint(_waypointIndex);
     }
 
     public void SetCurrentWaypoint(int number)
     {
         _waypointIndex = number;
-        UpdateTarget();
+        if (_waypointIndex < _myPath.Length)
+        {
+            _navMeshAgent.SetDestination(_myPath[_waypointIndex].position);
+        }
+        else
+        {
+            ReachedEnd();
+        }
     }
 
     public int GetCurrentWaypoint()
@@ -35,42 +38,20 @@ public class NormalEnemyMovement : MonoBehaviour, IMoveable
 
     public void GetNextWaypoint()
     {
-        if (_myPath != null && _myPath.Length > 0)
-        {
-            if (_waypointIndex >= _myPath.Length - 1)
-            {
-                ReachedEnd();
-            }
-            else
-            {
-                _waypointIndex++;
-                UpdateTarget();
-            }
-        }
-        else
-        {
-            Debug.LogError("Path is null or empty.");
-        }
+        _waypointIndex++;
+        SetCurrentWaypoint(_waypointIndex);
     }
 
-    private void UpdateTarget()
-    {
-        _target = _myPath[_waypointIndex];
-        _targetPosition = _target.transform.position;
-    }
-
-    public void TryMove()
-    {
-        Vector3 dir = _targetPosition - transform.position;
-        transform.Translate(dir.normalized * _speed * Time.deltaTime, Space.World);
-
-        if (Vector3.Distance(transform.position, _targetPosition) <= 0.05f)
-        {
-            GetNextWaypoint();
-        }
-    }
     private void ReachedEnd()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform == _myPath[_waypointIndex])
+        {
+            GetNextWaypoint();
+        }
     }
 }

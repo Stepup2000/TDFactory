@@ -24,11 +24,6 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
     }
 
-    protected void Move()
-    {
-        _myMovement?.TryMove();
-    }
-
     public void TakeDamage(float amount)
     {
         if (amount < 0)
@@ -56,10 +51,5 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     {
         EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(heldMoney));
         Destroy(gameObject);
-    }
-
-    private void Update()
-    {
-        Move();
     }
 }
