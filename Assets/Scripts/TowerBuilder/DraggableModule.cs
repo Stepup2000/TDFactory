@@ -30,7 +30,7 @@ public class DraggableModule : MonoBehaviour
         {
             CalculatePosition();
             HandleMaterial();
-            if (Input.GetMouseButton(0)) PlaceModule();
+            if (Input.GetMouseButtonUp(0)) PlaceModule();
         }
 
         HandleMouseInput();
@@ -70,9 +70,26 @@ public class DraggableModule : MonoBehaviour
             collider.enabled = false;
         }
 
-        //Ray for determining canPlace
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, _targetMask)) _canPlace = true;
-        else _canPlace = false;
+        int uiLayer = LayerMask.NameToLayer("UI");
+        int uiLayerMask = 1 << uiLayer;
+
+        // Raycast to check if any UI elements are hit
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, uiLayerMask))
+        {
+            _canPlace = false; // UI element hit, cannot place
+        }
+        else
+        {
+            // No UI element hit, check against target mask
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, _targetMask))
+            {
+                _canPlace = true; // Object from target mask hit, can place
+            }
+            else
+            {
+                _canPlace = false; // Nothing hit, cannot place
+            }
+        }
 
         //Ray for displaying the module in the right place
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -81,14 +98,10 @@ public class DraggableModule : MonoBehaviour
             Vector3 moduleScale = _moduleCollider.transform.localScale;
             Vector3 moduleEdgePosition = hit.point + surfaceNormal * (moduleScale.y * 0.5f);
 
-            // Check if the control key is pressed
-            //if (Input.GetKey(KeyCode.LeftControl))
-            {
-                // Round the moduleEdgePosition to the nearest 1 units
-                moduleEdgePosition.x = Mathf.Round(moduleEdgePosition.x * 1) / 1;
-                moduleEdgePosition.y = Mathf.Round(moduleEdgePosition.y * 1) / 1;
-                moduleEdgePosition.z = Mathf.Round(moduleEdgePosition.z * 1) / 1;
-            }
+            // Round the moduleEdgePosition to the nearest 1 units
+            moduleEdgePosition.x = Mathf.Round(moduleEdgePosition.x * 1) / 1;
+            moduleEdgePosition.y = Mathf.Round(moduleEdgePosition.y * 1) / 1;
+            moduleEdgePosition.z = Mathf.Round(moduleEdgePosition.z * 1) / 1;
 
             _createdModule.transform.position = moduleEdgePosition;
         }
@@ -99,9 +112,6 @@ public class DraggableModule : MonoBehaviour
             collider.enabled = true;
         }
     }
-
-
-
 
     //Returns the first collider that is not trigger
     private Collider GetCollider()
@@ -123,7 +133,7 @@ public class DraggableModule : MonoBehaviour
         {
             _towerRenderer = _createdModule.GetComponentInChildren<MeshRenderer>();
             _towerOriginalMaterial = _towerRenderer.material;
-        }        
+        }
     }
 
     //Actually place the created module
@@ -132,7 +142,7 @@ public class DraggableModule : MonoBehaviour
         if (_canPlace == true)
         {
             TowerBuilder.Instance.QueueModulePlacement(_createdModule);
-            Destroy(gameObject);
+            CreateModule();
         }
     }
 
@@ -142,7 +152,7 @@ public class DraggableModule : MonoBehaviour
         {
             Destroy(_createdModule.gameObject);
             DestroyDraggable();
-        }        
+        }
     }
 
     public void DestroyDraggable()

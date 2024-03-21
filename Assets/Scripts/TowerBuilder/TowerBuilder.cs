@@ -12,6 +12,7 @@ public class TowerBuilder : MonoBehaviour
     private List<GameObject> _towerShowModel = new();
     private GameObject _towerParent;
     private DraggableModule _currentDraggableModule;
+    private ModuleRemover _currentModuleRemover;
     private bool _canRotate = true;
     private Quaternion _oldTowerRotation;
     private int _currentTowerNumber = 0;
@@ -99,18 +100,53 @@ public class TowerBuilder : MonoBehaviour
 
     public void CreateNewDraggable(GameObject _modulePrefab, DraggableModule draggablePrefab)
     {
-        ClearNewDragabble();
+        if (_modulePrefab != null && draggablePrefab != null)
+        {
+            if(_currentDraggableModule == null && _currentModuleRemover == null)
+            {
+                DraggableModule newDragabble = Instantiate<DraggableModule>(draggablePrefab, transform.position, Quaternion.identity);
+                newDragabble.SetModulePrefab(_modulePrefab);
 
-        DraggableModule newDragabble = Instantiate<DraggableModule>(draggablePrefab, transform.position, Quaternion.identity);
-        newDragabble.SetModulePrefab(_modulePrefab);
+                _currentDraggableModule = newDragabble;
+                _currentDraggableModule.transform.SetParent(_towerParent.transform);
+            }
+            else
+            {
+                ClearNewDragabble();
+                ClearModuleRemover();
+            }
+        }        
+    }
 
-        _currentDraggableModule = newDragabble;
-        _currentDraggableModule.transform.SetParent(_towerParent.transform);
+    public void CreateModuleRemover(ModuleRemover moduleRemover)
+    {
+        if (moduleRemover != null)
+        {
+            if (_currentDraggableModule == null && _currentModuleRemover == null)
+            {
+                ClearModuleRemover();
+                ClearNewDragabble();
+
+                ModuleRemover newModuleRemover = Instantiate<ModuleRemover>(moduleRemover, transform.position, Quaternion.identity);
+
+                _currentModuleRemover = newModuleRemover;
+            }
+            else
+            {
+                ClearNewDragabble();
+                ClearModuleRemover();
+            }
+        }
     }
 
     public void ClearNewDragabble()
     {
         if (_currentDraggableModule != null) _currentDraggableModule.ClearDraggable();
+    }
+
+    public void ClearModuleRemover()
+    {
+        if (_currentModuleRemover != null) Destroy(_currentModuleRemover.gameObject);
     }
 
     public GameObject CreateModule(GameObject modulePrefab)
@@ -168,6 +204,9 @@ public class TowerBuilder : MonoBehaviour
 
     public void ConfirmTower()
     {
+        ClearModuleRemover();
+        ClearNewDragabble();
+
         EventBus<RequestModuleDataEvent>.Publish(new RequestModuleDataEvent());
         ResetTowerShowModelRotation();
 

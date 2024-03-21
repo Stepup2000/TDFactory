@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5069140399561435537}
   - component: {fileID: 4988709185295403668}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MachineGunModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,6 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3059356459211561517}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,7 +34,6 @@ Transform:
   - {fileID: 2340565988661889896}
   - {fileID: 527249613669927691}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4988709185295403668
 MonoBehaviour:
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 6432707200558494559}
   - component: {fileID: 2647839777738577139}
   - component: {fileID: 5691881264013211875}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CannonModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,13 +79,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6275506072475977302}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5069140399561435537}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6432707200558494559
 MeshFilter:
@@ -145,9 +145,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6275506072475977302}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 0
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9127232264567508020
@@ -162,7 +170,7 @@ GameObject:
   - component: {fileID: 721103271173411970}
   - component: {fileID: 4524677260809599876}
   - component: {fileID: 8155482000496115912}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CannonTipModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,13 +184,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9127232264567508020}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.20175}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.003}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5069140399561435537}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &721103271173411970
 MeshFilter:
@@ -242,9 +250,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9127232264567508020}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 0
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &61805505298787552
@@ -252,6 +268,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5069140399561435537}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
@@ -298,11 +315,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8446801162085877992, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -7338069319654727442, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -4904972787396121849, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -4405956185249234014, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -3704751404679840414, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1484000759336623469, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 635547659545568360, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Name
       value: Machinegun
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3585478270320187659, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135817407528038, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112132980172483909, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575051535231702828, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7600220915760279724}
   m_SourcePrefab: {fileID: 100100000, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
 --- !u!4 &527249613669927691 stripped
 Transform:
@@ -322,8 +393,16 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872284452132377009}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
