@@ -12,7 +12,7 @@ public class NavMeshEnemyMovement : MonoBehaviour, IMoveable
     public void Initialize(Transform[] pPath)
     {
         _myPath = pPath;
-        _navMeshAgent = GetComponent<NavMeshAgent>();
+        TryGetComponent<NavMeshAgent>(out _navMeshAgent);
         _navMeshAgent.autoBraking = false; // Disable auto braking to ensure continuous movement
         _navMeshAgent.speed = _speed;
         SetCurrentWaypoint(_waypointIndex);
@@ -21,7 +21,7 @@ public class NavMeshEnemyMovement : MonoBehaviour, IMoveable
     public void SetCurrentWaypoint(int number)
     {
         _waypointIndex = number;
-        if (_waypointIndex < _myPath.Length)
+        if (_waypointIndex < _myPath.Length && _navMeshAgent != null)
         {
             _navMeshAgent.SetDestination(_myPath[_waypointIndex].position);
         }
