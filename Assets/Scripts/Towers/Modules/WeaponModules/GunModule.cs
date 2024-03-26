@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class GunModule : MonoBehaviour, IWeapon
 {
@@ -10,6 +11,8 @@ public class GunModule : MonoBehaviour, IWeapon
     [field: SerializeField] public float shootCooldown { get; set; }
     [field: SerializeField] public int cost { get; set; }
     [field: SerializeField] public GameObject modulePrefab { get; set; }
+
+    private VisualEffect vfx;
 
     private bool _isReloading = false;
    
@@ -28,6 +31,11 @@ public class GunModule : MonoBehaviour, IWeapon
     private void OnDestroy()
     {
         if (_parentTower != null) _parentTower.OnEnemyDetectedEvent -= AttemptFire;
+    }
+
+    private void Start()
+    {
+        vfx = GetComponentInChildren<VisualEffect>();
     }
 
     private void SendModuleData(RequestModuleDataEvent requestModuleDataEvent)
@@ -67,6 +75,7 @@ public class GunModule : MonoBehaviour, IWeapon
         {
             IBullet bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation.normalized);
             bullet.Initialize(damage);
+            if (vfx != null) vfx.Play();
         }        
     }
 
