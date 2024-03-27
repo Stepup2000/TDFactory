@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <cost>k__BackingField: 0
   <modulePrefab>k__BackingField: {fileID: 5392385330683815814}
+  <placementSoundClip>k__BackingField: {fileID: 8300000, guid: 320c493856fe4c2418ec71eea4060930, type: 3}
 --- !u!1 &5526465307238590846
 GameObject:
   m_ObjectHideFlags: 0

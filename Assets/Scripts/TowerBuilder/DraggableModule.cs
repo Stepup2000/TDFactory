@@ -143,6 +143,8 @@ public class DraggableModule : MonoBehaviour
         {
             TowerBuilder.Instance.QueueModulePlacement(_createdModule);
             CreateModule();
+            AudioClip clip =  _createdModule.GetComponentInChildren<IModule>().placementSoundClip;
+            SoundManager.Instance.PlaySoundAtLocation(clip, _createdModule.transform.position, true);
         }
     }
 

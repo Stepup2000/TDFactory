@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] AudioClip backgroundMusicClip;
+
     // Create a static reference to the instance
     private static LevelManager _instance;
 
@@ -41,6 +43,11 @@ public class LevelManager : MonoBehaviour
 
         // Make sure it persists between scenes
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Start()
+    {
+        SoundManager.Instance.PlaySoundAtLocation(backgroundMusicClip, transform.position, false, true);    
     }
 
     public void LoadLevel(string levelName)

@@ -7,6 +7,7 @@ public class DamageModule : MonoBehaviour, IStatModifier
     [SerializeField] private Tower _parentTower;
     [field: SerializeField] public int cost { get; set; }
     [field: SerializeField] public GameObject modulePrefab { get; set; }
+    [field: SerializeField] public AudioClip placementSoundClip { get; set; }
 
     private float _damageModifier = 1f;
 

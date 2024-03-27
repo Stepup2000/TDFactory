@@ -122,3 +122,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 640
   _destructionCooldown: 0.1
+  _removeSoundClip: {fileID: 8300000, guid: 0d5dd45cb4072f24aba38e298dd83117, type: 3}

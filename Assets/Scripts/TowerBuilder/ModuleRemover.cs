@@ -6,6 +6,7 @@ public class ModuleRemover : MonoBehaviour
 {
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private float _destructionCooldown = 0.1f;
+    [SerializeField] AudioClip _removeSoundClip;
     private bool objectDestroyed = false;
 
     private void Update()
@@ -74,6 +75,7 @@ public class ModuleRemover : MonoBehaviour
     {
         if (IsModuleParent(testedObject))
         {
+            SoundManager.Instance.PlaySoundAtLocation(_removeSoundClip, transform.position, true);
             Destroy(testedObject.gameObject);
             ToggleObjectDestroyed();
         }

@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: <heldMoney>k__BackingField
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 682591645290824574, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
+      propertyPath: <maxHealth>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 974286747059697978, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.00000035762784

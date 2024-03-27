@@ -256,6 +256,7 @@ MonoBehaviour:
   _parentTower: {fileID: 0}
   <cost>k__BackingField: 2
   <modulePrefab>k__BackingField: {fileID: 8401419676006191154}
+  <placementSoundClip>k__BackingField: {fileID: 8300000, guid: 320c493856fe4c2418ec71eea4060930, type: 3}
 --- !u!1001 &8555908407911500628
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,13 +5,15 @@ using UnityEngine.VFX;
 
 public class GunModule : MonoBehaviour, IWeapon
 {
-    [SerializeField] private Tower _parentTower;
+    private Tower _parentTower;
     [SerializeField] private BaseBullet _bulletPrefab;
     [field: SerializeField] public float damageMultiplier { get; set; }
     [field: SerializeField] public float shootCooldown { get; set; }
     [field: SerializeField] public int cost { get; set; }
     [field: SerializeField] public GameObject modulePrefab { get; set; }
+    [field: SerializeField] public AudioClip placementSoundClip { get; set; }
 
+    [SerializeField] private AudioClip _audioClip;
     private VisualEffect vfx;
 
     private bool _isReloading = false;
@@ -76,6 +78,7 @@ public class GunModule : MonoBehaviour, IWeapon
             IBullet bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation.normalized);
             bullet.Initialize(damage);
             if (vfx != null) vfx.Play();
+            SoundManager.Instance.PlaySoundAtLocation(_audioClip, transform.position, true);
         }        
     }
 

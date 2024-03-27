@@ -7,6 +7,7 @@ public class BodyModule : MonoBehaviour, IModule
     private Tower _parentTower;
     [field: SerializeField] public int cost { get; set; }
     [field: SerializeField] public GameObject modulePrefab { get; set; }
+    [field: SerializeField] public AudioClip placementSoundClip { get; set; }
 
 
     private void OnEnable()

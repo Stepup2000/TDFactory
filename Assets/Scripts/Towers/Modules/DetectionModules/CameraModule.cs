@@ -6,9 +6,10 @@ public class CameraModule : MonoBehaviour, IDetectionModule
 {
     //All detected enemies
     private HashSet<BaseEnemy> _enemiesInRange = new();
-    [SerializeField] private Tower _parentTower;
+    private Tower _parentTower;
     [field: SerializeField] public int cost { get; set; }
     [field: SerializeField] public GameObject modulePrefab { get; set; }
+    [field: SerializeField] public AudioClip placementSoundClip { get; set; }
 
     //Subscribe to the EnemyRequestEvent
     private void OnEnable()
