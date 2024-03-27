@@ -13,8 +13,10 @@ public class GunModule : MonoBehaviour, IWeapon
     [field: SerializeField] public GameObject modulePrefab { get; set; }
     [field: SerializeField] public AudioClip placementSoundClip { get; set; }
 
-    [SerializeField] private AudioClip _audioClip;
-    private VisualEffect vfx;
+    [SerializeField] private Transform _bulletSpawnLocation;
+
+    [SerializeField] private AudioClip _audioClip = null;
+    private VisualEffect vfx = null;
 
     private bool _isReloading = false;
    
@@ -75,7 +77,7 @@ public class GunModule : MonoBehaviour, IWeapon
     {
         if (_bulletPrefab != null)
         {
-            IBullet bullet = Instantiate(_bulletPrefab, transform.position, transform.rotation.normalized);
+            IBullet bullet = Instantiate(_bulletPrefab, _bulletSpawnLocation.position, transform.rotation.normalized);
             bullet.Initialize(damage);
             if (vfx != null) vfx.Play();
             SoundManager.Instance.PlaySoundAtLocation(_audioClip, transform.position, true);

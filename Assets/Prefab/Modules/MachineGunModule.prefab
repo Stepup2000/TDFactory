@@ -54,7 +54,8 @@ MonoBehaviour:
   <cost>k__BackingField: 1
   <modulePrefab>k__BackingField: {fileID: 3059356459211561517}
   <placementSoundClip>k__BackingField: {fileID: 8300000, guid: 320c493856fe4c2418ec71eea4060930, type: 3}
-  _audioClip: {fileID: 8300000, guid: 733717f3b8c3cda40bfc30ff69cf893c, type: 3}
+  _bulletSpawnLocation: {fileID: 8984971753089004405}
+  _audioClip: {fileID: 8300000, guid: 6d30b75af74c05045b0bc142c5c16dbd, type: 3}
 --- !u!1 &5386521172792948045
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +167,37 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &6234270507931725336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8984971753089004405}
+  m_Layer: 7
+  m_Name: BulletSpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8984971753089004405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6234270507931725336}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 527249613669927691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6275506072475977302
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +514,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8984971753089004405}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       insertIndex: -1

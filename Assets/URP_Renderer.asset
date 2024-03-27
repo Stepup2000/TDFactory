@@ -22,7 +22,7 @@ MonoBehaviour:
     outlineScale: 0.3
     depthThreshold: 1.5
     robertsCrossMultiplier: 100
-    normalThreshold: 0.6
+    normalThreshold: 0.3
     steepAngleThreshold: 0.2
     steepAngleMultiplier: 25
     colorFormat: 0
