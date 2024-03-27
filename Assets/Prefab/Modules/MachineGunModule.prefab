@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 4979566180888985100}
   - component: {fileID: 5746629865640111618}
   - component: {fileID: 7485390671721807366}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: VFX_MuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8984971753089004405}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: BulletSpawnPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 6432707200558494559}
   - component: {fileID: 2647839777738577139}
   - component: {fileID: 5691881264013211875}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: CannonModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 721103271173411970}
   - component: {fileID: 4524677260809599876}
   - component: {fileID: 8155482000496115912}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: CannonTipModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,31 +462,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8446801162085877992, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -7338069319654727442, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -4904972787396121849, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -4405956185249234014, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -3704751404679840414, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -1484000759336623469, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 635547659545568360, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Name
@@ -494,23 +494,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3585478270320187659, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7765135817407528038, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8112132980172483909, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8575051535231702828, guid: d4bd290f7d2bfbc4199f965fca60e5f4, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

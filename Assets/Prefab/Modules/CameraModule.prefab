@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8910371139159980647}
   - component: {fileID: 6409975705975026352}
   - component: {fileID: 3122228172738666268}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: CameraModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4735666701632387000, guid: 01d103f410fdc1a4cbf308127436340e, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5400844455609756930, guid: 01d103f410fdc1a4cbf308127436340e, type: 3}
       propertyPath: m_RootOrder
@@ -253,7 +253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a6596eb02b1ec4db261e986e75e283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parentTower: {fileID: 0}
   <cost>k__BackingField: 2
   <modulePrefab>k__BackingField: {fileID: 8401419676006191154}
   <placementSoundClip>k__BackingField: {fileID: 8300000, guid: 320c493856fe4c2418ec71eea4060930, type: 3}
@@ -267,7 +266,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8700617353114198275, guid: fd8a1b608e870f4408f7c31a09b9933c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd8a1b608e870f4408f7c31a09b9933c, type: 3}
       propertyPath: m_RootOrder
@@ -315,15 +314,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1827928219432720515, guid: fd8a1b608e870f4408f7c31a09b9933c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -1484000759336623469, guid: fd8a1b608e870f4408f7c31a09b9933c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 635547659545568360, guid: fd8a1b608e870f4408f7c31a09b9933c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fd8a1b608e870f4408f7c31a09b9933c, type: 3}
       propertyPath: m_Name
@@ -331,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fd8a1b608e870f4408f7c31a09b9933c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fd8a1b608e870f4408f7c31a09b9933c, type: 3}
       propertyPath: m_IsActive
@@ -339,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7765135817407528038, guid: fd8a1b608e870f4408f7c31a09b9933c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
