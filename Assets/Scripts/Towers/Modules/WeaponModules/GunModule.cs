@@ -17,6 +17,7 @@ public class GunModule : MonoBehaviour, IWeapon
 
     [SerializeField] private AudioClip _audioClip = null;
     private VisualEffect vfx = null;
+    private ParticleSystem shellParticle = null;
 
     private bool _isReloading = false;
    
@@ -40,6 +41,7 @@ public class GunModule : MonoBehaviour, IWeapon
     private void Start()
     {
         vfx = GetComponentInChildren<VisualEffect>();
+        shellParticle = GetComponentInChildren<ParticleSystem>();
     }
 
     private void SendModuleData(RequestModuleDataEvent requestModuleDataEvent)
@@ -80,6 +82,7 @@ public class GunModule : MonoBehaviour, IWeapon
             IBullet bullet = Instantiate(_bulletPrefab, _bulletSpawnLocation.position, transform.rotation.normalized);
             bullet.Initialize(damage);
             if (vfx != null) vfx.Play();
+            if (shellParticle != null) shellParticle.Play();
             SoundManager.Instance.PlaySoundAtLocation(_audioClip, transform.position, true);
         }        
     }

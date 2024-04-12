@@ -5850,8 +5850,8 @@ MonoBehaviour:
   _buttonSoundClip: {fileID: 8300000, guid: bbe0c6cddea93de40ad4d5ae6524281f, type: 3}
   _swapSoundClip: {fileID: 8300000, guid: fbb01dd6acd6f664a813c74f1ce3a8f8, type: 3}
   _saveSoundClip: {fileID: 8300000, guid: cb5dd8360841c2b42909a714bbff5a58, type: 3}
-  initialPoolSize: 10
-  maxPoolSize: 20
+  initialPoolSize: 20
+  maxPoolSize: 40
 --- !u!4 &1386803409
 Transform:
   m_ObjectHideFlags: 0
