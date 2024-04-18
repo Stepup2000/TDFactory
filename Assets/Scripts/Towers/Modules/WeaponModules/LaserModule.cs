@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class GunModule : MonoBehaviour, IWeapon
+public class LaserModule : MonoBehaviour, IWeapon
 {
     private Tower _parentTower;
     [SerializeField] private BaseBullet _bulletPrefab;
@@ -13,12 +13,14 @@ public class GunModule : MonoBehaviour, IWeapon
     [field: SerializeField] public GameObject modulePrefab { get; set; }
     [field: SerializeField] public AudioClip placementSoundClip { get; set; }
 
+    [SerializeField] private GameObject _Laser;
+
     [SerializeField] private Transform _bulletSpawnLocation;
 
     [SerializeField] private AudioClip _audioClip = null;
-    private VisualEffect vfx = null;
     private ParticleSystem shellParticle = null;
 
+    private Coroutine _laserTimerCoroutine;
     private bool _isReloading = false;
    
 
@@ -40,7 +42,6 @@ public class GunModule : MonoBehaviour, IWeapon
 
     private void Start()
     {
-        vfx = GetComponentInChildren<VisualEffect>();
         shellParticle = GetComponentInChildren<ParticleSystem>();
     }
 
@@ -64,27 +65,32 @@ public class GunModule : MonoBehaviour, IWeapon
         else Invoke("SetEnemyRequestSubscription", 0.5f);
     }
 
-    //Try to fire when not reloading
     private void AttemptFire(BaseEnemy enemy, float damage)
     {
         if (!_isReloading)
         {
-            CreateBullet(damage * damageMultiplier);
             _isReloading = true;
             StartCoroutine(Reload());
+
+            // Start or reset the timer coroutine
+            if (_laserTimerCoroutine != null)
+            {
+                StopCoroutine(_laserTimerCoroutine);
+            }
+            _laserTimerCoroutine = StartCoroutine(LaserTimer());
+
+            if (shellParticle != null) shellParticle.Play();
         }
     }
 
-    private void CreateBullet(float damage)
+    // Coroutine for the laser timer
+    private IEnumerator LaserTimer()
     {
-        if (_bulletPrefab != null)
-        {
-            IBullet bullet = Instantiate(_bulletPrefab, _bulletSpawnLocation.position, transform.rotation.normalized);
-            bullet.Initialize(damage);
-            if (vfx != null) vfx.Play();
-            if (shellParticle != null) shellParticle.Play();
-            SoundManager.Instance.PlaySoundAtLocation(_audioClip, transform.position);
-        }        
+        if (_Laser.gameObject.activeSelf == false) _Laser.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+
+        // Deactivate the laser after the timer expires
+        _Laser.gameObject.SetActive(false);
     }
 
     private IEnumerator Reload()

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    // Singleton instance
     public static SoundManager Instance
     {
         get
@@ -22,9 +23,11 @@ public class SoundManager : MonoBehaviour
     }
     private static SoundManager _instance;
 
+    // AudioClip variables
     [SerializeField] private AudioClip _buttonSoundClip;
     [SerializeField] private AudioClip _swapSoundClip;
     [SerializeField] private AudioClip _saveSoundClip;
+    [SerializeField] private float soundCooldown = 0.15f;
 
     // Object pooling variables
     [SerializeField] private int initialPoolSize = 10;
@@ -33,8 +36,14 @@ public class SoundManager : MonoBehaviour
     private List<AudioSource> audioSourcesPool = new List<AudioSource>();
     private GameObject _audioSourceContainer;
 
+    // Dictionary to store last played times of each sound
+    private Dictionary<AudioClip, float> lastPlayTimes = new Dictionary<AudioClip, float>();
+    // Time window in which the same sound won't be played again
+    
+
     private void Awake()
     {
+        // Singleton pattern
         if (_instance != null && _instance != this)
         {
             Debug.LogWarning("Duplicate SoundManager instance found. Destroying this instance.");
@@ -61,7 +70,7 @@ public class SoundManager : MonoBehaviour
         {
             _audioSourceContainer = new GameObject("AudioSourceContainer");
             _audioSourceContainer.transform.SetParent(_instance.transform);
-        }        
+        }
         return _audioSourceContainer;
     }
 
@@ -72,7 +81,13 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning("No audioclip was given");
             return;
         }
-        
+
+        // Check if the sound is on cooldown
+        if (lastPlayTimes.ContainsKey(clip) && Time.time - lastPlayTimes[clip] < soundCooldown)
+        {
+            return; // Sound is still on cooldown
+        }
+
         AudioSource audioSource = GetAvailableAudioSource();
         if (audioSource == null)
         {
@@ -96,6 +111,9 @@ public class SoundManager : MonoBehaviour
             if (randomizePitch == true) audioSource.pitch = GetRandomNumber(0.9f, 1.1f);
             if (loop == true) audioSource.loop = true;
             else StartCoroutine(ReturnToPool(audioSource, clip.length));
+
+            // Update last play time
+            lastPlayTimes[clip] = Time.time;
         }
         else
         {
@@ -160,4 +178,3 @@ public class SoundManager : MonoBehaviour
         PlaySoundAtLocation(_saveSoundClip, transform.position, true);
     }
 }
-

@@ -13,7 +13,7 @@ public class BaseBullet : MonoBehaviour, IBullet
         Invoke(nameof(DestroySelf), _lifeTime);
     }
 
-    private void Move()
+    public virtual void Move()
     {
         // Get the forward direction of the object
         Vector3 direction = transform.forward;
@@ -24,13 +24,18 @@ public class BaseBullet : MonoBehaviour, IBullet
 
     private void OnTriggerEnter(Collider other)
     {
+        HandleTriggerCollision(other);
+    }
+
+    public virtual void HandleTriggerCollision(Collider other)
+    {
         if (other.TryGetComponent(out IDamageable foundDamageAble))
         {
             if (foundDamageAble.IsStillAlive() == true)
             {
                 foundDamageAble.TakeDamage(damage);
                 DestroySelf();
-            }            
+            }
         }
     }
 
