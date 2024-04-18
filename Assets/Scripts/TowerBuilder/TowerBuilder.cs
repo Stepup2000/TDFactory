@@ -305,6 +305,6 @@ public class TowerBuilder : MonoBehaviour
 
     public void LoadLevel()
     {
-        LevelManager.Instance.LoadLevel("Level");
+        LevelManager.Instance.LoadLevel("SCE_Level");
     }
 }
