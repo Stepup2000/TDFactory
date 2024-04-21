@@ -99,6 +99,17 @@ public class TotalHealthChangedEvent : Event
         value = newValue;
     }
 }
+
+//Sends out an event to let everything know the current health balance has been changed
+public class RequestActiveCameras : Event
+{
+    public readonly Camera camera;
+    public RequestActiveCameras(Camera newCamera)
+    {
+        camera = newCamera;
+    }
+}
+
 public class ToggleWeaponModuleButtonsEvent : Event
 {
     public readonly bool trueOrFalse;

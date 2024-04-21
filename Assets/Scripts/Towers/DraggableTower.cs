@@ -22,7 +22,8 @@ public class DraggableTower : MonoBehaviour
         {
             // Send raycast to know where the collision check will be
             RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Camera mainCamera = CameraController.Instance.GetCurrentCamera();
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             int layerMask = 1 << 6;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
@@ -81,8 +82,8 @@ public class DraggableTower : MonoBehaviour
     {
         if (_createdTower != null && _canPlace && true)
         {
-            //EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(-_towerPrefab.GetStats(Tower.PRICE_STAT)));
             _createdTower.ActivateTower();
+            CameraController.Instance.ChangeCamera("MainCamera");
             Destroy(gameObject);
         }        
     }

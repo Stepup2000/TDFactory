@@ -14,7 +14,7 @@ public class EnemyHealthBar : MonoBehaviour
 
     private float _maxHealth;
     private float _currentHealth;
-    private GameObject _mainCamera;
+    private Camera _mainCamera;
     private Quaternion originalRotation;
 
     private void OnEnable()
@@ -31,7 +31,7 @@ public class EnemyHealthBar : MonoBehaviour
     //Makes sure the proper camera is found and the healthbar is added to the right canvas
     private void SetupHealthBar()
     {
-        _mainCamera = GameObject.Find("Main Camera");
+        _mainCamera = CameraController.Instance.GetCurrentCamera();
         originalRotation = transform.rotation;
         UpdateHealthbar(1, 1);
         TurnToCamera();

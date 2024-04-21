@@ -57,7 +57,8 @@ public class DraggableModule : MonoBehaviour
     private void CalculatePosition()
     {
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Camera mainCamera = CameraController.Instance.GetCurrentCamera();
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         // If no layermask has been given, use the standard layermask of the TowerBodyLayerMask
         if (_targetMask == 0)
