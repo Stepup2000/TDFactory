@@ -40,7 +40,7 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
             { RANGE_STAT, 5f },
             { RELOADSPEED_STAT, 0.25f }
         };
-        Debug.Log($"PRICE_STAT value: {GetStats(PRICE_STAT)}");
+        //Debug.Log($"PRICE_STAT value: {GetStats(PRICE_STAT)}");
     }
 
     //End the FiringCoroutine

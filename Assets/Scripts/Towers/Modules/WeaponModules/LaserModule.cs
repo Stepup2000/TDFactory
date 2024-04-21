@@ -17,7 +17,6 @@ public class LaserModule : MonoBehaviour, IWeapon
 
     [SerializeField] private Transform _bulletSpawnLocation;
 
-    [SerializeField] private AudioClip _audioClip = null;
     private ParticleSystem shellParticle = null;
 
     private Coroutine _laserTimerCoroutine;

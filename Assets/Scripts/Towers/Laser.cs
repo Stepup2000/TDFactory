@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Laser : BaseBullet
 {
-    [SerializeField] private float _hitDelay = 0.25f;
-
     private List<IDamageable> _recentlyHitEnemies = new List<IDamageable>();
 
     public override void HandleTriggerCollision(Collider other)

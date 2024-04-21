@@ -33,7 +33,6 @@ public class PlayerDataManager : MonoBehaviour
 
     public void AddTowerToInventory(TowerBlueprint tower, int towerNumber)
     {
-        Debug.Log(tower.allTowerParts.Count);
         // Ensure the list has enough capacity to accommodate towerNumber
         if (allTowers == null)
         {
@@ -51,9 +50,6 @@ public class PlayerDataManager : MonoBehaviour
             allTowers.Add(null);
         }
 
-        // Create a new instance of TowerBlueprint for the tower being added
-        //TowerBlueprint newTower = new TowerBlueprint();
-        //newTower.allTowerParts = new List<TowerPart>(tower.allTowerParts); // Optionally copy tower parts if needed
         // Add the tower at the specified towerNumber location
         allTowers[towerNumber] = tower;
     }
@@ -75,7 +71,7 @@ public class PlayerDataManager : MonoBehaviour
 
     public List<TowerBlueprint> GetAllTowers()
     {
-        if (allTowers != null) return allTowers;
+        if (allTowers != null && allTowers.Count > 0) return allTowers;
         else
         {
             Debug.LogWarning("No towers found in inventory");

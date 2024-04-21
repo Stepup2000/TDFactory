@@ -177,7 +177,7 @@ public class TowerBuilder : MonoBehaviour
         Vector3 position = moduleToPlace.transform.position;
         Quaternion rotation = moduleToPlace.transform.rotation;
 
-        moduleToPlace.TryGetComponent<IModule>(out IModule moduleComponent);
+        IModule moduleComponent = moduleToPlace.GetComponentInChildren<IModule>();
 
         if (moduleComponent != null) cost = moduleComponent.cost;
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   availableEnemyPrefabs:
   - {fileID: 5410311810089712800, guid: 1a603bf6e5fed9b4880bd93d81bb3c7a, type: 3}
   AmountOfWaves: 25
-  StartingCurrency: 100
+  StartingCurrency: 200
   StartingHealth: 10
   EnemyStartingBudget: 130
   EnemyBudgetMultiplier: 1.1
