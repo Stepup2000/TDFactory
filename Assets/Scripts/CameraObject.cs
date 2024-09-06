@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//A camera class that sends its instance to the camera controller
 [RequireComponent(typeof(Camera))]
 public class CameraObject : MonoBehaviour
 {

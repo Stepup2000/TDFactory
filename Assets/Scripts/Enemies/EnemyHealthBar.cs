@@ -14,25 +14,32 @@ public class EnemyHealthBar : MonoBehaviour
 
     private float _maxHealth;
     private float _currentHealth;
-    private Camera _mainCamera;
-    private Quaternion originalRotation;
+    private Camera _targetCamera;
+    private Quaternion _originalRotation;
 
     private void OnEnable()
     {
         SetupHealthBar();
         if (_parent != null) _parent.OnHealthChanged += UpdateHealthbar;
+        if (CameraController.Instance != null) CameraController.Instance.OnCameraChange += ChangeTargetCamera;
     }
 
     private void OnDisable()
     {
         if (_parent != null) _parent.OnHealthChanged -= UpdateHealthbar;
+        if (CameraController.Instance != null) CameraController.Instance.OnCameraChange -= ChangeTargetCamera;
+    }
+
+    private void ChangeTargetCamera()
+    {
+        if (CameraController.Instance != null) _targetCamera = CameraController.Instance.GetCurrentCamera();
     }
 
     //Makes sure the proper camera is found and the healthbar is added to the right canvas
     private void SetupHealthBar()
     {
-        _mainCamera = CameraController.Instance.GetCurrentCamera();
-        originalRotation = transform.rotation;
+        ChangeTargetCamera();
+        _originalRotation = transform.rotation;
         UpdateHealthbar(1, 1);
         TurnToCamera();
     }
@@ -40,7 +47,7 @@ public class EnemyHealthBar : MonoBehaviour
     //Checks if the healthbar is properly setup, otherwise destroy itself
     private void ValidateHealthBar()
     {
-        if (_mainCamera == null || _myHealthBar == null || _fillImage == null || _colorGradient == null)
+        if (_targetCamera == null || _myHealthBar == null || _fillImage == null || _colorGradient == null)
         {
             Debug.LogWarning("Healthbar prefab was not set up properly");
             Destroy(gameObject);
@@ -63,10 +70,10 @@ public class EnemyHealthBar : MonoBehaviour
     //Makes the healthbar always face the given camera
     private void TurnToCamera()
     {
-        if (_mainCamera)
+        if (_targetCamera)
         {
-            transform.LookAt(_mainCamera.transform.position, Vector3.down);
-            transform.rotation = _mainCamera.transform.rotation * originalRotation;
+            transform.LookAt(_targetCamera.transform.position, Vector3.down);
+            transform.rotation = _targetCamera.transform.rotation * _originalRotation;
         }
     }
 

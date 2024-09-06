@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 109884619348134578, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.35
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 109884619812858541, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 109884619812858541, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.35
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 109884620143865926, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
       propertyPath: m_AnchorMax.y
@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 109884620262167500, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.35
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 682591645290824574, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
       propertyPath: <heldMoney>k__BackingField
@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitMaterial: {fileID: 2100000, guid: 8110538a7989e1c4dbf17141121b3aac, type: 2}
+  _flashDuration: 0.05
 --- !u!4 &4040857565525922584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8997381108114727532, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}

@@ -8,6 +8,10 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float _movementSpeed = 5f;
     [SerializeField] private Camera _cameraPrefab;
 
+    //Camera chance observarable event for the camera's
+    public delegate void Triggerevent();
+    public event Triggerevent OnCameraChange;
+
     private Dictionary<string, Camera> _allCameras = new Dictionary<string, Camera>();
     private Camera _currentCamera;
     private Camera _targetCamera;
@@ -62,6 +66,12 @@ public class CameraController : MonoBehaviour
 
     private Camera CreateTransitionCamera()
     {
+        if (_cameraPrefab == null)
+        {
+            Debug.LogWarning("TransitionCamera prefab not found, returning null");
+            return null;
+        }
+
         Camera newCamera = Instantiate<Camera>(_cameraPrefab);
         DontDestroyOnLoad(newCamera);
         newCamera.enabled = false;
@@ -88,7 +98,8 @@ public class CameraController : MonoBehaviour
             Debug.LogWarning("No camera found with key: " + cameraKey);
             return;
         }
-
+        
+        //Might have to change this, why would it return when no current camera is found
         if (_currentCamera == null)
         {
             Debug.LogWarning("No current camera found");
@@ -101,13 +112,12 @@ public class CameraController : MonoBehaviour
             _transitionCamera = CreateTransitionCamera();
         }
 
-        SetActiveCamera(_transitionCamera);
-
         _transitionCamera.transform.position = _currentCamera.transform.position;
         _transitionCamera.transform.rotation = _currentCamera.transform.rotation;
+        _currentCamera = _transitionCamera;
         _targetCamera = _allCameras[cameraKey];
 
-        _currentCamera = _transitionCamera;
+        ActivateCamera(_transitionCamera);               
     }
 
     private void MoveToTarget()
@@ -131,7 +141,7 @@ public class CameraController : MonoBehaviour
                 _currentCamera = _targetCamera;
 
                 // Activate the target camera
-                SetActiveCamera(_targetCamera);
+                ActivateCamera(_targetCamera);
 
                 // Reset the target camera to null
                 _targetCamera = null;
@@ -139,8 +149,11 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void SetActiveCamera(Camera activeCamera)
+    private void ActivateCamera(Camera activeCamera)
     {
+        //Send out an event that the camera changed
+        OnCameraChange?.Invoke();
+
         foreach (var kvp in _allCameras)
         {
             Camera camera = kvp.Value;
@@ -156,7 +169,7 @@ public class CameraController : MonoBehaviour
         else
         {
             Debug.LogWarning("No active camera found, turning camera with key 'default' on");
-            SetActiveCamera(_allCameras.ContainsKey("default") ? _allCameras["default"] : null);
+            ActivateCamera(_allCameras.ContainsKey("default") ? _allCameras["default"] : null);
         }
     }
 
