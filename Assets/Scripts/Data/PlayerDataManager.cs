@@ -2,35 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages player data related to tower inventory and save slots.
+/// Implements a singleton pattern to ensure only one instance exists and persists across scenes.
+/// </summary>
 public class PlayerDataManager : MonoBehaviour
 {
-    [SerializeField] private int _amountOfSaveslots = 3;
-    private List<TowerBlueprint> allTowers = new List<TowerBlueprint>();
-    private static PlayerDataManager instance;
+    [SerializeField] private int _amountOfSaveslots = 3; // Number of save slots for towers
+    private List<TowerBlueprint> allTowers = new List<TowerBlueprint>(); // List to hold tower blueprints
+    private static PlayerDataManager _instance; // Singleton instance of PlayerDataManager
 
-    //Make sure there is only one instance
+    /// <summary>
+    /// Provides access to the singleton instance of PlayerDataManager.
+    /// Ensures only one instance exists and persists across scenes.
+    /// </summary>
     public static PlayerDataManager Instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = FindObjectOfType<PlayerDataManager>();
-                if (instance == null)
+                _instance = FindObjectOfType<PlayerDataManager>();
+
+                if (_instance == null)
                 {
-                    GameObject singletonObject = new GameObject("playerDataManager");
-                    instance = singletonObject.AddComponent<PlayerDataManager>();
+                    GameObject singletonObject = new GameObject("PlayerDataManager");
+                    _instance = singletonObject.AddComponent<PlayerDataManager>();
+                    DontDestroyOnLoad(singletonObject);
                 }
             }
-            return instance;
+
+            return _instance;
         }
     }
 
+    /// <summary>
+    /// Initializes the instance and ensures it persists across scenes.
+    /// </summary>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
     }
 
+    /// <summary>
+    /// Adds a tower blueprint to the inventory at the specified slot number.
+    /// Ensures the list has enough capacity and elements to accommodate the slot number.
+    /// </summary>
+    /// <param name="tower">The tower blueprint to add.</param>
+    /// <param name="towerNumber">The index of the slot to add the tower to.</param>
     public void AddTowerToInventory(TowerBlueprint tower, int towerNumber)
     {
         // Ensure the list has enough capacity to accommodate towerNumber
@@ -54,6 +73,11 @@ public class PlayerDataManager : MonoBehaviour
         allTowers[towerNumber] = tower;
     }
 
+    /// <summary>
+    /// Attempts to remove a tower from the inventory at the specified slot number.
+    /// Logs warnings if the list is null or the tower is not found.
+    /// </summary>
+    /// <param name="towerNumber">The index of the slot to remove the tower from.</param>
     public void TryRemoveTowerFromInventory(int towerNumber)
     {
         if (allTowers == null)
@@ -69,6 +93,11 @@ public class PlayerDataManager : MonoBehaviour
         allTowers[towerNumber] = null;
     }
 
+    /// <summary>
+    /// Returns the list of all tower blueprints in the inventory.
+    /// Logs a warning if no towers are found.
+    /// </summary>
+    /// <returns>List of tower blueprints or null if none are found.</returns>
     public List<TowerBlueprint> GetAllTowers()
     {
         if (allTowers != null && allTowers.Count > 0) return allTowers;
@@ -76,9 +105,12 @@ public class PlayerDataManager : MonoBehaviour
         {
             Debug.LogWarning("No towers found in inventory");
             return null;
-        }        
+        }
     }
 
+    /// <summary>
+    /// Creates and spawns a new tower using the blueprints in the inventory.
+    /// </summary>
     private void SpawnTower()
     {
         GameObject tower = new GameObject("NewTower");
@@ -86,6 +118,6 @@ public class PlayerDataManager : MonoBehaviour
         {
             GameObject createdPart = Instantiate<GameObject>(part.module, part.position, part.rotation);
             createdPart.transform.SetParent(tower.transform);
-        }        
+        }
     }
 }

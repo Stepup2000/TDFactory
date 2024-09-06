@@ -1,23 +1,28 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages level loading, scene transitions, and background music.
+/// Implements a singleton pattern to ensure only one instance exists and persists between scenes.
+/// </summary>
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] AudioClip backgroundMusicClip;
+    [SerializeField] private AudioClip backgroundMusicClip; // Clip for background music
 
-    // Create a static reference to the instance
-    private static LevelManager _instance;
+    private static LevelManager _instance; // Singleton instance of LevelManager
 
+    /// <summary>
+    /// Provides access to the singleton instance of LevelManager.
+    /// Ensures only one instance exists and persists across scenes.
+    /// </summary>
     public static LevelManager Instance
     {
         get
         {
-            // If there is no instance yet, find or create one
             if (_instance == null)
             {
                 _instance = FindObjectOfType<LevelManager>();
 
-                // If there are no instances in the scene, create a new one
                 if (_instance == null)
                 {
                     GameObject singletonObject = new GameObject(typeof(LevelManager).Name);
@@ -29,33 +34,37 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Ensures there's only one instance of LevelManager and makes it persist between scenes.
+    /// </summary>
     private void Awake()
     {
-        // Ensure there's only one instance
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
             return;
         }
 
-        // Set the instance to this object
         _instance = this;
-
-        // Make sure it persists between scenes
         DontDestroyOnLoad(this.gameObject);
     }
 
+    /// <summary>
+    /// Plays the background music clip at the start of the scene.
+    /// </summary>
     private void Start()
     {
-        SoundManager.Instance.PlaySoundAtLocation(backgroundMusicClip, transform.position, false, true);    
+        SoundManager.Instance.PlaySoundAtLocation(backgroundMusicClip, transform.position, false, true);
     }
 
+    /// <summary>
+    /// Loads a scene by its name.
+    /// </summary>
+    /// <param name="levelName">Name of the scene to load.</param>
     public void LoadLevel(string levelName)
     {
-        SceneManager.LoadScene(levelName);
-
+        // Code for checking if the scene exists, currently does not work.
         /*
-        // Check if the scene exists in the build settings
         if (SceneExists(levelName))
         {
             SceneManager.LoadScene(levelName);
@@ -65,13 +74,23 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("Scene '" + levelName + "' does not exist in the build settings.");
         }
         */
+
+        SceneManager.LoadScene(levelName);
     }
 
+    /// <summary>
+    /// Quits the application.
+    /// </summary>
     public void QuitGame()
     {
         Application.Quit();
     }
 
+    /// <summary>
+    /// Checks if a scene exists in the build settings.
+    /// </summary>
+    /// <param name="sceneName">Name of the scene to check.</param>
+    /// <returns>True if the scene is valid, otherwise false.</returns>
     private bool SceneExists(string sceneName)
     {
         Scene scene = SceneManager.GetSceneByName(sceneName);

@@ -2,14 +2,29 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Demonstrates how to serialize and deserialize a Dictionary using Unity's serialization system.
+/// </summary>
 public class SerializationCallbackScript : MonoBehaviour, ISerializationCallbackReceiver
 {
+    /// <summary>
+    /// List of keys used for serialization of the Dictionary.
+    /// </summary>
     public List<int> _keys = new List<int> { 3, 4, 5 };
+
+    /// <summary>
+    /// List of values used for serialization of the Dictionary.
+    /// </summary>
     public List<string> _values = new List<string> { "I", "Love", "Unity" };
 
-    //Unity doesn't know how to serialize a Dictionary
+    /// <summary>
+    /// Dictionary to be serialized and deserialized.
+    /// </summary>
     public Dictionary<int, string> _myDictionary = new Dictionary<int, string>();
 
+    /// <summary>
+    /// Called before serialization. Converts the Dictionary to lists of keys and values.
+    /// </summary>
     public void OnBeforeSerialize()
     {
         _keys.Clear();
@@ -22,6 +37,9 @@ public class SerializationCallbackScript : MonoBehaviour, ISerializationCallback
         }
     }
 
+    /// <summary>
+    /// Called after deserialization. Converts the lists of keys and values back to a Dictionary.
+    /// </summary>
     public void OnAfterDeserialize()
     {
         _myDictionary = new Dictionary<int, string>();
@@ -30,6 +48,9 @@ public class SerializationCallbackScript : MonoBehaviour, ISerializationCallback
             _myDictionary.Add(_keys[i], _values[i]);
     }
 
+    /// <summary>
+    /// Displays the contents of the Dictionary in the GUI.
+    /// </summary>
     void OnGUI()
     {
         foreach (var kvp in _myDictionary)
