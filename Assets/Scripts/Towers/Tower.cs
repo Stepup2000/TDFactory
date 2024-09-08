@@ -4,35 +4,48 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour, ISerializationCallbackReceiver
 {
-    //Declare delegate type for events that use an enemy type and damage
+    /// <summary>
+    /// Delegate for handling enemy detection events, passing the detected enemy and damage value.
+    /// </summary>
+    /// <param name="enemy">The detected enemy.</param>
+    /// <param name="damage">The damage dealt to the enemy.</param>
     public delegate void EnemyEvent(BaseEnemy enemy, float damage);
+
+    /// <summary>
+    /// Event triggered when an enemy is detected.
+    /// </summary>
     public event EnemyEvent OnEnemyDetectedEvent;
 
-    //Declare delegate type without parameters
+    /// <summary>
+    /// Delegate for triggering generic events without parameters.
+    /// </summary>
     public delegate void TriggerEvent();
+
+    /// <summary>
+    /// Event triggered to request enemy targets from attached detection modules.
+    /// </summary>
     public event TriggerEvent EnemyRequestEvent;
 
-    //private serialized fields for stats
-    [SerializeField] private List<string> _statKeys;
-    [SerializeField] private List<float> _statValues;
+    [SerializeField] private List<string> _statKeys; // Serialized list of stat keys for saving/loading.
+    [SerializeField] private List<float> _statValues; // Serialized list of stat values for saving/loading.
 
-    //Dictionary that hold all the stats of the tower
-    private Dictionary<string, float> _stats;
+    private Dictionary<string, float> _stats; // Dictionary holding tower stats.
 
-    // Define the keys for your stats constants
+    // Constants defining the keys for tower stats.
     public const string PRICE_STAT = "Price";
     public const string DAMAGE_STAT = "BaseDamage";
     public const string RANGE_STAT = "BaseRange";
     public const string RELOADSPEED_STAT = "BaseReloadSpeed";
 
-    //Hashset that holds all detectedEnemies
-    private HashSet<BaseEnemy> _detectedEnemies = new();
+    private HashSet<BaseEnemy> _detectedEnemies = new(); // Set holding all detected enemies.
+    private BaseEnemy _lastEnemy = null; // Tracks the last enemy targeted by the tower.
 
-    private BaseEnemy _lastEnemy = null;
-
+    /// <summary>
+    /// Initializes default stats when the tower is instantiated.
+    /// </summary>
     private void Awake()
     {
-        // Initialize the stats dictionary with default values
+        // Initialize the stats dictionary with default values.
         _stats = new Dictionary<string, float>()
         {
             { PRICE_STAT, 100f },
@@ -40,21 +53,29 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
             { RANGE_STAT, 5f },
             { RELOADSPEED_STAT, 0.25f }
         };
-        //Debug.Log($"PRICE_STAT value: {GetStats(PRICE_STAT)}");
     }
 
-    //End the FiringCoroutine
+    /// <summary>
+    /// Stops the firing coroutine when the tower is destroyed.
+    /// </summary>
     private void OnDestroy()
     {
         StopCoroutine(FireRateCoroutine());
     }
 
+    /// <summary>
+    /// Activates the tower by starting the firing coroutine.
+    /// </summary>
     public void ActivateTower()
     {
         StartCoroutine(FireRateCoroutine());
     }
 
-    //Get the current stats of the tower
+    /// <summary>
+    /// Retrieves the current value of a specified stat.
+    /// </summary>
+    /// <param name="statName">The name of the stat to retrieve.</param>
+    /// <returns>The value of the stat, or 0 if not found.</returns>
     public float GetStats(string statName)
     {
         if (_stats.TryGetValue(statName, out float value))
@@ -68,17 +89,19 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         }
     }
 
-    // Modify the stats of the tower based on the input modifiers dictionary.
+    /// <summary>
+    /// Modifies the stats of the tower based on the given dictionary of modifiers.
+    /// </summary>
+    /// <param name="modifiers">A dictionary containing stat modifications.</param>
     public void ModifyStats(Dictionary<string, float> modifiers)
     {
-        //Returns if not modifiers are given
         if (modifiers == null)
         {
             Debug.LogWarning("Modifiers argument is null");
             return;
         }
 
-        // If the new value is negative, clamps it to 0 and logs a warning.
+        // Apply each modifier, clamping values to 0 if necessary.
         foreach (var kvp in modifiers)
         {
             if (_stats.TryGetValue(kvp.Key, out float oldValue))
@@ -98,70 +121,86 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         }
     }
 
+    /// <summary>
+    /// Coroutine that handles the tower's firing cycle.
+    /// </summary>
     private IEnumerator FireRateCoroutine()
     {
         while (true)
         {
-            // Request all enemies from detectors
+            // Request all targets from detection modules.
             ObtainAllTargets();
 
-            // Wait for the enemy request event to complete
+            // Wait for detection event.
             yield return new WaitForEndOfFrame();
 
-            //Calculate the furthest target
+            // Select the furthest target from the detected enemies.
             CalculateTarget();
 
-            // Fire weapons
+            // Attempt to fire at the selected target.
             TryFireWeapons();
 
-            // Wait for reload time
+            // Wait for the tower's reload time before firing again.
             yield return new WaitForSeconds(_stats[RELOADSPEED_STAT]);
         }
     }
 
-    //Method for DetectionModules to add their prefered enemytarget to the hashset of the tower
+    /// <summary>
+    /// Adds an enemy to the set of detected enemies.
+    /// </summary>
+    /// <param name="enemy">The enemy to add.</param>
     public void AddTarget(BaseEnemy enemy)
     {
-        if (_detectedEnemies != null && enemy != null) _detectedEnemies.Add(enemy);
+        if (_detectedEnemies != null && enemy != null)
+            _detectedEnemies.Add(enemy);
     }
 
-    //Gets rid of the old targets and sends out an event to get new targets
+    /// <summary>
+    /// Clears current targets and requests new ones from detection modules.
+    /// </summary>
     private void ObtainAllTargets()
     {
         _detectedEnemies?.Clear();
         EnemyRequestEvent?.Invoke();
     }
 
-    //Assigns a new target based on the distance they travelled, it wants the furthest one
+    /// <summary>
+    /// Determines the furthest enemy in the set of detected enemies and assigns it as the target.
+    /// </summary>
     private void CalculateTarget()
     {
         BaseEnemy furthestEnemy = null;
         foreach (BaseEnemy enemy in _detectedEnemies)
         {
             if (enemy == null) continue;
-            if (furthestEnemy == null || furthestEnemy.travelledDistance < enemy.travelledDistance) furthestEnemy = enemy;
+            if (furthestEnemy == null || furthestEnemy.travelledDistance < enemy.travelledDistance)
+                furthestEnemy = enemy;
         }
         _lastEnemy = furthestEnemy;
     }
 
-    //Invokes an event if an enemy has been detected
+    /// <summary>
+    /// Attempts to fire at the selected enemy if any enemies are detected.
+    /// </summary>
     private void TryFireWeapons()
     {
         if (_detectedEnemies.Count != 0)
         {
             OnEnemyDetectedEvent?.Invoke(_lastEnemy, _stats[DAMAGE_STAT]);
-        }        
+        }
     }
 
     #region ShowDictionary
-    // This method is called before the object is serialized
+    /// <summary>
+    /// Serializes the tower's stats into lists for saving.
+    /// </summary>
     public void OnBeforeSerialize()
     {
-        // Clear the lists before serializing
+        // Clear the lists before serializing.
         _statKeys = new List<string>();
         _statValues = new List<float>();
 
-        // Serialize each key-value pair to the lists
+        // Add each key-value pair from the dictionary to the lists.
         foreach (var kvp in _stats)
         {
             _statKeys.Add(kvp.Key);
@@ -169,13 +208,15 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         }
     }
 
-    // This method is called after the object is deserialized
+    /// <summary>
+    /// Deserializes the tower's stats from the saved lists.
+    /// </summary>
     public void OnAfterDeserialize()
     {
-        // Create a new dictionary to store the deserialized key-value pairs
+        // Initialize the stats dictionary from the deserialized lists.
         _stats = new Dictionary<string, float>();
 
-        // Deserialize each key-value pair from the lists
+        // Populate the dictionary with key-value pairs from the lists.
         for (int i = 0; i < _statKeys.Count; i++)
         {
             _stats[_statKeys[i]] = _statValues[i];

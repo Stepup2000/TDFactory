@@ -4,42 +4,59 @@ using UnityEngine;
 
 public class DraggableTower : MonoBehaviour
 {
+    /// <summary>
+    /// The amount by which the tower rotates when the mouse scrolls.
+    /// </summary>
     [SerializeField] private int _rotationAmount = 45;
 
-    private Tower _createdTower;
-    private bool _canPlace = false;
+    private Tower _createdTower; // Reference to the currently created tower.
+    private bool _canPlace = false; // Indicates whether the tower can be placed at the current location.
 
+    /// <summary>
+    /// Initializes the tower by spawning it using the player's first available tower blueprint.
+    /// </summary>
     private void Start()
     {
-        TowerBlueprint towerBlueprint = PlayerDataManager.Instance.GetAllTowers()[0];
-        SpawnTower(towerBlueprint);
+        TowerBlueprint towerBlueprint = PlayerDataManager.Instance.GetAllTowers()[0]; // Get the first tower blueprint.
+        SpawnTower(towerBlueprint); // Spawn the tower based on the blueprint.
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Updates the position of the tower being dragged and checks if it can be placed at the current location.
+    /// </summary>
     private void FixedUpdate()
     {
         if (_createdTower != null)
         {
-            // Send raycast to know where the collision check will be
             RaycastHit hit;
             Camera mainCamera = CameraController.Instance.GetCurrentCamera();
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            int layerMask = 1 << 6;
+            int layerMask = 1 << 6; // Only interact with the specified layer.
+
+            // Cast a ray to determine where the tower should be positioned.
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                _createdTower.transform.position = hit.point;
-                _canPlace = true;
+                _createdTower.transform.position = hit.point; // Move the tower to the raycast hit position.
+                _canPlace = true; // Tower can be placed.
             }
             else _canPlace = false;
+
+            // If left mouse button is clicked, activate the tower.
             if (Input.GetMouseButton(0)) ActivateTower();
         }
     }
 
+    /// <summary>
+    /// Handles mouse input for rotating the tower.
+    /// </summary>
     private void Update()
     {
         HandleMouseInput();
     }
 
+    /// <summary>
+    /// Rotates the tower based on the mouse scroll input.
+    /// </summary>
     private void HandleMouseInput()
     {
         float scrollAmount = Input.mouseScrollDelta.y;
@@ -47,44 +64,47 @@ public class DraggableTower : MonoBehaviour
         {
             if (scrollAmount > 0)
             {
-                // Rotate the module counter-clockwise around its local Z-axis by 1 degree
-                _createdTower.transform.Rotate(_createdTower.transform.up, -_rotationAmount);
+                _createdTower.transform.Rotate(_createdTower.transform.up, -_rotationAmount); // Rotate counter-clockwise.
             }
             else if (scrollAmount < 0)
             {
-                // Rotate the module clockwise around its local Z-axis by 1 degree
-                _createdTower.transform.Rotate(_createdTower.transform.up, _rotationAmount);
+                _createdTower.transform.Rotate(_createdTower.transform.up, _rotationAmount); // Rotate clockwise.
             }
         }
     }
 
-
-    // Create the tower and deduct money through the eventbus
+    /// <summary>
+    /// Spawns the tower using the provided tower blueprint and attaches the necessary parts.
+    /// </summary>
+    /// <param name="towerBlueprint">The blueprint that contains information about the tower's structure and modules.</param>
     private void SpawnTower(TowerBlueprint towerBlueprint)
     {
-        GameObject tower = new GameObject("NewTower");
-        _createdTower = tower.AddComponent<Tower>();
-        Vector3 newPosition = new Vector3(transform.position.x, 0, transform.position.z);
-        _createdTower.transform.position = newPosition;
+        GameObject tower = new GameObject("NewTower"); // Create a new GameObject for the tower.
+        _createdTower = tower.AddComponent<Tower>(); // Attach a Tower component to the GameObject.
 
-        //_createdTower = Instantiate<Tower>(_towerPrefab, newPosition, Quaternion.identity);
-        
+        Vector3 newPosition = new Vector3(transform.position.x, 0, transform.position.z);
+        _createdTower.transform.position = newPosition; // Set the initial position of the tower.
+
+        // Instantiate and attach each tower part based on the blueprint.
         foreach (TowerPart part in towerBlueprint.allTowerParts)
         {
-            GameObject createdPart = Instantiate<GameObject>(part.Module, newPosition + part.Position, part.Rotation);
-            createdPart.transform.SetParent(tower.transform);
-            IModule module = createdPart.GetComponentInChildren<IModule>();
-            if (module != null) module.SetParentTower(_createdTower);
+            GameObject createdPart = Instantiate(part.Module, newPosition + part.Position, part.Rotation);
+            createdPart.transform.SetParent(tower.transform); // Attach the part to the tower as a child.
+            IModule module = createdPart.GetComponentInChildren<IModule>(); // Get the module component if available.
+            if (module != null) module.SetParentTower(_createdTower); // Assign the parent tower to the module.
         }
     }
 
+    /// <summary>
+    /// Activates the tower if it can be placed, switching the camera back to the main view and destroying the draggable object.
+    /// </summary>
     private void ActivateTower()
     {
-        if (_createdTower != null && _canPlace && true)
+        if (_createdTower != null && _canPlace)
         {
-            _createdTower.ActivateTower();
-            CameraController.Instance.ChangeCamera("MainCamera");
-            Destroy(gameObject);
-        }        
+            _createdTower.ActivateTower(); // Activate the tower's functionality.
+            CameraController.Instance.ChangeCamera("MainCamera"); // Switch back to the main camera.
+            Destroy(gameObject); // Destroy the draggable object.
+        }
     }
 }
