@@ -47,7 +47,7 @@ public class ShopButton : MonoBehaviour
         int newCost = 0;
         foreach(TowerPart part in towerBlueprint.allTowerParts)
         {
-            newCost += part.moduleCost;
+            newCost += part.ModuleCost;
         }
         _towerCost = newCost;
     }

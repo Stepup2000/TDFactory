@@ -71,7 +71,7 @@ public class DraggableTower : MonoBehaviour
         
         foreach (TowerPart part in towerBlueprint.allTowerParts)
         {
-            GameObject createdPart = Instantiate<GameObject>(part.module, newPosition + part.position, part.rotation);
+            GameObject createdPart = Instantiate<GameObject>(part.Module, newPosition + part.Position, part.Rotation);
             createdPart.transform.SetParent(tower.transform);
             IModule module = createdPart.GetComponentInChildren<IModule>();
             if (module != null) module.SetParentTower(_createdTower);

@@ -2,22 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the construction and management of towers in the game.
+/// Includes functionality for rotating towers, creating draggable modules, placing modules, and saving/loading tower configurations.
+/// </summary>
 public class TowerBuilder : MonoBehaviour
 {
-    [SerializeField] int _rotationAmount = 90;
-    [SerializeField] float _rotationCooldown = 0.5f;
+    [SerializeField] int _rotationAmount = 90; // Degrees to rotate the tower
+    [SerializeField] float _rotationCooldown = 0.5f; // Cooldown time between rotations
 
-    private static TowerBuilder instance;
-    private List<TowerPart> _allTowerParts;
-    private List<GameObject> _towerShowModel = new();
-    private GameObject _towerParent;
-    private DraggableModule _currentDraggableModule;
-    private ModuleRemover _currentModuleRemover;
-    private bool _canRotate = true;
-    private Quaternion _oldTowerRotation;
-    private int _currentTowerNumber = 0;
+    private static TowerBuilder instance; // Singleton instance
+    private List<TowerPart> _allTowerParts; // List of all parts added to the tower
+    private List<GameObject> _towerShowModel = new(); // Visual representation of the tower
+    private GameObject _towerParent; // Parent object for tower parts
+    private DraggableModule _currentDraggableModule; // Currently active draggable module
+    private ModuleRemover _currentModuleRemover; // Currently active module remover
+    private bool _canRotate = true; // Flag to control if rotation is allowed
+    private Quaternion _oldTowerRotation; // Stores the old rotation of the tower
+    private int _currentTowerNumber = 0; // Keeps track of the currently loaded tower
 
-    //Make sure there is only one instance
+    /// <summary>
+    /// Singleton instance of the TowerBuilder.
+    /// Ensures there is only one instance in the scene.
+    /// </summary>
     public static TowerBuilder Instance
     {
         get
@@ -37,34 +44,38 @@ public class TowerBuilder : MonoBehaviour
 
     private void Start()
     {
-        _allTowerParts = new List<TowerPart>();
-        CreateTowerParent();
-        SetLoadbuttonsActive();
+        _allTowerParts = new List<TowerPart>(); // Initialize list of tower parts
+        CreateTowerParent(); // Create parent object for the tower
+        SetLoadbuttonsActive(); // Activate load buttons in the UI
     }
 
     private void Update()
     {
-        if (Input.GetMouseButton(1) && _canRotate) // Check if right mouse button is being held down and rotation is allowed
+        // Rotate the tower when right mouse button is pressed and rotation is allowed
+        if (Input.GetMouseButton(1) && _canRotate)
         {
-            float mouseX = Input.GetAxis("Mouse X"); // Get horizontal movement of the mouse
+            float mouseX = Input.GetAxis("Mouse X"); // Get horizontal mouse movement
+
             if (_towerShowModel != null)
             {
-                if (mouseX > 0)
+                if (mouseX > 0) // Rotate clockwise
                 {
-                    // Rotate the module clockwise around its local Z-axis by 45 degrees
                     RotateTowerShowModel(-_rotationAmount);
-                    StartCoroutine(WaitForRotation());
+                    StartCoroutine(WaitForRotation()); // Wait for cooldown
                 }
-                else if (mouseX < 0)
+                else if (mouseX < 0) // Rotate counter-clockwise
                 {
-                    // Rotate the module counter-clockwise around its local Z-axis by 45 degrees
                     RotateTowerShowModel(_rotationAmount);
-                    StartCoroutine(WaitForRotation());
+                    StartCoroutine(WaitForRotation()); // Wait for cooldown
                 }
             }
         }
     }
 
+    /// <summary>
+    /// Creates the parent GameObject for the tower parts.
+    /// Destroys any previous parent object to ensure there is only one.
+    /// </summary>
     private void CreateTowerParent()
     {
         if (_towerParent != null) Destroy(_towerParent.gameObject);
@@ -72,6 +83,9 @@ public class TowerBuilder : MonoBehaviour
         _towerParent.transform.position = new Vector3(0, 1, 0);
     }
 
+    /// <summary>
+    /// Waits for a cooldown period before allowing further rotations.
+    /// </summary>
     private IEnumerator WaitForRotation()
     {
         _canRotate = false;
@@ -79,45 +93,64 @@ public class TowerBuilder : MonoBehaviour
         _canRotate = true;
     }
 
+    /// <summary>
+    /// Rotates the tower model by a given amount.
+    /// </summary>
+    /// <param name="amount">Amount of rotation in degrees.</param>
     private void RotateTowerShowModel(int amount)
     {
         if (_towerParent != null) _towerParent.transform.Rotate(_towerParent.transform.up, amount);
     }
 
+    /// <summary>
+    /// Resets the rotation of the tower model to its default rotation (0, 0, 0).
+    /// </summary>
     private void ResetTowerShowModelRotation()
     {
         if (_towerParent != null)
         {
             _oldTowerRotation = _towerParent.transform.rotation;
             _towerParent.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }            
+        }
     }
 
+    /// <summary>
+    /// Restores the tower's rotation to its previous state before resetting.
+    /// </summary>
     private void SetTowerRotationToOld()
     {
         _towerParent.transform.rotation = _oldTowerRotation;
     }
 
+    /// <summary>
+    /// Creates a new draggable module for the tower.
+    /// </summary>
+    /// <param name="_modulePrefab">The prefab for the module to be created.</param>
+    /// <param name="draggablePrefab">The draggable module prefab.</param>
     public void CreateNewDraggable(GameObject _modulePrefab, DraggableModule draggablePrefab)
     {
         if (_modulePrefab != null && draggablePrefab != null)
         {
-            if(_currentDraggableModule == null && _currentModuleRemover == null)
+            if (_currentDraggableModule == null && _currentModuleRemover == null)
             {
-                DraggableModule newDragabble = Instantiate<DraggableModule>(draggablePrefab, transform.position, Quaternion.identity);
-                newDragabble.SetModulePrefab(_modulePrefab);
+                DraggableModule newDraggable = Instantiate<DraggableModule>(draggablePrefab, transform.position, Quaternion.identity);
+                newDraggable.SetModulePrefab(_modulePrefab);
 
-                _currentDraggableModule = newDragabble;
+                _currentDraggableModule = newDraggable;
                 _currentDraggableModule.transform.SetParent(_towerParent.transform);
             }
             else
             {
-                ClearNewDragabble();
+                ClearNewDraggable();
                 ClearModuleRemover();
             }
-        }        
+        }
     }
 
+    /// <summary>
+    /// Creates a module remover for removing modules from the tower.
+    /// </summary>
+    /// <param name="moduleRemover">The module remover prefab.</param>
     public void CreateModuleRemover(ModuleRemover moduleRemover)
     {
         if (moduleRemover != null)
@@ -125,7 +158,7 @@ public class TowerBuilder : MonoBehaviour
             if (_currentDraggableModule == null && _currentModuleRemover == null)
             {
                 ClearModuleRemover();
-                ClearNewDragabble();
+                ClearNewDraggable();
 
                 ModuleRemover newModuleRemover = Instantiate<ModuleRemover>(moduleRemover, transform.position, Quaternion.identity);
 
@@ -133,22 +166,33 @@ public class TowerBuilder : MonoBehaviour
             }
             else
             {
-                ClearNewDragabble();
+                ClearNewDraggable();
                 ClearModuleRemover();
             }
         }
     }
 
-    public void ClearNewDragabble()
+    /// <summary>
+    /// Clears the currently active draggable module.
+    /// </summary>
+    public void ClearNewDraggable()
     {
         if (_currentDraggableModule != null) _currentDraggableModule.ClearDraggable();
     }
 
+    /// <summary>
+    /// Clears the currently active module remover.
+    /// </summary>
     public void ClearModuleRemover()
     {
         if (_currentModuleRemover != null) Destroy(_currentModuleRemover.gameObject);
     }
 
+    /// <summary>
+    /// Instantiates a new module in the scene.
+    /// </summary>
+    /// <param name="modulePrefab">The prefab of the module to be created.</param>
+    /// <returns>The newly created module GameObject.</returns>
     public GameObject CreateModule(GameObject modulePrefab)
     {
         if (modulePrefab == null)
@@ -163,12 +207,20 @@ public class TowerBuilder : MonoBehaviour
         return newObject;
     }
 
+    /// <summary>
+    /// Queues the placement of a module by parenting it to the tower.
+    /// </summary>
+    /// <param name="moduleToPlace">The module to be placed.</param>
     public void QueueModulePlacement(GameObject moduleToPlace)
     {
         moduleToPlace.transform.SetParent(_towerParent.transform);
     }
 
-    //Actually place the created module
+    /// <summary>
+    /// Places a module onto the tower.
+    /// </summary>
+    /// <param name="moduleToPlace">The module to be placed.</param>
+    /// <param name="modulePrefab">The prefab for the module.</param>
     public void PlaceModule(GameObject moduleToPlace, GameObject modulePrefab)
     {
         ResetTowerShowModelRotation();
@@ -186,41 +238,54 @@ public class TowerBuilder : MonoBehaviour
         SetTowerRotationToOld();
     }
 
+    /// <summary>
+    /// Adds a module to the tower and updates the tower's model list.
+    /// </summary>
+    /// <param name="towerPartToAdd">The tower part to be added.</param>
+    /// <param name="showModel">The visual model of the module.</param>
     public void AddModuleToTower(TowerPart towerPartToAdd, GameObject showModel)
     {
         _allTowerParts.Add(towerPartToAdd);
         _towerShowModel.Add(showModel);
     }
 
+    /// <summary>
+    /// Removes a module from the tower.
+    /// </summary>
+    /// <param name="towerPartToRemove">The tower part to be removed.</param>
     public void RemoveModuleFromTower(TowerPart towerPartToRemove)
     {
         _allTowerParts.Remove(towerPartToRemove);
     }
 
+    /// <summary>
+    /// Gets the list of all parts that make up the tower.
+    /// </summary>
+    /// <returns>List of tower parts.</returns>
     public List<TowerPart> GetAllTowerParts()
     {
         return _allTowerParts;
     }
 
+    /// <summary>
+    /// Confirms the tower's configuration, calculating its cost and saving it.
+    /// </summary>
     public void ConfirmTower()
     {
         ClearModuleRemover();
-        ClearNewDragabble();
+        ClearNewDraggable();
 
         EventBus<RequestModuleDataEvent>.Publish(new RequestModuleDataEvent());
         ResetTowerShowModelRotation();
 
-
         int towerCost = 0;
         foreach (TowerPart towerPart in _allTowerParts)
         {
-            towerCost += towerPart.moduleCost;
+            towerCost += towerPart.ModuleCost;
         }
 
-        //Potentially add cost of 0 for the check
         if (_allTowerParts != null && _allTowerParts.Count != 0)
         {
-            // Create a copy of _allTowerParts
             List<TowerPart> towerPartsCopy = new List<TowerPart>(_allTowerParts);
 
             TowerBlueprint newBlueprint = new TowerBlueprint(towerPartsCopy, towerCost);
@@ -230,19 +295,26 @@ public class TowerBuilder : MonoBehaviour
         ClearWorkSpace();
     }
 
+    /// <summary>
+    /// Clears the current workspace, resetting the tower's parent and parts list.
+    /// </summary>
     public void ClearWorkSpace()
     {
         CreateTowerParent();
         _allTowerParts = new List<TowerPart>();
     }
 
+    /// <summary>
+    /// Loads a saved tower configuration by its index.
+    /// </summary>
+    /// <param name="towerNumber">The index of the tower to load.</param>
     public void LoadTower(int towerNumber)
     {
         _currentTowerNumber = towerNumber;
         List<TowerBlueprint> allTowers = PlayerDataManager.Instance.GetAllTowers();
         if (allTowers == null)
         {
-            Debug.LogWarning("No towerlist was found");
+            Debug.LogWarning("No tower list was found");
             return;
         }
         else if (towerNumber < 0 || towerNumber >= allTowers.Count || allTowers[towerNumber] == null)
@@ -260,49 +332,65 @@ public class TowerBuilder : MonoBehaviour
 
         foreach (TowerPart part in towerBlueprint.allTowerParts)
         {
-            GameObject createdPart = Instantiate<GameObject>(part.module, newPosition + part.position, part.rotation);
+            GameObject createdPart = Instantiate<GameObject>(part.Module, newPosition + part.Position, part.Rotation);
             createdPart.transform.SetParent(_towerParent.transform);
             IModule module = createdPart.GetComponentInChildren<IModule>();
             if (module != null)
             {
                 module.SetParentTower(towerModule);
-                module.modulePrefab = part.module;
+                module.modulePrefab = part.Module;
             }
         }
     }
 
+    /// <summary>
+    /// Activates the buttons for selecting weapon modules and deactivates others.
+    /// </summary>
     public void SetWeaponModulebuttonsActive()
     {
-        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(true));
-        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
-        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
-        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false));
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(true)); // Enable weapon module buttons
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false)); // Disable detection module buttons
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false)); // Disable body module buttons
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false)); // Disable load buttons
     }
 
+    /// <summary>
+    /// Activates the buttons for selecting detection modules and deactivates others.
+    /// </summary>
     public void SetDetectionModulebuttonsActive()
     {
-        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
-        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(true));
-        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
-        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false));
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false)); // Disable weapon module buttons
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(true)); // Enable detection module buttons
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false)); // Disable body module buttons
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false)); // Disable load buttons
     }
 
+    /// <summary>
+    /// Activates the buttons for selecting body modules and deactivates others.
+    /// </summary>
     public void SetBodyModulebuttonsActive()
     {
-        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
-        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
-        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(true));
-        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false));
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false)); // Disable weapon module buttons
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false)); // Disable detection module buttons
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(true)); // Enable body module buttons
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false)); // Disable load buttons
     }
 
+    /// <summary>
+    /// Activates the load buttons and deactivates others.
+    /// </summary>
     public void SetLoadbuttonsActive()
     {
-        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
-        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
-        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
-        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(true));
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false)); // Disable weapon module buttons
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false)); // Disable detection module buttons
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false)); // Disable body module buttons
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(true)); // Enable load buttons
     }
 
+
+    /// <summary>
+    /// Loads the game level where tower defense occurs.
+    /// </summary>
     public void LoadLevel()
     {
         LevelManager.Instance.LoadLevel("SCE_Level");

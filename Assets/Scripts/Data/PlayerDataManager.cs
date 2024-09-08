@@ -116,7 +116,7 @@ public class PlayerDataManager : MonoBehaviour
         GameObject tower = new GameObject("NewTower");
         foreach (TowerPart part in allTowers[0].allTowerParts)
         {
-            GameObject createdPart = Instantiate<GameObject>(part.module, part.position, part.rotation);
+            GameObject createdPart = Instantiate<GameObject>(part.Module, part.Position, part.Rotation);
             createdPart.transform.SetParent(tower.transform);
         }
     }
