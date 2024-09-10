@@ -13,7 +13,7 @@ public class ModuleRemover : MonoBehaviour
 
     [SerializeField] private AudioClip removeSoundClip; // Sound clip to play when a module is removed.
 
-    private bool objectDestroyed = false; // Flag to track if an object has been destroyed.
+    private bool objectDestroyedRecently = false; // Flag to track if an object has been destroyed recently.
 
     private void Update()
     {
@@ -78,7 +78,7 @@ public class ModuleRemover : MonoBehaviour
         Collider[] colliders = Physics.OverlapBox(transform.position, transform.localScale / 10, transform.rotation);
         foreach (Collider collider in colliders)
         {
-            if (!objectDestroyed) // Check if an object has already been destroyed
+            if (!objectDestroyedRecently) // Check if an object has already been destroyed
             {
                 CheckForModuleParent(collider.gameObject);
             }
@@ -118,11 +118,11 @@ public class ModuleRemover : MonoBehaviour
     }
 
     /// <summary>
-    /// Toggles the object destroyed flag and sets up a recurring call to itself after the destruction cooldown.
+    /// Toggles the object destroyed recently flag and sets up a recurring call to itself after the destruction cooldown.
     /// </summary>
     private void ToggleObjectDestroyed()
     {
-        objectDestroyed = !objectDestroyed;
-        Invoke("ToggleObjectDestroyed", destructionCooldown);
+        objectDestroyedRecently = !objectDestroyedRecently;
+        if (objectDestroyedRecently == true) Invoke("ToggleObjectDestroyed", destructionCooldown);
     }
 }

@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de8b31f235152e479237f1bca5c9eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetMask:
+  targetMask:
     serializedVersion: 2
-    m_Bits: 640
-  _destructionCooldown: 0.1
-  _removeSoundClip: {fileID: 8300000, guid: 0d5dd45cb4072f24aba38e298dd83117, type: 3}
+    m_Bits: 2688
+  destructionCooldown: 0.1
+  removeSoundClip: {fileID: 0}
