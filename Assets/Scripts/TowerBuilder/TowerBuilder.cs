@@ -20,6 +20,7 @@ public class TowerBuilder : MonoBehaviour
     private bool _canRotate = true; // Flag to control if rotation is allowed
     private Quaternion _oldTowerRotation; // Stores the old rotation of the tower
     private int _currentTowerNumber = 0; // Keeps track of the currently loaded tower
+    private GameObject _previousModulePrefab;
 
     /// <summary>
     /// Singleton instance of the TowerBuilder.
@@ -129,20 +130,24 @@ public class TowerBuilder : MonoBehaviour
     /// <param name="draggablePrefab">The draggable module prefab.</param>
     public void CreateNewDraggable(GameObject _modulePrefab, DraggableModule draggablePrefab)
     {
+        //Clear the draggables, and only make a new one if its a new button
         if (_modulePrefab != null && draggablePrefab != null)
         {
-            if (_currentDraggableModule == null && _currentModuleRemover == null)
+            ClearNewDraggable();
+            ClearModuleRemover();
+            if (_modulePrefab != _previousModulePrefab)            
             {
                 DraggableModule newDraggable = Instantiate<DraggableModule>(draggablePrefab, transform.position, Quaternion.identity);
                 newDraggable.SetModulePrefab(_modulePrefab);
 
                 _currentDraggableModule = newDraggable;
                 _currentDraggableModule.transform.SetParent(_towerParent.transform);
+                _previousModulePrefab = _modulePrefab;
             }
             else
             {
-                ClearNewDraggable();
-                ClearModuleRemover();
+                //Reset previous module prefab (since the button is pressed a second time it should cancel placement)
+                _previousModulePrefab = null;
             }
         }
     }
