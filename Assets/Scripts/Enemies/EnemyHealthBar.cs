@@ -16,8 +16,6 @@ public class EnemyHealthBar : MonoBehaviour
 
     private float _maxHealth; // The maximum health value for the enemy.
     private float _currentHealth; // The current health value of the enemy.
-    private Camera _targetCamera; // The camera that the health bar should face.
-    private Quaternion _originalRotation; // The original rotation of the health bar to maintain proper orientation.
 
     /// <summary>
     /// Called when the script is enabled. Sets up the health bar and subscribes to necessary events.
@@ -26,7 +24,6 @@ public class EnemyHealthBar : MonoBehaviour
     {
         SetupHealthBar();
         if (_parent != null) _parent.OnHealthChanged += UpdateHealthbar;
-        if (CameraController.Instance != null) CameraController.Instance.OnCameraChange += ChangeTargetCamera;
     }
 
     /// <summary>
@@ -35,18 +32,6 @@ public class EnemyHealthBar : MonoBehaviour
     private void OnDisable()
     {
         if (_parent != null) _parent.OnHealthChanged -= UpdateHealthbar;
-        if (CameraController.Instance != null) CameraController.Instance.OnCameraChange -= ChangeTargetCamera;
-    }
-
-    /// <summary>
-    /// Updates the reference to the current camera from the CameraController.
-    /// </summary>
-    private void ChangeTargetCamera()
-    {
-        if (CameraController.Instance != null)
-        {
-            _targetCamera = CameraController.Instance.GetCurrentCamera();
-        }
     }
 
     /// <summary>
@@ -54,10 +39,7 @@ public class EnemyHealthBar : MonoBehaviour
     /// </summary>
     private void SetupHealthBar()
     {
-        ChangeTargetCamera();
-        _originalRotation = transform.rotation;
         UpdateHealthbar(1, 1); // Initialize health bar with dummy values
-        TurnToCamera();
     }
 
     /// <summary>
@@ -65,7 +47,7 @@ public class EnemyHealthBar : MonoBehaviour
     /// </summary>
     private void ValidateHealthBar()
     {
-        if (_targetCamera == null || _myHealthBar == null || _fillImage == null || _colorGradient == null)
+        if (_myHealthBar == null || _fillImage == null || _colorGradient == null)
         {
             Debug.LogWarning("Health bar prefab was not set up properly");
             Destroy(gameObject);
@@ -87,25 +69,5 @@ public class EnemyHealthBar : MonoBehaviour
         _myHealthBar.maxValue = _maxHealth;
         _myHealthBar.value = _currentHealth;
         _fillImage.color = _colorGradient.Evaluate(1 - _myHealthBar.value / _maxHealth);
-    }
-
-    /// <summary>
-    /// Rotates the health bar to always face the current camera.
-    /// </summary>
-    private void TurnToCamera()
-    {
-        if (_targetCamera != null)
-        {
-            transform.LookAt(_targetCamera.transform.position, Vector3.down);
-            transform.rotation = _targetCamera.transform.rotation * _originalRotation;
-        }
-    }
-
-    /// <summary>
-    /// Updates the health bar's rotation to face the camera every frame.
-    /// </summary>
-    private void Update()
-    {
-        TurnToCamera();
     }
 }

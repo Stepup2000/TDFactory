@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8398411918087084637}
   - component: {fileID: -2139482288924099417}
   m_Layer: 0
-  m_Name: ExtraCamera
+  m_Name: PREF_ExtraCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
