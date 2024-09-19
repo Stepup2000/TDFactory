@@ -98,15 +98,18 @@ public class StoppedSpawningEvent : Event
 // Event to request a change in the current money amount.
 public class ChangeMoneyEvent : Event
 {
-    public readonly float amount; // Amount to change the current money by
+    public readonly float amount;
+    public readonly Vector3 position;
 
     /// <summary>
     /// Constructor for the ChangeMoneyEvent event.
     /// </summary>
     /// <param name="newAmount">The amount to change the money by.</param>
-    public ChangeMoneyEvent(float newAmount)
+    /// /// <param name="newPosition">The position where the transaction took place.</param>
+    public ChangeMoneyEvent(float newAmount, Vector3 newPosition)
     {
         amount = newAmount;
+        position = newPosition;
     }
 }
 

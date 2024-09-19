@@ -9,14 +9,18 @@ using UnityEngine.UI;
 /// </summary>
 public class LookAtCamera : MonoBehaviour
 {
-    private Camera targetCamera; // The camera that the health bar should face.
-    private Quaternion originalRotation; // The original rotation of the object to maintain proper orientation.
+    [SerializeField, Tooltip("If true, the text popup will not take the original rotation into consideration.")]
+    private bool overrideOriginalRotation = true;
+
+    private Camera targetCamera;
+    private Quaternion originalRotation;
 
     /// <summary>
     /// Called when the script is enabled. Subscribes to necessary events.
     /// </summary>
     private void OnEnable()
     {
+        SetupObject();
         if (CameraController.Instance != null) CameraController.Instance.OnCameraChange += ChangeTargetCamera;
     }
 
@@ -26,14 +30,6 @@ public class LookAtCamera : MonoBehaviour
     private void OnDisable()
     {
         if (CameraController.Instance != null) CameraController.Instance.OnCameraChange -= ChangeTargetCamera;
-    }
-
-    /// <summary>
-    /// Called when the scripts starts. Sets up the values for turning.
-    /// </summary>
-    private void Start()
-    {
-        SetupObject();
     }
 
     /// <summary>
@@ -64,8 +60,8 @@ public class LookAtCamera : MonoBehaviour
     {
         if (targetCamera != null)
         {
-            transform.LookAt(targetCamera.transform.position, Vector3.down);
-            transform.rotation = targetCamera.transform.rotation * originalRotation;
+            if (overrideOriginalRotation == false) transform.rotation = targetCamera.transform.rotation * originalRotation;
+            else transform.rotation = targetCamera.transform.rotation;
         }
     }
 

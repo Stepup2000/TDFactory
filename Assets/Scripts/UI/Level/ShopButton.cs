@@ -66,7 +66,7 @@ public class ShopButton : MonoBehaviour
                 {
                     createdDraggable = Instantiate<DraggableTower>(_draggablePrefab, transform.position, Quaternion.identity);
                     // Deduct the cost of the tower from the player's money.
-                    EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(-_towerCost));
+                    EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(-_towerCost, transform.position));
                     // Change the camera view to the top camera.
                     CameraController.Instance.ChangeCamera("TopCamera");
                 }

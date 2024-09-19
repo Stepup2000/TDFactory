@@ -8,17 +8,36 @@ using UnityEngine;
 public abstract class BaseEnemy : MonoBehaviour, IDamageable
 {
     // Delegate and event for notifying changes in enemy health
+    /// <summary>
+    /// Delegate for value change events, providing the new and max values.
+    /// </summary>
+    /// <param name="newValue">The new health value.</param>
+    /// <param name="maxValue">The maximum health value.</param>
     public delegate void ValueChangeEvent(float newValue, float maxValue);
+
+    /// <summary>
+    /// Event triggered when health changes.
+    /// </summary>
     public event ValueChangeEvent OnHealthChanged;
 
-    [field: SerializeField] public float maxHealth { get; set; } // Maximum health of the enemy
-    [field: SerializeField] public int spawnCost { get; private set; } // Cost to spawn this enemy
-    [field: SerializeField] public float heldMoney { get; private set; } // Amount of money held by the enemy
-    public float currentHealth { get; private set; } // Current health of the enemy
-    public float travelledDistance { get; private set; } // Distance travelled by the enemy
+    [field: SerializeField, Tooltip("The maximum health of the enemy.")]
+    public float maxHealth { get; set; }
 
-    private Transform[] _myPath; // Path that the enemy follows
-    private IMoveable _myMovement; // Movement component of the enemy
+    [field: SerializeField, Tooltip("The cost to spawn the enemy.")]
+    public int spawnCost { get; private set; }
+
+    [field: SerializeField, Tooltip("The amount of money the enemy holds when defeated.")]
+    public float heldMoney { get; private set; }
+
+    [Tooltip("The current health of the enemy.")]
+    public float currentHealth { get; private set; }
+
+    [Tooltip("The total distance the enemy has travelled.")]
+    public float travelledDistance { get; private set; }
+
+
+    private Transform[] _myPath;
+    private IMoveable _myMovement;
 
     /// <summary>
     /// Initializes the enemy with a path to follow and sets up its movement component.
@@ -75,7 +94,8 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     /// </summary>
     public void Death()
     {
-        EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(heldMoney));
+        Vector3 offset = new Vector3(0, 1, 0);
+        EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(heldMoney, transform.position + offset));
         Destroy(gameObject);
     }
 }

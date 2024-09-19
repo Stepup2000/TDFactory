@@ -53,7 +53,7 @@ public class SceneController : MonoBehaviour
         if (_levelData != null)
         {
             EventBus<InitializeLevel>.Publish(new InitializeLevel(_levelData));
-            EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(_levelData.StartingCurrency));
+            EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(_levelData.StartingCurrency, Vector3.zero));
             EventBus<ChangeHealthEvent>.Publish(new ChangeHealthEvent(_levelData.StartingHealth));
         }
     }

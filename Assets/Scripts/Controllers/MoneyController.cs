@@ -64,6 +64,12 @@ public class MoneyController : MonoBehaviour
         _currentMoney += pEvent.amount;
         if (_currentMoney < 0) _currentMoney = 0;
         EventBus<TotalMoneyChangedEvent>.Publish(new TotalMoneyChangedEvent(_currentMoney));
+
+        Color newcolor;
+        if (pEvent.amount >= 0) newcolor = Color.green;
+        else newcolor = Color.red;
+
+        FloatingTextController.Instance.ShowTextPopup("$" + pEvent.amount, pEvent.position, newcolor, 1f);
     }
 
     /// <summary>
