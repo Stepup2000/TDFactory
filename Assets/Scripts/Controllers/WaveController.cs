@@ -139,8 +139,16 @@ public class WaveController : MonoBehaviour
     /// <returns>True if all enemies are defeated, otherwise false.</returns>
     private bool AreAllEnemiesDefeated()
     {
-        // Check if there are any active enemies
         return FindObjectOfType<BaseEnemy>() == null;
+    }
+
+    /// <summary>
+    /// Gets the index of the current wave.
+    /// </summary>
+    public int GetWaveIndex()
+    {
+        if (_waveIndex > 0) return _waveIndex;
+        else return 1;
     }
 
     /// <summary>

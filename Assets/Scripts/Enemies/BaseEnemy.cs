@@ -23,6 +23,9 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     [field: SerializeField, Tooltip("The maximum health of the enemy.")]
     public float maxHealth { get; set; }
 
+    [field: SerializeField, Tooltip("An multiplier to make the enemies have more health every wave")]
+    public float healthMultiplier { get; set; }
+
     [field: SerializeField, Tooltip("The cost to spawn the enemy.")]
     public int spawnCost { get; private set; }
 
@@ -45,10 +48,11 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     /// <param name="pPath">Path the enemy should follow.</param>
     public void Initialize(Transform[] pPath)
     {
+        maxHealth *= Mathf.Pow(healthMultiplier, WaveController.Instance.GetWaveIndex());
+        currentHealth = maxHealth;
         _myPath = pPath;
         TryGetComponent<IMoveable>(out _myMovement);
         _myMovement?.Initialize(_myPath);
-        currentHealth = maxHealth; // Reset current health to max health
     }
 
     /// <summary>

@@ -19,5 +19,5 @@ MonoBehaviour:
   AmountOfWaves: 25
   StartingCurrency: 200
   StartingHealth: 10
-  EnemyStartingBudget: 130
-  EnemyBudgetMultiplier: 1.1
+  EnemyStartingBudget: 75
+  EnemyBudgetMultiplier: 1.2
