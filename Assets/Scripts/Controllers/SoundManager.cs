@@ -31,6 +31,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    [SerializeField] private AudioClip _backgroundMusic;
     [SerializeField] private AudioClip _buttonSoundClip; // The sound clip to play for button clicks.
     [SerializeField] private AudioClip _swapSoundClip; // The sound clip to play for swap actions.
     [SerializeField] private AudioClip _saveSoundClip; // The sound clip to play for save actions.
@@ -58,7 +59,7 @@ public class SoundManager : MonoBehaviour
         }
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
-
+        StartBackgroundMusic();
         InitializePool(); // Initialize the audio source pool
     }
 
@@ -207,6 +208,14 @@ public class SoundManager : MonoBehaviour
     private float GetRandomNumber(float min, float max)
     {
         return Random.Range(min, max);
+    }
+
+    /// <summary>
+    /// Plays the background music.
+    /// </summary>
+    private void StartBackgroundMusic()
+    {
+        PlaySoundAtLocation(_backgroundMusic, transform.position, false, true);
     }
 
     /// <summary>

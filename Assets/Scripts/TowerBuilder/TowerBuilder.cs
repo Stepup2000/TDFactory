@@ -398,6 +398,6 @@ public class TowerBuilder : MonoBehaviour
     /// </summary>
     public void LoadLevel()
     {
-        LevelManager.Instance.LoadLevel("SCE_Level");
+        LevelManager.LoadLevel("SCE_Level");
     }
 }
