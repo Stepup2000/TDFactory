@@ -58,7 +58,7 @@ public class HealthController : MonoBehaviour
     private void ChangeHealth(ChangeHealthEvent pEvent)
     {
         _currentHealth += pEvent.amount;
-        if (_currentHealth < 0) _currentHealth = 0;
+        if (_currentHealth <= 0) OnDefeat();
         EventBus<TotalHealthChangedEvent>.Publish(new TotalHealthChangedEvent(_currentHealth));
     }
 
@@ -69,5 +69,10 @@ public class HealthController : MonoBehaviour
     public bool IsGameOver()
     {
         return _currentHealth <= 0;
+    }
+
+    private void OnDefeat()
+    {
+        LevelManager.LoadLevel("EndScreen");
     }
 }
