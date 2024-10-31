@@ -217,28 +217,4 @@ public class SoundManager : MonoBehaviour
     {
         PlaySoundAtLocation(_backgroundMusic, transform.position, false, true);
     }
-
-    /// <summary>
-    /// Plays the button sound effect.
-    /// </summary>
-    public void PlayButtonSound()
-    {
-        PlaySoundAtLocation(_buttonSoundClip, transform.position, true);
-    }
-
-    /// <summary>
-    /// Plays the swap sound effect.
-    /// </summary>
-    public void PlaySwapSound()
-    {
-        PlaySoundAtLocation(_swapSoundClip, transform.position, true);
-    }
-
-    /// <summary>
-    /// Plays the save sound effect.
-    /// </summary>
-    public void PlaySaveSound()
-    {
-        PlaySoundAtLocation(_saveSoundClip, transform.position, true);
-    }
 }

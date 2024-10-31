@@ -8,18 +8,18 @@ using UnityEngine;
 /// </summary>
 public class TowerBuilder : MonoBehaviour
 {
-    [SerializeField] int _rotationAmount = 90; // Degrees to rotate the tower
-    [SerializeField] float _rotationCooldown = 0.5f; // Cooldown time between rotations
+    [SerializeField] int _rotationAmount = 90;
+    [SerializeField] float _rotationCooldown = 0.5f;
 
-    private static TowerBuilder instance; // Singleton instance
-    private List<TowerPart> _allTowerParts; // List of all parts added to the tower
-    private List<GameObject> _towerShowModel = new(); // Visual representation of the tower
-    private GameObject _towerParent; // Parent object for tower parts
-    private DraggableModule _currentDraggableModule; // Currently active draggable module
-    private ModuleRemover _currentModuleRemover; // Currently active module remover
-    private bool _canRotate = true; // Flag to control if rotation is allowed
-    private Quaternion _oldTowerRotation; // Stores the old rotation of the tower
-    private int _currentTowerNumber = 0; // Keeps track of the currently loaded tower
+    private static TowerBuilder instance;
+    private List<TowerPart> _allTowerParts;
+    private List<GameObject> _towerShowModel = new();
+    private GameObject _towerParent;
+    private DraggableModule _currentDraggableModule;
+    private ModuleRemover _currentModuleRemover;
+    private bool _canRotate = true;
+    private Quaternion _oldTowerRotation;
+    private int _currentTowerNumber = 0;
     private GameObject _previousModulePrefab;
 
     /// <summary>
@@ -398,6 +398,6 @@ public class TowerBuilder : MonoBehaviour
     /// </summary>
     public void LoadLevel()
     {
-        LevelManager.LoadLevel("SCE_Level");
+        LevelManager.LoadLevel("Level");
     }
 }
