@@ -8,11 +8,12 @@ using UnityEngine;
 /// </summary>
 public class MoneyController : MonoBehaviour
 {
-    [SerializeField] private Currency _currency; // Reference to the Currency asset or component
+    [SerializeField] private Currency _currency;
+    [SerializeField] private AudioClip _buttonSoundClip;
 
-    private static MoneyController _instance; // Singleton instance of MoneyController
+    private static MoneyController _instance;
 
-    private float _currentMoney; // The current amount of money the player has
+    private float _currentMoney;
 
     /// <summary>
     /// Provides access to the singleton instance of MoneyController.
@@ -64,6 +65,7 @@ public class MoneyController : MonoBehaviour
         _currentMoney += pEvent.amount;
         if (_currentMoney < 0) _currentMoney = 0;
         EventBus<TotalMoneyChangedEvent>.Publish(new TotalMoneyChangedEvent(_currentMoney));
+        SoundManager.Instance.PlaySoundAtLocation(_buttonSoundClip, transform.position, true);
 
         Color newcolor;
         if (pEvent.amount >= 0) newcolor = Color.green;

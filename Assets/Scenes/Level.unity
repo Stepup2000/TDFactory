@@ -3858,6 +3858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currency: {fileID: 11400000, guid: 9f0a01d041cd2d34b914af3a3a0907a2, type: 2}
+  _buttonSoundClip: {fileID: 8300000, guid: 65a139da8785cfc49aab8cfe8fb67c1b, type: 3}
 --- !u!1001 &2005533752
 PrefabInstance:
   m_ObjectHideFlags: 0

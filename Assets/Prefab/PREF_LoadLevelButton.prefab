@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8355783226566949577}
   - component: {fileID: 3003833703818473487}
   m_Layer: 5
-  m_Name: LoadLevelButton
+  m_Name: PREF_LoadLevelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
