@@ -65,16 +65,14 @@ public class ShopButton : MonoBehaviour
                 if (createdDraggable == null)
                 {
                     createdDraggable = Instantiate<DraggableTower>(_draggablePrefab, transform.position, Quaternion.identity);
+                    createdDraggable.SetTowerBlueprint(_towerNumber);
+
                     // Deduct the cost of the tower from the player's money.
                     EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(-_towerCost, transform.position));
-                    // Change the camera view to the top camera.
                     CameraController.Instance.ChangeCamera("TopCamera");
                 }
                 else
-                {
-                    // If a draggable tower has already been created, destroy it.
                     Destroy(createdDraggable.gameObject);
-                }
             }
         }
     }

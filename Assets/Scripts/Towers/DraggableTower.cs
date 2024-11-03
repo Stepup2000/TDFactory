@@ -17,8 +17,16 @@ public class DraggableTower : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        TowerBlueprint towerBlueprint = PlayerDataManager.Instance.GetAllTowers()[0]; // Get the first tower blueprint.
-        SpawnTower(towerBlueprint); // Spawn the tower based on the blueprint.
+        
+    }
+
+    /// <summary>
+    /// Sets the blueprint for the tower prefab.
+    /// </summary>
+    public void SetTowerBlueprint(int towerNumber)
+    {
+        TowerBlueprint towerBlueprint = PlayerDataManager.Instance.GetAllTowers()[towerNumber];
+        SpawnTower(towerBlueprint);
     }
 
     /// <summary>
