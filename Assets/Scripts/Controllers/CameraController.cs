@@ -9,29 +9,17 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float _movementSpeed = 5f; // Speed at which the camera transitions between positions and rotations
+    [SerializeField] private float _movementSpeed = 5f;
+    [SerializeField] private Camera _cameraPrefab;
 
-    [SerializeField] private Camera _cameraPrefab; // Prefab used to instantiate the transition camera
-
-    /// <summary>
-    /// Delegate for camera change events.
-    /// </summary>
     public delegate void Triggerevent();
-
-    /// <summary>
-    /// Event triggered whenever the active camera is changed.
-    /// </summary>
     public event Triggerevent OnCameraChange;
 
-    private Dictionary<string, Camera> _allCameras = new Dictionary<string, Camera>(); // Dictionary storing all available cameras by their key names
-
-    private Camera _currentCamera; // The currently active camera
-
-    private Camera _targetCamera; // The target camera to transition to
-
-    private Camera _transitionCamera; // A transition camera that handles smooth movement between cameras
-
-    private static CameraController _instance; // Singleton instance of the CameraController
+    private Dictionary<string, Camera> _allCameras = new Dictionary<string, Camera>();
+    private Camera _currentCamera;
+    private Camera _targetCamera;
+    private Camera _transitionCamera;
+    private static CameraController _instance;
 
     /// <summary>
     /// Gets the singleton instance of the CameraController, creating one if it does not exist.

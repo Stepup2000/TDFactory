@@ -47,14 +47,9 @@ public class CameraObject : MonoBehaviour
         // Wait for one frame to ensure that the scene is fully loaded
         yield return null;
 
-        // Retrieve the Camera component attached to this GameObject
         Camera camera = GetComponent<Camera>();
 
-        // Check if the Camera component exists
         if (camera != null)
-        {
-            // Register the camera with the CameraController using the provided camera name
             CameraController.Instance.AddCamera(cameraName, camera);
-        }
     }
 }

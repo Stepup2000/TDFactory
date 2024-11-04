@@ -4,52 +4,68 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[RequireComponent(typeof(Button))]
 public class ShopButton : MonoBehaviour
 {
-    [SerializeField] private Currency _goldCurrency;  // Reference to the currency used for purchasing towers.
-    [SerializeField] private DraggableTower _draggablePrefab;  // Prefab for the draggable tower to be instantiated.
-    [SerializeField] private int _towerNumber = 0;  // Index of the tower in the available list.
+    [SerializeField] private DraggableTower draggablePrefab;
+    [SerializeField] private int towerNumber = 0;
 
-    private DraggableTower createdDraggable = null;  // Reference to the currently created draggable tower.
-    private int _towerCost = 0;  // Cost of the tower.
+    private Button button;
+    private DraggableTower activeDragableTower;
+    private List<TowerBlueprint> allTowers;
+    private TowerBlueprint towerBlueprint;
+    private int towerCost = 0;
 
-    private void Awake()
+    private void OnEnable()
     {
-        // Load the gold currency resource.
-        _goldCurrency = Resources.Load<Currency>("GoldCurrency");
+        button = GetComponent<Button>();
+        EventBus<TotalMoneyChangedEvent>.Subscribe(OnTotalMoneyChanged);
 
-        // Retrieve the list of available tower blueprints.
-        List<TowerBlueprint> allTowers = PlayerDataManager.Instance.GetAllTowers();
-        TowerBlueprint towerBlueprint = null;
+        allTowers = PlayerDataManager.Instance.GetAllTowers();
+        towerBlueprint = ValidateAndGetTowerBlueprint(allTowers);
 
-        // Ensure allTowers is not null and has elements.
-        if (allTowers != null && allTowers.Count > 0)
-        {
-            // Ensure the towerNumber is within a valid range.
-            if (_towerNumber >= 0 && _towerNumber < allTowers.Count)
-            {
-                // Get the tower blueprint at the specified index.
-                towerBlueprint = allTowers[_towerNumber];
-            }
-            else
-            {
-                Debug.LogWarning("Tower number out of range!");
-                return;
-            }
-        }
-        else
+        if (towerBlueprint != null)
+            towerCost = CalculateTowerCost(towerBlueprint);
+    }
+
+    private void OnDisable()
+    {
+        EventBus<TotalMoneyChangedEvent>.UnSubscribe(OnTotalMoneyChanged);
+    }
+
+    /// <summary>
+    /// Validates tower data and retrieves the tower blueprint at the specified index.
+    /// </summary>
+    private TowerBlueprint ValidateAndGetTowerBlueprint(List<TowerBlueprint> allTowers)
+    {
+        if (allTowers == null || allTowers.Count == 0)
         {
             Debug.LogWarning("No towers available!");
-            return;
+            return null;
         }
 
-        // Calculate the cost of the tower by summing the costs of its parts.
-        int newCost = 0;
+        if (towerNumber < 0 || towerNumber >= allTowers.Count)
+        {
+            Debug.LogWarning("Tower number out of range!");
+            return null;
+        }
+
+        return allTowers[towerNumber];
+    }
+
+    /// <summary>
+    /// Calculates the total cost of a tower by summing the costs of its parts.
+    /// </summary>
+    private int CalculateTowerCost(TowerBlueprint towerBlueprint)
+    {
+        int totalCost = 0;
+
         foreach (TowerPart part in towerBlueprint.allTowerParts)
         {
-            newCost += part.ModuleCost;
+            totalCost += part.ModuleCost;
         }
-        _towerCost = newCost;
+
+        return totalCost;
     }
 
     /// <summary>
@@ -57,23 +73,34 @@ public class ShopButton : MonoBehaviour
     /// </summary>
     public void TryBuyTower()
     {
-        if (_draggablePrefab != null && _goldCurrency != null)
+        if (draggablePrefab != null && MoneyController.Instance.CanAfford(towerCost))
         {
-            if (MoneyController.Instance.CanAfford(_towerCost))
+            // If no draggable tower has been created yet, instantiate one.
+            if (activeDragableTower == null)
             {
-                // If no draggable tower has been created yet, instantiate one.
-                if (createdDraggable == null)
-                {
-                    createdDraggable = Instantiate<DraggableTower>(_draggablePrefab, transform.position, Quaternion.identity);
-                    createdDraggable.SetTowerBlueprint(_towerNumber);
+                activeDragableTower = Instantiate<DraggableTower>(draggablePrefab, transform.position, Quaternion.identity);
+                activeDragableTower.SetTowerBlueprint(towerNumber);
 
-                    // Deduct the cost of the tower from the player's money.
-                    EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(-_towerCost, transform.position));
-                    CameraController.Instance.ChangeCamera("TopCamera");
-                }
-                else
-                    Destroy(createdDraggable.gameObject);
+                EventBus<ChangeMoneyEvent>.Publish(new ChangeMoneyEvent(-towerCost, transform.position));
+                CameraController.Instance.ChangeCamera("TopCamera");
+            }
+            else
+            {
+                Destroy(activeDragableTower.gameObject);
             }
         }
+    }
+
+    /// <summary>
+    /// Enables or disables the button based on whether the player can afford the tower cost
+    /// and there are available towers.
+    /// </summary>
+    private void OnTotalMoneyChanged(TotalMoneyChangedEvent moneyChangedEvent)
+    {
+        bool blueprintExists = towerBlueprint != null;
+        bool canAfford = MoneyController.Instance.CanAfford(towerCost);
+        bool hasTowersAvailable = allTowers != null && allTowers.Count > 0;
+
+        button.interactable = canAfford && hasTowersAvailable && blueprintExists;
     }
 }
