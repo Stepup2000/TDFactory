@@ -5,12 +5,14 @@ using UnityEngine.UI;
 using TMPro;
 
 [RequireComponent(typeof(Button))]
+[RequireComponent(typeof(DisplayText))]
 public class ShopButton : MonoBehaviour
 {
     [SerializeField] private DraggableTower draggablePrefab;
     [SerializeField] private int towerNumber = 0;
 
     private Button button;
+    private DisplayText towerCostText;
     private DraggableTower activeDragableTower;
     private List<TowerBlueprint> allTowers;
     private TowerBlueprint towerBlueprint;
@@ -19,13 +21,20 @@ public class ShopButton : MonoBehaviour
     private void OnEnable()
     {
         button = GetComponent<Button>();
+        towerCostText = GetComponent<DisplayText>();
+
         EventBus<TotalMoneyChangedEvent>.Subscribe(OnTotalMoneyChanged);
 
         allTowers = PlayerDataManager.Instance.GetAllTowers();
         towerBlueprint = ValidateAndGetTowerBlueprint(allTowers);
 
         if (towerBlueprint != null)
+        {
             towerCost = CalculateTowerCost(towerBlueprint);
+            towerCostText.ChangeText("Cost: $" + towerCost);
+        }
+        else
+            towerCostText.ChangeText("Empty slot");
     }
 
     private void OnDisable()
