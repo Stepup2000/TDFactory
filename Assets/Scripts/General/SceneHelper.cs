@@ -4,9 +4,8 @@ using UnityEngine;
 
 /// <summary>
 /// Manages scene loading by providing a method to load levels through the LevelManager.
-/// This class should be attached to a GameObject in the scene.
 /// </summary>
-public class LoadScene : MonoBehaviour
+public class SceneHelper : MonoBehaviour
 {
     /// <summary>
     /// Loads the specified scene using the LevelManager.

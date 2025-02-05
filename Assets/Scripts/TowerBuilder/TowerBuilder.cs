@@ -10,7 +10,6 @@ public class TowerBuilder : MonoBehaviour
 {
     [SerializeField] int _rotationAmount = 90;
     [SerializeField] float _rotationCooldown = 0.5f;
-    [SerializeField] PlayButtonActivator playButtonActivator;
 
     private static TowerBuilder instance;
     private List<TowerPart> _allTowerParts;
@@ -299,7 +298,6 @@ public class TowerBuilder : MonoBehaviour
             PlayerDataManager.Instance.AddTowerToInventory(newBlueprint, _currentTowerNumber);
         }
         ClearWorkSpace();
-        playButtonActivator?.CheckForBlueprint();
     }
 
     /// <summary>

@@ -275,6 +275,14 @@ PrefabInstance:
       propertyPath: towerNumber
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2623129869474408138, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
+      propertyPath: m_text
+      value: Tower_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2623129869474408138, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
+      propertyPath: m_fontSize
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3352854658623575720, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
       propertyPath: m_text
       value: Tower_2
@@ -366,6 +374,10 @@ PrefabInstance:
     - target: {fileID: 7953250256395079523, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
       propertyPath: m_Name
       value: TowerButton_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216657774079726318, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
+      propertyPath: towerNumber
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1354,6 +1366,14 @@ PrefabInstance:
       propertyPath: towerNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2623129869474408138, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
+      propertyPath: m_text
+      value: Tower_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2623129869474408138, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
+      propertyPath: m_fontSize
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3352854658623575720, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
       propertyPath: m_text
       value: Tower_3
@@ -1445,6 +1465,10 @@ PrefabInstance:
     - target: {fileID: 7953250256395079523, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
       propertyPath: m_Name
       value: TowerButton_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216657774079726318, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
+      propertyPath: towerNumber
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3459,6 +3483,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 94050273}
     m_Modifications:
+    - target: {fileID: 2623129869474408138, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
+      propertyPath: m_text
+      value: Tower_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2623129869474408138, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
+      propertyPath: m_fontSize
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4014407914268610385, guid: c79ce980ace59e44286f745898b3a9e8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
