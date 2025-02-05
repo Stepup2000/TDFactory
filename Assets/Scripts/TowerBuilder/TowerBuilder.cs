@@ -46,29 +46,29 @@ public class TowerBuilder : MonoBehaviour
 
     private void Start()
     {
-        _allTowerParts = new List<TowerPart>(); // Initialize list of tower parts
-        CreateTowerParent(); // Create parent object for the tower
-        SetLoadbuttonsActive(); // Activate load buttons in the UI
+        _allTowerParts = new List<TowerPart>();
+        CreateTowerParent();
+        SetLoadbuttonsActive();
     }
+
 
     private void Update()
     {
-        // Rotate the tower when right mouse button is pressed and rotation is allowed
         if (Input.GetMouseButton(1) && _canRotate)
         {
-            float mouseX = Input.GetAxis("Mouse X"); // Get horizontal mouse movement
+            float mouseX = Input.GetAxis("Mouse X");
 
             if (_towerShowModel != null)
             {
-                if (mouseX > 0) // Rotate clockwise
+                if (mouseX > 0)
                 {
                     RotateTowerShowModel(-_rotationAmount);
-                    StartCoroutine(WaitForRotation()); // Wait for cooldown
+                    StartCoroutine(WaitForRotation());
                 }
-                else if (mouseX < 0) // Rotate counter-clockwise
+                else if (mouseX < 0)
                 {
                     RotateTowerShowModel(_rotationAmount);
-                    StartCoroutine(WaitForRotation()); // Wait for cooldown
+                    StartCoroutine(WaitForRotation());
                 }
             }
         }
@@ -355,10 +355,10 @@ public class TowerBuilder : MonoBehaviour
     /// </summary>
     public void SetWeaponModulebuttonsActive()
     {
-        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(true)); // Enable weapon module buttons
-        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false)); // Disable detection module buttons
-        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false)); // Disable body module buttons
-        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false)); // Disable load buttons
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(true));
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false));
     }
 
     /// <summary>
@@ -366,10 +366,10 @@ public class TowerBuilder : MonoBehaviour
     /// </summary>
     public void SetDetectionModulebuttonsActive()
     {
-        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false)); // Disable weapon module buttons
-        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(true)); // Enable detection module buttons
-        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false)); // Disable body module buttons
-        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false)); // Disable load buttons
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(true));
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false));
     }
 
     /// <summary>
@@ -377,10 +377,10 @@ public class TowerBuilder : MonoBehaviour
     /// </summary>
     public void SetBodyModulebuttonsActive()
     {
-        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false)); // Disable weapon module buttons
-        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false)); // Disable detection module buttons
-        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(true)); // Enable body module buttons
-        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false)); // Disable load buttons
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(true));
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(false));
     }
 
     /// <summary>
@@ -388,10 +388,10 @@ public class TowerBuilder : MonoBehaviour
     /// </summary>
     public void SetLoadbuttonsActive()
     {
-        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false)); // Disable weapon module buttons
-        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false)); // Disable detection module buttons
-        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false)); // Disable body module buttons
-        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(true)); // Enable load buttons
+        EventBus<ToggleWeaponModuleButtonsEvent>.Publish(new ToggleWeaponModuleButtonsEvent(false));
+        EventBus<ToggleDetectionModuleButtonsEvent>.Publish(new ToggleDetectionModuleButtonsEvent(false));
+        EventBus<ToggleBodyModuleButtonsEvent>.Publish(new ToggleBodyModuleButtonsEvent(false));
+        EventBus<ToggleLoadButtonsEvent>.Publish(new ToggleLoadButtonsEvent(true));
     }
 
 

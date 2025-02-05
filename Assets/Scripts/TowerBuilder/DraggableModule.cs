@@ -8,36 +8,36 @@ using UnityEngine;
 /// </summary>
 public class DraggableModule : MonoBehaviour
 {
-    [SerializeField] private LayerMask _targetMask; // The layer mask used to determine where the module can be placed
-    [SerializeField] private Material _faultyPlacementMaterial; // The material used to indicate an invalid placement
+    [SerializeField] private LayerMask _targetMask;
+    [SerializeField] private Material _faultyPlacementMaterial;
 
-    [SerializeField] private int _rotationAmount = 90; // Amount of rotation applied per scroll
+    [SerializeField] private int _rotationAmount = 90;
 
-    private GameObject _modulePrefab; // Prefab for the module to be placed
-    private GameObject _createdModule; // The instance of the created module
-    private Collider _moduleCollider; // Collider of the module used for positioning
-    private bool _canPlace = false; // Indicates whether the module can be placed at the current position
+    private GameObject _modulePrefab;
+    private GameObject _createdModule;
+    private Collider _moduleCollider;
+    private bool _canPlace = false;
 
-    private MeshRenderer _towerRenderer; // Renderer for the module to change its material
-    private Material _towerOriginalMaterial; // Original material of the module
-    public float transparency = 0.5f; // Transparency level for the module when placement is invalid
+    private MeshRenderer _towerRenderer;
+    private Material _towerOriginalMaterial;
+    public float transparency = 0.5f;
 
     private void Start()
     {
-        CreateModule(); // Initialize the module
-        _moduleCollider = GetCollider(); // Get the module's collider
+        CreateModule();
+        _moduleCollider = GetCollider();
     }
 
     private void Update()
     {
         if (_modulePrefab != null && _createdModule != null && _moduleCollider != null)
         {
-            CalculatePosition(); // Calculate and update the module's position
-            HandleMaterial(); // Update the module's material based on placement validity
-            if (Input.GetMouseButtonUp(0)) PlaceModule(); // Place the module on left mouse button release
+            CalculatePosition();
+            HandleMaterial();
+            if (Input.GetMouseButtonUp(0)) PlaceModule();
         }
 
-        HandleMouseInput(); // Handle module rotation via mouse scroll input
+        HandleMouseInput();
     }
 
     /// <summary>
@@ -87,18 +87,18 @@ public class DraggableModule : MonoBehaviour
         // Raycast to check if any UI elements are hit
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, uiLayerMask))
         {
-            _canPlace = false; // UI element hit, cannot place
+            _canPlace = false;
         }
         else
         {
             // No UI element hit, check against target mask
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, _targetMask))
             {
-                _canPlace = true; // Object from target mask hit, can place
+                _canPlace = true;
             }
             else
             {
-                _canPlace = false; // Nothing hit, cannot place
+                _canPlace = false;
             }
         }
 

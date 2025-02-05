@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 682591645290824574, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
       propertyPath: <healthMultiplier>k__BackingField
-      value: 1.1
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 974286747059697978, guid: 0448ed0579dc7f44b84148c99238c81e, type: 3}
       propertyPath: m_LocalRotation.w
