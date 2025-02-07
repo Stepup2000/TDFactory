@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization.Components;
 using TMPro;
 
 [RequireComponent(typeof(Button))]
-[RequireComponent(typeof(DisplayText))]
 public class ShopButton : MonoBehaviour
 {
     [SerializeField] private DraggableTower draggablePrefab;
+    [SerializeField] private LocalizeStringEvent stringEvent;
     [SerializeField] private int towerNumber = 0;
 
     private Button button;
-    private DisplayText towerCostText;
     private DraggableTower activeDragableTower;
     private List<TowerBlueprint> allTowers;
     private TowerBlueprint towerBlueprint;
@@ -21,20 +21,20 @@ public class ShopButton : MonoBehaviour
     private void OnEnable()
     {
         button = GetComponent<Button>();
-        towerCostText = GetComponent<DisplayText>();
 
         EventBus<TotalMoneyChangedEvent>.Subscribe(OnTotalMoneyChanged);
 
         allTowers = PlayerDataManager.Instance.GetAllTowers();
         towerBlueprint = ValidateAndGetTowerBlueprint(allTowers);
+        stringEvent.SetTable("UI");
 
         if (towerBlueprint != null)
         {
             towerCost = CalculateTowerCost(towerBlueprint);
-            towerCostText.ChangeText("Cost: $" + towerCost);
+            stringEvent.SetEntry("Costs");
         }
         else
-            towerCostText.ChangeText("Empty slot");
+            stringEvent.SetEntry("EmptySlot");
     }
 
     private void OnDisable()

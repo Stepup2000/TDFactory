@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_nl
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: nl
+  m_SharedData: {fileID: 11400000, guid: 163681dde1344ac4b82eb17085a2eaee, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 208083656704
+    m_Localized: Speel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306725298176
+    m_Localized: Werkplaats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419883425792
+    m_Localized: Stop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 530353004544
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 733957103616
+    m_Localized: Golf
+    m_Metadata:
+      m_Items: []
+  - m_Id: 803960037376
+    m_Localized: Geld
+    m_Metadata:
+      m_Items: []
+  - m_Id: 844573483008
+    m_Localized: Levens
+    m_Metadata:
+      m_Items: []
+  - m_Id: 985695035392
+    m_Localized: Kost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9827006849024
+    m_Localized: Test_NL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12171048165376
+    m_Localized: Verslagen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 293813599903744
+    m_Localized: Leeg slot
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

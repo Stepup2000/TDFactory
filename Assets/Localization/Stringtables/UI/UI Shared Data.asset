@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UI
+  m_TableCollectionNameGuidString: 163681dde1344ac4b82eb17085a2eaee
+  m_Entries:
+  - m_Id: 844573483008
+    m_Key: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 530353004544
+    m_Key: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 803960037376
+    m_Key: Money
+    m_Metadata:
+      m_Items: []
+  - m_Id: 985695035392
+    m_Key: Costs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208083656704
+    m_Key: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 419883425792
+    m_Key: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 733957103616
+    m_Key: Wave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306725298176
+    m_Key: Workshop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9827006849024
+    m_Key: Test
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12171048165376
+    m_Key: Defeat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 293813599903744
+    m_Key: EmptySlot
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 1457353313048592408
+  references:
+    version: 2
+    RefIds:
+    - rid: 1457353313048592408
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1738771928601

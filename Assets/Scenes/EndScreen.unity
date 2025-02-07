@@ -211,9 +211,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Menu
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: MenuButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 530353004544
+      objectReference: {fileID: 0}
+    - target: {fileID: 6167249568855836280, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 530353004544
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -571,9 +583,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Workshop
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: WorkshopButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 306725298176
+      objectReference: {fileID: 0}
+    - target: {fileID: 6167249568855836280, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 306725298176
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -993,9 +1017,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Quit
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: QuitButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 419883425792
+      objectReference: {fileID: 0}
+    - target: {fileID: 6167249568855836280, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 419883425792
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1909,6 +1945,7 @@ GameObject:
   - component: {fileID: 2083507121}
   - component: {fileID: 2083507123}
   - component: {fileID: 2083507122}
+  - component: {fileID: 2083507124}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -2032,6 +2069,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083507120}
   m_CullTransparentMesh: 1
+--- !u!114 &2083507124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083507120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:163681dde1344ac4b82eb17085a2eaee
+    m_TableEntryReference:
+      m_KeyId: 12171048165376
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2083507122}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

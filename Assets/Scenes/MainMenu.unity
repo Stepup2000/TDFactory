@@ -290,9 +290,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Workshop
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: WorkshopButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 306725298176
+      objectReference: {fileID: 0}
+    - target: {fileID: 6167249568855836280, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 306725298176
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -456,9 +468,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Quit
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: QuitButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 419883425792
+      objectReference: {fileID: 0}
+    - target: {fileID: 6167249568855836280, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 419883425792
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1599,9 +1623,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Play
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: PlayButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 208083656704
+      objectReference: {fileID: 0}
+    - target: {fileID: 6167249568855836280, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 208083656704
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DisplayText : MonoBehaviour
+public class ChangeLocalizedString : MonoBehaviour
 {
     [SerializeField] private TMP_Text text;
 

@@ -211,9 +211,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Slope(Down)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 7.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: TowerBodyButton_Slope_Down
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1161641893888
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -516,9 +532,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: PlayButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 208083656704
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -859,9 +887,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: InvCorner(Up)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 7.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: TowerBodyButton_RoundCorner_Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1482690699264
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -1068,9 +1112,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 9.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: NavigationBodyTab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 114106081280
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -1482,9 +1542,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Corner(Down)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 7.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: TowerBodyButton_Corner_Down
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1365522817024
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -1656,9 +1732,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Load
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 9.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: NavigationLoadTab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 378124935168
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -1841,9 +1933,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Point(Down)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 8.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: TowerBodyButton_Point_Down
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1873172013056
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -2125,9 +2233,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Point(Up)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 10.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: TowerBodyButton_Point_Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1812711120896
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -2505,9 +2629,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Corner(Up)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: TowerBodyButton_Corner_Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1240087961600
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -2679,9 +2819,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Tower_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: LoadButtonTower_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 8728640266240
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -2864,9 +3020,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 12.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: TowerBodyButton_Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 945643626496
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -3071,9 +3247,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Machinegun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 8.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: ModuleButtonMachineGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 597860327424
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -3364,9 +3556,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Weapons
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 9.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: NavigationWeaponsTab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 20795400192
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -3610,9 +3818,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 9.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: SaveButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 2056878333952
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -3840,9 +4064,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Tower_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: LoadButtonTower_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 8728640266240
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -4025,9 +4265,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Tower_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: LoadButtonTower_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 8728640266240
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -4315,9 +4571,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Raygun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 13.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: ModuleButtonRaygun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 716814983168
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -4522,9 +4794,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 12.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: ModuleButtonCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 897040031744
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -4690,9 +4978,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Slope(up)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 10.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: TowerBodyButton_Slope_Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 992833740800
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -4899,9 +5203,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Cannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 12.9
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: ModuleButtonCannon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 492813983744
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -5180,9 +5500,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: InvCorner(Down)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 5.9
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: TowerBodyButton_RoundCorner_Down
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1723338891264
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -5389,9 +5725,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Detection
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 9.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: NavigationDetectionTab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 63216590848
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
@@ -5669,9 +6021,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_text
+      value: Delete
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376155266335556346, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_fontSize
+      value: 9.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4475686351141983633, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_Name
       value: DeleteButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 2006974504960
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475925093669405940, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:5c46b7b80e72729408ecd50888af6563
       objectReference: {fileID: 0}
     - target: {fileID: 6224375471472021327, guid: bc1748a20b7bf3d4e841c286308e0683, type: 3}
       propertyPath: m_TargetGraphic
