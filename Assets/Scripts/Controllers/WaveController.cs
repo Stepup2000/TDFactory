@@ -8,13 +8,12 @@ using UnityEngine;
 /// </summary>
 public class WaveController : MonoBehaviour
 {
-    private LevelData _levelData; // Holds the level configuration data.
-    private enum WaveState { Start, Spawning, Fighting, End } // Enumeration for different states of a wave.
-    private WaveState waveState = WaveState.Start; // Current state of the wave.
+    private LevelData _levelData;
+    private enum WaveState { Start, Spawning, Fighting, End }
+    private WaveState waveState = WaveState.Start;
 
-    private int _waveIndex = 1; // Index of the current wave.
-
-    private static WaveController instance; // Singleton instance of the WaveController.
+    private int _waveIndex = 1;
+    private static WaveController instance;
 
     /// <summary>
     /// Gets the singleton instance of the WaveController, creating one if it does not exist.
@@ -28,7 +27,6 @@ public class WaveController : MonoBehaviour
                 instance = FindObjectOfType<WaveController>();
                 if (instance == null)
                 {
-                    // Create a new GameObject with WaveController component if none exists
                     GameObject singletonObject = new GameObject("WaveController");
                     instance = singletonObject.AddComponent<WaveController>();
                     DontDestroyOnLoad(singletonObject);
@@ -53,7 +51,7 @@ public class WaveController : MonoBehaviour
     private void OnDisable()
     {
         EventBus<StoppedSpawningEvent>.UnSubscribe(SetWaveToFighting);
-        StopCoroutine(GameLoop()); // Stop the game loop coroutine
+        StopCoroutine(GameLoop());
         EventBus<InitializeLevel>.UnSubscribe(StartGameLoop);
     }
 
@@ -63,7 +61,7 @@ public class WaveController : MonoBehaviour
     /// <param name="pEvent">Event containing the level data.</param>
     private void StartGameLoop(InitializeLevel pEvent)
     {
-        ValidateLevelData(pEvent); // Validate the level data
+        ValidateLevelData(pEvent);
         if (_levelData != null) StartCoroutine(GameLoop());
         else Debug.LogWarning("No LevelData has been assigned in the controller.");
     }
@@ -75,7 +73,6 @@ public class WaveController : MonoBehaviour
     private void ValidateLevelData(InitializeLevel pEvent)
     {
         _levelData = pEvent.data;
-        // Log warnings if any level data fields are not set correctly
         if (_levelData == null) Debug.LogWarning("No LevelData loaded.");
         if (_levelData.availableEnemyPrefabs == null || _levelData.availableEnemyPrefabs.Length <= 0)
             Debug.LogWarning("No EnemyPrefabs loaded.");
@@ -97,18 +94,16 @@ public class WaveController : MonoBehaviour
             switch (waveState)
             {
                 case WaveState.Start:
-                    SpawnWave(); // Start spawning a new wave of enemies
+                    SpawnWave();
                     waveState = WaveState.Spawning;
-                    EventBus<WaveStarted>.Publish(new WaveStarted(_waveIndex)); // Notify that a new wave has started
+                    EventBus<WaveStarted>.Publish(new WaveStarted(_waveIndex));
                     break;
 
                 case WaveState.Spawning:
-                    // Wait until spawning is complete
                     yield return new WaitForSeconds(1f);
                     break;
 
                 case WaveState.Fighting:
-                    // Check if all enemies are defeated
                     if (AreAllEnemiesDefeated())
                     {
                         waveState = WaveState.End;
@@ -117,7 +112,7 @@ public class WaveController : MonoBehaviour
                     break;
 
                 case WaveState.End:
-                    IncreaseWave(); // Increase wave index and prepare for the next wave
+                    IncreaseWave();
                     waveState = WaveState.Start;
                     break;
             }
@@ -169,12 +164,11 @@ public class WaveController : MonoBehaviour
     /// </summary>
     private void SpawnWave()
     {
-        // Calculate the enemy budget based on the current wave index
         int enemyBudget = Mathf.RoundToInt(_levelData.EnemyStartingBudget * (1 + ((_levelData.EnemyBudgetMultiplier - 1) * _waveIndex)));
         BaseEnemy[] enemiesToSpawn = EnemyWaveGenerator.GenerateEnemyWave(_levelData.availableEnemyPrefabs, enemyBudget);
         if (enemiesToSpawn != null && enemiesToSpawn.Length > 0)
         {
-            EventBus<SpawnEnemyEvent>.Publish(new SpawnEnemyEvent(enemiesToSpawn)); // Notify that enemies should be spawned
+            EventBus<SpawnEnemyEvent>.Publish(new SpawnEnemyEvent(enemiesToSpawn));
         }
     }
 }

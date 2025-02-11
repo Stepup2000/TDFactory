@@ -2,30 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthTextUpdater : BaseTextUpdater
+public class HealhTextUpdater : ChangeLocalizedString
 {
     /// <summary>
-    /// Subscribes to the event when the total health changes to update the displayed text.
+    /// Subscribes to the WaveStarted event when the object is enabled.
     /// </summary>
-    public override void OnEnable()
+    protected override void OnEnable()
     {
-        EventBus<TotalHealthChangedEvent>.Subscribe(ChangeHealthText);
+        base.OnEnable();
+        EventBus<TotalHealthChangedEvent>.Subscribe(UpdateText);
     }
 
     /// <summary>
-    /// Unsubscribes from the event when the total health changes to stop updating the displayed text.
+    /// Unsubscribes from the WaveStarted event when the object is disabled.
     /// </summary>
-    public override void OnDisable()
+    protected override void OnDisable()
     {
-        EventBus<TotalHealthChangedEvent>.UnSubscribe(ChangeHealthText);
+        base.OnDisable();
+        EventBus<TotalHealthChangedEvent>.UnSubscribe(UpdateText);
     }
 
     /// <summary>
-    /// Updates the text display with the new total health value.
+    /// Updates the localized text event with the new string key.
     /// </summary>
-    /// <param name="pEvent">Event containing the updated total health value.</param>
-    protected void ChangeHealthText(TotalHealthChangedEvent pEvent)
+    /// <param name="pEvent">Requires an WaveStartedEvent</param>
+    protected void UpdateText(TotalHealthChangedEvent pEvent)
     {
-        UpdateText(_textToDisplay + "" + pEvent.value);
+        ChangeString("UI", "Health", pEvent.value);
     }
 }

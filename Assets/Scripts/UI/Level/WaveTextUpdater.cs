@@ -2,30 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveTextUpdater : BaseTextUpdater
+public class WaveTextUpdater : ChangeLocalizedString
 {
     /// <summary>
     /// Subscribes to the WaveStarted event when the object is enabled.
     /// </summary>
-    public override void OnEnable()
+    protected override void OnEnable()
     {
-        EventBus<WaveStarted>.Subscribe(ChangeWaveText);
+        base.OnEnable();
+        EventBus<WaveStarted>.Subscribe(UpdateText);
     }
 
     /// <summary>
     /// Unsubscribes from the WaveStarted event when the object is disabled.
     /// </summary>
-    public override void OnDisable()
+    protected override void OnDisable()
     {
-        EventBus<WaveStarted>.UnSubscribe(ChangeWaveText);
+        base.OnDisable();
+        EventBus<WaveStarted>.UnSubscribe(UpdateText);
     }
 
     /// <summary>
-    /// Updates the displayed text with the current wave value.
+    /// Updates the localized text event with the new string key.
     /// </summary>
-    /// <param name="pEvent">The event containing the wave value.</param>
-    protected void ChangeWaveText(WaveStarted pEvent)
+    /// <param name="pEvent">Requires an WaveStartedEvent</param>
+    protected void UpdateText(WaveStarted pEvent)
     {
-        UpdateText(_textToDisplay + " " + pEvent.value);
+        ChangeString("UI", "Wave", pEvent.value);
     }
 }

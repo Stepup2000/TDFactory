@@ -16,24 +16,28 @@ MonoBehaviour:
     m_Code: de
   m_SharedData: {fileID: 11400000, guid: 163681dde1344ac4b82eb17085a2eaee, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1457353355052449800
   m_TableData:
   - m_Id: 844573483008
-    m_Localized: Leben
+    m_Localized: 'Leben: {0}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1457353355052449800
   - m_Id: 530353004544
     m_Localized: "Men\xFC"
     m_Metadata:
       m_Items: []
   - m_Id: 803960037376
-    m_Localized: Geld
+    m_Localized: 'Geld: {0}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1457353355052449800
   - m_Id: 985695035392
-    m_Localized: Kosten
+    m_Localized: 'Preis: {0}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1457353355052449800
   - m_Id: 208083656704
     m_Localized: Spielen
     m_Metadata:
@@ -43,9 +47,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 733957103616
-    m_Localized: Welle
+    m_Localized: 'Welle: {0}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1457353355052449800
   - m_Id: 306725298176
     m_Localized: Werkstatt
     m_Metadata:
@@ -59,9 +64,18 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 293813599903744
-    m_Localized: Leerer slot
+    m_Localized: Freie platz
     m_Metadata:
       m_Items: []
+  - m_Id: 1124966795878400
+    m_Localized: Turm {0}
+    m_Metadata:
+      m_Items:
+      - rid: 1457353355052449800
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1457353355052449800
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00a00080e500000000a080a4c400000000a0c02fbb00000000a040e3aa00000000a040be26ff0300

@@ -59,6 +59,10 @@ MonoBehaviour:
     m_Key: EmptySlot
     m_Metadata:
       m_Items: []
+  - m_Id: 1124966795878400
+    m_Key: Tower
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

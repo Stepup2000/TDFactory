@@ -55,11 +55,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 992833740800
-    m_Localized: Ansteigung
+    m_Localized: Rampe (Auf)
     m_Metadata:
       m_Items: []
   - m_Id: 1161641893888
-    m_Localized: Abstieg
+    m_Localized: Rampe (unten)
     m_Metadata:
       m_Items: []
   - m_Id: 1240087961600
@@ -96,10 +96,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2166249005056
     m_Localized: Spielen
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8728640266240
-    m_Localized: Turm
     m_Metadata:
       m_Items: []
   references:

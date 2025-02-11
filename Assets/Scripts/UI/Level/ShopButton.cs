@@ -9,7 +9,7 @@ using TMPro;
 public class ShopButton : MonoBehaviour
 {
     [SerializeField] private DraggableTower draggablePrefab;
-    [SerializeField] private LocalizeStringEvent stringEvent;
+    [SerializeField] private ChangeLocalizedString costString;
     [SerializeField] private int towerNumber = 0;
 
     private Button button;
@@ -26,15 +26,14 @@ public class ShopButton : MonoBehaviour
 
         allTowers = PlayerDataManager.Instance.GetAllTowers();
         towerBlueprint = ValidateAndGetTowerBlueprint(allTowers);
-        stringEvent.SetTable("UI");
 
         if (towerBlueprint != null)
         {
             towerCost = CalculateTowerCost(towerBlueprint);
-            stringEvent.SetEntry("Costs");
+            costString?.ChangeString("UI", "Costs", towerCost);
         }
         else
-            stringEvent.SetEntry("EmptySlot");
+            costString?.ChangeString("UI", "EmptySlot");
     }
 
     private void OnDisable()

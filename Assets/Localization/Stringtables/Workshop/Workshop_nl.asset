@@ -98,10 +98,6 @@ MonoBehaviour:
     m_Localized: Speel
     m_Metadata:
       m_Items: []
-  - m_Id: 8728640266240
-    m_Localized: Toren
-    m_Metadata:
-      m_Items: []
   references:
     version: 2
     RefIds: []

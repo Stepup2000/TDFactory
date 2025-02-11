@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: nl
   m_SharedData: {fileID: 11400000, guid: 163681dde1344ac4b82eb17085a2eaee, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1457353355052449798
   m_TableData:
   - m_Id: 208083656704
     m_Localized: Speel
@@ -35,21 +36,25 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 733957103616
-    m_Localized: Golf
+    m_Localized: 'Golf: {0}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1457353355052449798
   - m_Id: 803960037376
-    m_Localized: Geld
+    m_Localized: 'Geld: {0}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1457353355052449798
   - m_Id: 844573483008
-    m_Localized: Levens
+    m_Localized: 'Levens: {0}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1457353355052449798
   - m_Id: 985695035392
-    m_Localized: Kost
+    m_Localized: 'Kost: {0}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1457353355052449798
   - m_Id: 9827006849024
     m_Localized: Test_NL
     m_Metadata:
@@ -62,6 +67,15 @@ MonoBehaviour:
     m_Localized: Leeg slot
     m_Metadata:
       m_Items: []
+  - m_Id: 1124966795878400
+    m_Localized: Toren {0}
+    m_Metadata:
+      m_Items:
+      - rid: 1457353355052449798
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1457353355052449798
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00a00080e500000000a080a4c400000000a0c02fbb00000000a040e3aa00000000a040be26ff0300

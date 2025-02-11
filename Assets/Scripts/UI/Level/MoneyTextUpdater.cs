@@ -2,30 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoneyTextUpdater : BaseTextUpdater
+public class MoneyTextUpdater : ChangeLocalizedString
 {
     /// <summary>
-    /// Subscribes to the event when the total money changes to update the displayed text.
+    /// Subscribes to the WaveStarted event when the object is enabled.
     /// </summary>
-    public override void OnEnable()
+    protected override void OnEnable()
     {
-        EventBus<TotalMoneyChangedEvent>.Subscribe(ChangeMoneyText);
+        base.OnEnable();
+        EventBus<TotalMoneyChangedEvent>.Subscribe(UpdateText);
     }
 
     /// <summary>
-    /// Unsubscribes from the event when the total money changes to stop updating the displayed text.
+    /// Unsubscribes from the WaveStarted event when the object is disabled.
     /// </summary>
-    public override void OnDisable()
+    protected override void OnDisable()
     {
-        EventBus<TotalMoneyChangedEvent>.UnSubscribe(ChangeMoneyText);
+        base.OnDisable();
+        EventBus<TotalMoneyChangedEvent>.UnSubscribe(UpdateText);
     }
 
     /// <summary>
-    /// Updates the text display with the new total money value.
+    /// Updates the localized text event with the new string key.
     /// </summary>
-    /// <param name="pEvent">Event containing the updated total money value.</param>
-    protected void ChangeMoneyText(TotalMoneyChangedEvent pEvent)
+    /// <param name="pEvent">Requires an WaveStartedEvent</param>
+    protected void UpdateText(TotalMoneyChangedEvent pEvent)
     {
-        UpdateText(_textToDisplay + "" + pEvent.value);
+        ChangeString("UI", "Money", pEvent.value);
     }
 }

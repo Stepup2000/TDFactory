@@ -95,10 +95,6 @@ MonoBehaviour:
     m_Key: Play
     m_Metadata:
       m_Items: []
-  - m_Id: 8728640266240
-    m_Key: Tower
-    m_Metadata:
-      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
