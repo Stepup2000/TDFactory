@@ -7,35 +7,18 @@ using UnityEngine;
 /// </summary>
 public class CameraModule : MonoBehaviour, IDetectionModule
 {
-    /// <summary>
-    /// A set of detected enemies currently in range of the camera module.
-    /// </summary>
-    private HashSet<BaseEnemy> _enemiesInRange = new();
-
-    /// <summary>
-    /// Reference to the parent tower of this module.
-    /// </summary>
-    private Tower _parentTower;
-
-    /// <summary>
-    /// The cost of the module.
-    /// </summary>
+    [Header("Basic detection references")]
+    protected HashSet<BaseEnemy> _enemiesInRange = new();
+    protected Tower _parentTower;
+     
     [field: SerializeField] public int cost { get; set; }
-
-    /// <summary>
-    /// The prefab associated with this module.
-    /// </summary>
     [field: SerializeField] public GameObject modulePrefab { get; set; }
-
-    /// <summary>
-    /// The sound clip played when the module is placed.
-    /// </summary>
     [field: SerializeField] public AudioClip placementSoundClip { get; set; }
 
     /// <summary>
     /// Called when the script is enabled. Subscribes to the EnemyRequestEvent and RequestModuleDataEvent.
     /// </summary>
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         Invoke("SetEnemyRequestSubscription", 0.5f);
         EventBus<RequestModuleDataEvent>.Subscribe(SendModuleData);
@@ -44,7 +27,7 @@ public class CameraModule : MonoBehaviour, IDetectionModule
     /// <summary>
     /// Called when the script is disabled. Unsubscribes from the EnemyRequestEvent and RequestModuleDataEvent.
     /// </summary>
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         if (_parentTower != null) _parentTower.EnemyRequestEvent -= SendFurthestEnemy;
         EventBus<RequestModuleDataEvent>.UnSubscribe(SendModuleData);
@@ -54,7 +37,7 @@ public class CameraModule : MonoBehaviour, IDetectionModule
     /// Handles the RequestModuleDataEvent by placing the module.
     /// </summary>
     /// <param name="requestModuleDataEvent">The event data.</param>
-    private void SendModuleData(RequestModuleDataEvent requestModuleDataEvent)
+    protected virtual void SendModuleData(RequestModuleDataEvent requestModuleDataEvent)
     {
         TowerBuilder.Instance.PlaceModule(gameObject.transform.parent.gameObject, modulePrefab);
     }
@@ -71,7 +54,7 @@ public class CameraModule : MonoBehaviour, IDetectionModule
     /// <summary>
     /// Subscribes to the EnemyRequestEvent of the parent tower, if it is not null. Retries if the parent tower is not yet assigned.
     /// </summary>
-    private void SetEnemyRequestSubscription()
+    protected virtual void SetEnemyRequestSubscription()
     {
         if (_parentTower != null)
         {
@@ -85,7 +68,7 @@ public class CameraModule : MonoBehaviour, IDetectionModule
     /// Called when a collider enters the trigger. Detects and adds the enemy to the list of enemies in range.
     /// </summary>
     /// <param name="other">The collider that entered the trigger.</param>
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out BaseEnemy foundEnemy)) EnemyDetected(foundEnemy);
     }
@@ -94,7 +77,7 @@ public class CameraModule : MonoBehaviour, IDetectionModule
     /// Called when a collider exits the trigger. Removes the enemy from the list of enemies in range.
     /// </summary>
     /// <param name="other">The collider that exited the trigger.</param>
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out BaseEnemy foundEnemy)) EnemyLost(foundEnemy);
     }
@@ -121,7 +104,7 @@ public class CameraModule : MonoBehaviour, IDetectionModule
     /// Gets the enemy that has traveled the furthest distance from the set of enemies in range.
     /// </summary>
     /// <returns>The furthest enemy, or null if no enemies are in range.</returns>
-    private BaseEnemy GetFurthestEnemy()
+    protected virtual BaseEnemy GetFurthestEnemy()
     {
         if (_enemiesInRange == null) return null;
 
@@ -145,7 +128,7 @@ public class CameraModule : MonoBehaviour, IDetectionModule
     /// <summary>
     /// Sends the furthest enemy to the parent tower.
     /// </summary>
-    private void SendFurthestEnemy()
+    protected virtual void SendFurthestEnemy()
     {
         BaseEnemy enemy = GetFurthestEnemy();
         _parentTower.AddTarget(enemy);

@@ -98,6 +98,10 @@ MonoBehaviour:
     m_Localized: Spielen
     m_Metadata:
       m_Items: []
+  - m_Id: 4692104219500544
+    m_Localized: Timer
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

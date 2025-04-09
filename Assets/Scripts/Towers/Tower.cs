@@ -26,10 +26,10 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
     /// </summary>
     public event TriggerEvent EnemyRequestEvent;
 
-    [SerializeField] private List<string> _statKeys; // Serialized list of stat keys for saving/loading.
-    [SerializeField] private List<float> _statValues; // Serialized list of stat values for saving/loading.
+    [SerializeField] private List<string> _statKeys;
+    [SerializeField] private List<float> _statValues;
 
-    private Dictionary<string, float> _stats; // Dictionary holding tower stats.
+    private Dictionary<string, float> _stats;
 
     // Constants defining the keys for tower stats.
     public const string PRICE_STAT = "Price";
@@ -37,8 +37,8 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
     public const string RANGE_STAT = "BaseRange";
     public const string RELOADSPEED_STAT = "BaseReloadSpeed";
 
-    private HashSet<BaseEnemy> _detectedEnemies = new(); // Set holding all detected enemies.
-    private BaseEnemy _lastEnemy = null; // Tracks the last enemy targeted by the tower.
+    private HashSet<BaseEnemy> _detectedEnemies = new();
+    private BaseEnemy _lastEnemy = null;
 
     /// <summary>
     /// Initializes default stats when the tower is instantiated.
@@ -128,17 +128,12 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
     {
         while (true)
         {
-            // Request all targets from detection modules.
             ObtainAllTargets();
 
-            // Wait for detection event.
             yield return new WaitForEndOfFrame();
 
-            // Select the furthest target from the detected enemies.
             CalculateTarget();
-
-            // Attempt to fire at the selected target.
-            TryFireWeapons();
+            TryFireWeapons(false);
 
             // Wait for the tower's reload time before firing again.
             yield return new WaitForSeconds(_stats[RELOADSPEED_STAT]);
@@ -182,12 +177,15 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
     /// <summary>
     /// Attempts to fire at the selected enemy if any enemies are detected.
     /// </summary>
-    private void TryFireWeapons()
+    public void TryFireWeapons(bool overrideFiremechanism)
     {
-        if (_detectedEnemies.Count != 0)
+        if (overrideFiremechanism)
         {
-            OnEnemyDetectedEvent?.Invoke(_lastEnemy, _stats[DAMAGE_STAT]);
+            OnEnemyDetectedEvent?.Invoke(null, _stats[DAMAGE_STAT]);
+            return;
         }
+        else if (_detectedEnemies.Count != 0)
+            OnEnemyDetectedEvent?.Invoke(_lastEnemy, _stats[DAMAGE_STAT]);
     }
 
     #region ShowDictionary
