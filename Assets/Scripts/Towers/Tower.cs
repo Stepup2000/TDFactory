@@ -51,7 +51,7 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
             { PRICE_STAT, 100f },
             { DAMAGE_STAT, 1f },
             { RANGE_STAT, 5f },
-            { RELOADSPEED_STAT, 0.25f }
+            { RELOADSPEED_STAT, 0.1f }
         };
     }
 

@@ -32,18 +32,18 @@ public class SoundManager : MonoBehaviour
     }
 
     [SerializeField] private AudioClip _backgroundMusic;
-    [SerializeField] private AudioClip _buttonSoundClip; // The sound clip to play for button clicks.
-    [SerializeField] private AudioClip _swapSoundClip; // The sound clip to play for swap actions.
-    [SerializeField] private AudioClip _saveSoundClip; // The sound clip to play for save actions.
-    [SerializeField] private float soundCooldown = 0.15f; // Duration to wait before playing the same sound again.
+    [SerializeField] private AudioClip _buttonSoundClip;
+    [SerializeField] private AudioClip _swapSoundClip;
+    [SerializeField] private AudioClip _saveSoundClip;
+    [SerializeField] private float soundCooldown = 0.15f;
 
-    [SerializeField] private int initialPoolSize = 10; // Initial size of the audio source pool.
-    [SerializeField] private int maxPoolSize = 20; // Maximum size of the audio source pool.
+    [SerializeField] private int initialPoolSize = 10;
+    [SerializeField] private int maxPoolSize = 20; 
 
-    private List<AudioSource> audioSourcesPool = new List<AudioSource>(); // Pool of available audio sources.
-    private GameObject _audioSourceContainer; // Container for managing audio source objects.
+    private List<AudioSource> audioSourcesPool = new List<AudioSource>();
+    private GameObject _audioSourceContainer;
 
-    private Dictionary<AudioClip, float> lastPlayTimes = new Dictionary<AudioClip, float>(); // Tracks the last play time of each sound.
+    private Dictionary<AudioClip, float> lastPlayTimes = new Dictionary<AudioClip, float>();
 
     /// <summary>
     /// Called when the script is enabled. Sets up the singleton instance and initializes the audio source pool.
@@ -60,7 +60,7 @@ public class SoundManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
         StartBackgroundMusic();
-        InitializePool(); // Initialize the audio source pool
+        InitializePool();
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ public class SoundManager : MonoBehaviour
     {
         for (int i = 0; i < initialPoolSize; i++)
         {
-            CreateNewAudioSource(); // Create new audio sources and add to pool
+            CreateNewAudioSource();
         }
     }
 
@@ -107,7 +107,7 @@ public class SoundManager : MonoBehaviour
         // Check if the sound is on cooldown
         if (lastPlayTimes.ContainsKey(clip) && Time.time - lastPlayTimes[clip] < soundCooldown)
         {
-            return; // Sound is still on cooldown
+            return;
         }
 
         AudioSource audioSource = GetAvailableAudioSource();
