@@ -13,6 +13,16 @@ public interface IWeapon : IModule
     float damageMultiplier { get; set; }
 
     /// <summary>
+    /// Gets or sets the maximum amount of ammo.
+    /// </summary>
+    int maxAmmoCount { get; set; }
+
+    /// <summary>
+    /// Gets or sets the duration of the reload.
+    /// </summary>
+    float reloadDuration { get; set; }
+
+    /// <summary>
     /// Gets or sets the cooldown time between weapon shots.
     /// </summary>
     float shootCooldown { get; set; }

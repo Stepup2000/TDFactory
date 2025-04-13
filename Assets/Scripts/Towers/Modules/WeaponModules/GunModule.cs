@@ -17,14 +17,18 @@ public class GunModule : MonoBehaviour, IWeapon
     [Header("Basic gun settings")]
     [SerializeField] protected Transform _bulletSpawnLocation;
     [field: SerializeField] public float damageMultiplier { get; set; }
+    [field: SerializeField] public int maxAmmoCount { get; set; }
+    [field: SerializeField] public float reloadDuration { get; set; }
     [field: SerializeField] public float shootCooldown { get; set; }
     [field: SerializeField] public int cost { get; set; }
     [field: SerializeField] public float recoilAmount { get; set; }
 
-    protected Tower _parentTower;
+    protected Tower parentTower;
     protected VisualEffect vfx = null;
     protected ParticleSystem shellParticle = null;
-    protected bool _isReloading = false;
+    protected bool isOnCooldown = false;
+    protected bool isReloading = false;
+    protected int currentAmmo;
 
     /// <summary>
     /// Called when the script is enabled. Sets up the enemy detection subscription and module data subscription.
@@ -48,7 +52,8 @@ public class GunModule : MonoBehaviour, IWeapon
     /// </summary>
     protected virtual void OnDestroy()
     {
-        if (_parentTower != null) _parentTower.OnEnemyDetectedEvent -= AttemptFire;
+        if (parentTower != null)
+            parentTower.OnEnemyDetectedEvent -= AttemptFire;
     }
 
     /// <summary>
@@ -58,6 +63,7 @@ public class GunModule : MonoBehaviour, IWeapon
     {
         vfx = GetComponentInChildren<VisualEffect>();
         shellParticle = GetComponentInChildren<ParticleSystem>();
+        currentAmmo = maxAmmoCount;
     }
 
     /// <summary>
@@ -75,7 +81,7 @@ public class GunModule : MonoBehaviour, IWeapon
     /// <param name="newTower">The new parent tower.</param>
     public virtual void SetParentTower(Tower newTower)
     {
-        _parentTower = newTower;
+        parentTower = newTower;
     }
 
     /// <summary>
@@ -83,12 +89,13 @@ public class GunModule : MonoBehaviour, IWeapon
     /// </summary>
     protected virtual void SetEnemyRequestSubscription()
     {
-        if (_parentTower != null)
+        if (parentTower != null)
         {
-            _parentTower.OnEnemyDetectedEvent -= AttemptFire;
-            _parentTower.OnEnemyDetectedEvent += AttemptFire;
+            parentTower.OnEnemyDetectedEvent -= AttemptFire;
+            parentTower.OnEnemyDetectedEvent += AttemptFire;
         }
-        else Invoke("SetEnemyRequestSubscription", 0.5f);
+        else
+            Invoke("SetEnemyRequestSubscription", 0.5f);
     }
 
     /// <summary>
@@ -98,11 +105,13 @@ public class GunModule : MonoBehaviour, IWeapon
     /// <param name="damage">The damage to apply.</param>
     protected virtual void AttemptFire(BaseEnemy enemy, float damage)
     {
-        if (!_isReloading)
+        if (!isOnCooldown && !isReloading && currentAmmo > 0)
         {
-            CreateBullet(damage * damageMultiplier);
-            _isReloading = true;
-            StartCoroutine(Reload());
+            currentAmmo--;
+            CreateBullet(damage * damageMultiplier);            
+            StartCoroutine(CooldownRoutine());
+            if (currentAmmo <= 0)
+                StartCoroutine(ReloadRoutine());
         }
     }
 
@@ -130,11 +139,23 @@ public class GunModule : MonoBehaviour, IWeapon
 
 
     /// <summary>
+    /// Coroutine for handling the shoot cooldown time of the module.
+    /// </summary>
+    protected virtual IEnumerator CooldownRoutine()
+    {
+        isOnCooldown = true;
+        yield return new WaitForSeconds(shootCooldown);
+        isOnCooldown = false;
+    }
+
+    /// <summary>
     /// Coroutine for handling the reload time of the module.
     /// </summary>
-    protected virtual IEnumerator Reload()
+    protected virtual IEnumerator ReloadRoutine()
     {
-        yield return new WaitForSeconds(shootCooldown);
-        _isReloading = false;
+        isReloading = true;
+        yield return new WaitForSeconds(reloadDuration);
+        isReloading = false;
+        currentAmmo = maxAmmoCount;
     }
 }

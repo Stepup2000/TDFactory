@@ -55,6 +55,8 @@ MonoBehaviour:
   <placementSoundClip>k__BackingField: {fileID: 8300000, guid: 320c493856fe4c2418ec71eea4060930, type: 3}
   _bulletSpawnLocation: {fileID: 8984971753089004405}
   <damageMultiplier>k__BackingField: 0.1
+  <maxAmmoCount>k__BackingField: 100
+  <reloadDuration>k__BackingField: 5
   <shootCooldown>k__BackingField: 0.1
   <cost>k__BackingField: 50
   <recoilAmount>k__BackingField: 10

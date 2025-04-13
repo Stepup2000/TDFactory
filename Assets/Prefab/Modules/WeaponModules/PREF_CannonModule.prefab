@@ -164,13 +164,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 5621817643151570591, guid: f97ccc85f451f24479695f9e4082988e, type: 3}
-  <damageMultiplier>k__BackingField: 1.5
-  <shootCooldown>k__BackingField: 1.5
-  <cost>k__BackingField: 50
+  _audioClip: {fileID: 8300000, guid: 931f9234bca697a42a785204e0fd6670, type: 3}
   <modulePrefab>k__BackingField: {fileID: 3059356459211561517}
   <placementSoundClip>k__BackingField: {fileID: 8300000, guid: 320c493856fe4c2418ec71eea4060930, type: 3}
   _bulletSpawnLocation: {fileID: 7578330133406067407}
-  _audioClip: {fileID: 8300000, guid: 931f9234bca697a42a785204e0fd6670, type: 3}
+  <damageMultiplier>k__BackingField: 1.5
+  <maxAmmoCount>k__BackingField: 1
+  <reloadDuration>k__BackingField: 1.5
+  <shootCooldown>k__BackingField: 1.5
+  <cost>k__BackingField: 50
+  <recoilAmount>k__BackingField: 0
 --- !u!1 &5652271153556753116
 GameObject:
   m_ObjectHideFlags: 0
