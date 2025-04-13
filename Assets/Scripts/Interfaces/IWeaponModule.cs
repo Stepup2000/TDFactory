@@ -16,4 +16,9 @@ public interface IWeapon : IModule
     /// Gets or sets the cooldown time between weapon shots.
     /// </summary>
     float shootCooldown { get; set; }
+
+    /// <summary>
+    /// Gets or sets the directional offset (in degrees) applied to each bullet.
+    /// </summary>
+    float recoilAmount { get; set; }
 }

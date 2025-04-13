@@ -19,6 +19,7 @@ public class GunModule : MonoBehaviour, IWeapon
     [field: SerializeField] public float damageMultiplier { get; set; }
     [field: SerializeField] public float shootCooldown { get; set; }
     [field: SerializeField] public int cost { get; set; }
+    [field: SerializeField] public float recoilAmount { get; set; }
 
     protected Tower _parentTower;
     protected VisualEffect vfx = null;
@@ -113,13 +114,20 @@ public class GunModule : MonoBehaviour, IWeapon
     {
         if (_bulletPrefab != null)
         {
-            IBullet bullet = Instantiate(_bulletPrefab, _bulletSpawnLocation.position, transform.rotation.normalized);
+            // Generate small random horizontal recoil (Y-axis only)
+            float recoilY = Random.Range(-recoilAmount, recoilAmount);
+            Quaternion recoilRotation = Quaternion.Euler(0f, recoilY, 0f) * transform.rotation;
+
+            // Instantiate bullet with recoil
+            IBullet bullet = Instantiate(_bulletPrefab, _bulletSpawnLocation.position, recoilRotation);
             bullet.Initialize(damage);
+
             if (vfx != null) vfx.Play();
             if (shellParticle != null) shellParticle.Play();
             SoundManager.Instance.PlaySoundAtLocation(_audioClip, transform.position);
-        }        
+        }
     }
+
 
     /// <summary>
     /// Coroutine for handling the reload time of the module.

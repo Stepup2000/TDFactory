@@ -14,7 +14,7 @@ public class BaseBullet : MonoBehaviour, IBullet
     /// </summary>
     [field: SerializeField] public float damage { get; set; }
 
-    [SerializeField] private float _lifeTime = 2; // The lifespan of the bullet before it is destroyed.
+    [SerializeField] private float _lifeTime = 2;
 
     /// <summary>
     /// Initializes the bullet with a given damage value and sets a timer to destroy it after a certain lifetime.
@@ -23,7 +23,7 @@ public class BaseBullet : MonoBehaviour, IBullet
     public void Initialize(float pDamage)
     {
         damage = pDamage;
-        Invoke(nameof(DestroySelf), _lifeTime); // Schedules the destruction of the bullet after its lifetime expires.
+        Invoke(nameof(DestroySelf), _lifeTime);
     }
 
     /// <summary>
@@ -31,8 +31,8 @@ public class BaseBullet : MonoBehaviour, IBullet
     /// </summary>
     public virtual void Move()
     {
-        Vector3 direction = transform.forward; // Gets the forward direction of the bullet.
-        transform.position += direction * speed * Time.deltaTime; // Moves the bullet forward.
+        Vector3 direction = transform.forward;
+        transform.position += direction * speed * Time.deltaTime;
     }
 
     /// <summary>
@@ -55,8 +55,8 @@ public class BaseBullet : MonoBehaviour, IBullet
         {
             if (foundDamageAble.IsStillAlive())
             {
-                foundDamageAble.TakeDamage(damage); // Inflicts damage on the damageable target.
-                DestroySelf(); // Destroys the bullet after hitting the target.
+                foundDamageAble.TakeDamage(damage);
+                DestroySelf();
             }
         }
     }
@@ -66,7 +66,7 @@ public class BaseBullet : MonoBehaviour, IBullet
     /// </summary>
     private void DestroySelf()
     {
-        Destroy(gameObject); // Destroys the bullet's game object.
+        Destroy(gameObject);
     }
 
     /// <summary>
@@ -74,6 +74,6 @@ public class BaseBullet : MonoBehaviour, IBullet
     /// </summary>
     private void Update()
     {
-        Move(); // Continuously moves the bullet forward.
+        Move();
     }
 }

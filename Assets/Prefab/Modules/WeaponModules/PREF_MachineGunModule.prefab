@@ -57,6 +57,7 @@ MonoBehaviour:
   <damageMultiplier>k__BackingField: 0.25
   <shootCooldown>k__BackingField: 0.25
   <cost>k__BackingField: 50
+  <recoilAmount>k__BackingField: 10
 --- !u!1 &5386521172792948045
 GameObject:
   m_ObjectHideFlags: 0
