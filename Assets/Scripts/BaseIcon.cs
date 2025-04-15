@@ -24,7 +24,7 @@ public class BaseIcon : MonoBehaviour
 
     private void OnDisable()
     {
-        transform.rotation = originalRotation;
+        //transform.rotation = originalRotation;
         transform.localScale = originalScale;
     }
 

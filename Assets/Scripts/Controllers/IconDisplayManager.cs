@@ -116,3 +116,4 @@ public class IconDisplayManager : MonoBehaviour
         icon.SetActive(false);
     }
 }
+
