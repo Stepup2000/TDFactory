@@ -99,7 +99,7 @@ public class IconDisplayManager : MonoBehaviour
 
         GameObject icon = GetPooledIcon();
         icon.transform.position = worldPosition;
-        if (sprite != null) icon.GetComponent<Image>().sprite = sprite;
+        if (sprite != null) icon.GetComponentInChildren<Image>().sprite = sprite;
         icon.SetActive(true);
 
         StartCoroutine(HideAfterDelay(icon, duration));
