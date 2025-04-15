@@ -12,6 +12,7 @@ public class GunModule : MonoBehaviour, IWeapon
     [SerializeField] protected BaseBullet _bulletPrefab;
     [SerializeField] protected AudioClip _audioClip = null;
     [field: SerializeField] public GameObject modulePrefab { get; set; }
+    [field: SerializeField] public Sprite reloadIcon { get; set; }
     [field: SerializeField] public AudioClip placementSoundClip { get; set; }
 
     [Header("Basic gun settings")]
@@ -131,8 +132,11 @@ public class GunModule : MonoBehaviour, IWeapon
             IBullet bullet = Instantiate(_bulletPrefab, _bulletSpawnLocation.position, recoilRotation);
             bullet.Initialize(damage);
 
-            if (vfx != null) vfx.Play();
-            if (shellParticle != null) shellParticle.Play();
+            if (vfx != null)
+                vfx.Play();
+            if (shellParticle != null)
+                shellParticle.Play();
+
             SoundManager.Instance.PlaySoundAtLocation(_audioClip, transform.position);
         }
     }
@@ -149,11 +153,21 @@ public class GunModule : MonoBehaviour, IWeapon
     }
 
     /// <summary>
+    /// Shows a reload icon above the module.
+    /// </summary>
+    protected void ShowReloadIcon()
+    {
+        Vector3 positionOffset = new Vector3(1, 4, 0);
+        IconDisplayManager.Instance.ShowIcon(reloadIcon, transform.position + positionOffset, reloadDuration);
+    }
+
+    /// <summary>
     /// Coroutine for handling the reload time of the module.
     /// </summary>
     protected virtual IEnumerator ReloadRoutine()
     {
         isReloading = true;
+        ShowReloadIcon();
         yield return new WaitForSeconds(reloadDuration);
         isReloading = false;
         currentAmmo = maxAmmoCount;
