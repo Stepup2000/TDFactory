@@ -1,16 +1,15 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 /// <summary>
 /// Applies a damage-over-time effect to an enemy, dealing periodic damage for a set duration.
 /// </summary>
-public class DOTEffect : MonoBehaviour, IStatusEffect
+public class DOTEffect : BaseStatusEffect
 {
     /// <summary>
-    /// The amount of damage dealt per tick.
+    /// The total duration the DoT effect lasts (in seconds).
     /// </summary>
-    [field: SerializeField] public float damage { get; set; }
+    [field: SerializeField] public float dotDamage { get; set; }
 
     /// <summary>
     /// The time interval between each damage tick (in seconds).
@@ -18,19 +17,14 @@ public class DOTEffect : MonoBehaviour, IStatusEffect
     [field: SerializeField] public float dotCooldown { get; set; }
 
     /// <summary>
-    /// The total duration the DoT effect lasts (in seconds).
-    /// </summary>
-    [field: SerializeField] public float duration { get; set; }
-
-    /// <summary>
     /// Starts applying the DoT effect to the target enemy.
     /// </summary>
     /// <param name="targetEnemy">The enemy to apply the effect to.</param>
-    public virtual void ExecuteEffect(BaseEnemy targetEnemy)
+    public override void ApplyEffect(IDamageable target)
     {
-        IDamageable damagable = targetEnemy.GetComponent<IDamageable>();
-        if (damagable != null)
-            StartCoroutine(ApplyDamageOverTime(damagable));
+        base.ApplyEffect(target);
+        if (target != null)
+            StartCoroutine(ApplyDamageOverTime(target));
     }
 
     /// <summary>
@@ -43,7 +37,7 @@ public class DOTEffect : MonoBehaviour, IStatusEffect
 
         while (elapsed < duration)
         {
-            target.TakeDamage(damage);
+            target?.TakeDamage(dotDamage);
             yield return new WaitForSeconds(dotCooldown);
             elapsed += dotCooldown;
         }
