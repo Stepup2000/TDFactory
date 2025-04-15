@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class SoundManager : MonoBehaviour
 {
-    // Singleton instance
     private static SoundManager _instance;
 
     /// <summary>
@@ -130,11 +129,12 @@ public class SoundManager : MonoBehaviour
             audioSource.clip = clip;
             audioSource.Play();
 
-            // Randomize pitch if requested
-            if (randomizePitch) audioSource.pitch = GetRandomNumber(0.9f, 1.1f);
-            // Handle looping of sound
-            if (loop) audioSource.loop = true;
-            else StartCoroutine(ReturnToPool(audioSource, clip.length)); // Return audio source to pool after sound is done
+            if (randomizePitch)
+                audioSource.pitch = GetRandomNumber(0.9f, 1.1f);
+            if (loop)
+                audioSource.loop = true;
+            else
+                StartCoroutine(ReturnToPool(audioSource, clip.length)); // Return audio source to pool after sound is done
 
             // Update last play time
             lastPlayTimes[clip] = Time.time;

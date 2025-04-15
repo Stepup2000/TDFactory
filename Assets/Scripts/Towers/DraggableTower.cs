@@ -9,8 +9,8 @@ public class DraggableTower : MonoBehaviour
     /// </summary>
     [SerializeField] private int _rotationAmount = 45;
 
-    private Tower _createdTower; // Reference to the currently created tower.
-    private bool _canPlace = false; // Indicates whether the tower can be placed at the current location.
+    private Tower _createdTower;
+    private bool _canPlace = false;
 
     /// <summary>
     /// Initializes the tower by spawning it using the player's first available tower blueprint.
@@ -44,13 +44,14 @@ public class DraggableTower : MonoBehaviour
             // Cast a ray to determine where the tower should be positioned.
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                _createdTower.transform.position = hit.point; // Move the tower to the raycast hit position.
-                _canPlace = true; // Tower can be placed.
+                _createdTower.transform.position = hit.point;
+                _canPlace = true;
             }
-            else _canPlace = false;
+            else
+                _canPlace = false;
 
-            // If left mouse button is clicked, activate the tower.
-            if (Input.GetMouseButton(0)) ActivateTower();
+            if (Input.GetMouseButton(0))
+                ActivateTower();
         }
     }
 
@@ -71,13 +72,9 @@ public class DraggableTower : MonoBehaviour
         if (_createdTower != null)
         {
             if (scrollAmount > 0)
-            {
                 _createdTower.transform.Rotate(_createdTower.transform.up, -_rotationAmount); // Rotate counter-clockwise.
-            }
             else if (scrollAmount < 0)
-            {
                 _createdTower.transform.Rotate(_createdTower.transform.up, _rotationAmount); // Rotate clockwise.
-            }
         }
     }
 
@@ -87,19 +84,19 @@ public class DraggableTower : MonoBehaviour
     /// <param name="towerBlueprint">The blueprint that contains information about the tower's structure and modules.</param>
     private void SpawnTower(TowerBlueprint towerBlueprint)
     {
-        GameObject tower = new GameObject("NewTower"); // Create a new GameObject for the tower.
-        _createdTower = tower.AddComponent<Tower>(); // Attach a Tower component to the GameObject.
+        GameObject tower = new GameObject("NewTower");
+        _createdTower = tower.AddComponent<Tower>();
 
         Vector3 newPosition = new Vector3(transform.position.x, 0, transform.position.z);
-        _createdTower.transform.position = newPosition; // Set the initial position of the tower.
+        _createdTower.transform.position = newPosition;
 
         // Instantiate and attach each tower part based on the blueprint.
         foreach (TowerPart part in towerBlueprint.allTowerParts)
         {
             GameObject createdPart = Instantiate(part.Module, newPosition + part.Position, part.Rotation);
-            createdPart.transform.SetParent(tower.transform); // Attach the part to the tower as a child.
-            IModule module = createdPart.GetComponentInChildren<IModule>(); // Get the module component if available.
-            if (module != null) module.SetParentTower(_createdTower); // Assign the parent tower to the module.
+            createdPart.transform.SetParent(tower.transform);
+            IModule module = createdPart.GetComponentInChildren<IModule>();
+            if (module != null) module.SetParentTower(_createdTower);
         }
     }
 
@@ -110,9 +107,9 @@ public class DraggableTower : MonoBehaviour
     {
         if (_createdTower != null && _canPlace)
         {
-            _createdTower.ActivateTower(); // Activate the tower's functionality.
-            CameraController.Instance.ChangeCamera("MainCamera"); // Switch back to the main camera.
-            Destroy(gameObject); // Destroy the draggable object.
+            _createdTower.ActivateTower();
+            CameraController.Instance.ChangeCamera("MainCamera");
+            Destroy(gameObject);
         }
     }
 }
