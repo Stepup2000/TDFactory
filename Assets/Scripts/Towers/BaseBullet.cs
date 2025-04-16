@@ -56,6 +56,7 @@ public class BaseBullet : MonoBehaviour, IBullet
             if (foundDamageAble.IsStillAlive())
             {
                 foundDamageAble.TakeDamage(damage);
+                EffectController.Instance.ApplyEffect(EffectType.Fire, foundDamageAble);
                 DestroySelf();
             }
         }

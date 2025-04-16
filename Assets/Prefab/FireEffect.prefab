@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8178008093340549575
+--- !u!1 &1256184813419023728
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5550844388003719296}
-  - component: {fileID: 3416371857991254857}
+  - component: {fileID: 2232590835283425856}
+  - component: {fileID: 6214497686550178882}
   m_Layer: 0
-  m_Name: PREF_EnemySpawner
+  m_Name: FireEffect
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5550844388003719296
+--- !u!4 &2232590835283425856
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8178008093340549575}
+  m_GameObject: {fileID: 1256184813419023728}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,16 +32,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3416371857991254857
+--- !u!114 &6214497686550178882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8178008093340549575}
+  m_GameObject: {fileID: 1256184813419023728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dee14c821d3900448fad74c3037f08c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d6e74f1d3467a64a94694398f3b00ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnSpeed: 0.75
+  <initialDamage>k__BackingField: 0.5
+  <duration>k__BackingField: 5
+  <dotDamage>k__BackingField: 0.1
+  <dotCooldown>k__BackingField: 1

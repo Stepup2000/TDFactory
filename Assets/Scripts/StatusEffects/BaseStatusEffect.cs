@@ -1,12 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class BaseStatusEffect : MonoBehaviour, IStatusEffect
+public class BaseStatusEffect : MonoBehaviour, IStatusEffect, IPoolableEffect
 {
+    [field: SerializeField] public EffectType effectType { get; set; }
     [field: SerializeField] public float initialDamage { get; set; }
     [field: SerializeField] public float duration { get; set; }
 
     protected IDamageable targetDamageable;
+
+    public System.Action<BaseStatusEffect> returnToPoolCallback;
 
     /// <summary>
     /// Applies the effect, attaching it to the target's GameObject.
@@ -15,15 +18,10 @@ public class BaseStatusEffect : MonoBehaviour, IStatusEffect
     {
         targetDamageable = target;
 
-        if (targetDamageable is Component component)
+        if (target is Component c)
         {
-            transform.SetParent(component.gameObject.transform);
-            target?.TakeDamage(initialDamage);
+            target.TakeDamage(initialDamage);
             StartCoroutine(EffectDurationTimer());
-        }
-        else
-        {
-            Debug.LogWarning("Target is not a Component, cannot attach effect.");
         }
     }
 
@@ -41,6 +39,17 @@ public class BaseStatusEffect : MonoBehaviour, IStatusEffect
     /// </summary>
     public virtual void ResetEffect()
     {
-        Destroy(this);
+        returnToPoolCallback?.Invoke(this);
     }
+
+    /// <summary>
+    /// Called when the effect is spawned or activated from the pool.
+    /// </summary>
+    public virtual void OnSpawn() => gameObject.SetActive(true);
+
+    /// <summary>
+    /// Called when the effect is despawned or returned to the pool.
+    /// </summary>
+    public virtual void OnDespawn() => gameObject.SetActive(false);
+
 }
