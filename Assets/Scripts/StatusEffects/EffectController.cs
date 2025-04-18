@@ -81,7 +81,11 @@ public class EffectController : MonoBehaviour
         effect.ApplyEffect(target);
 
         if (target is Component targetComponent)
+        {
+            effect.transform.position = targetComponent.transform.position;
             effect.transform.SetParent(targetComponent.transform);
+        }
+            
     }
 
     /// <summary>

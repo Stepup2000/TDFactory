@@ -52,6 +52,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
         _myPath = pPath;
         TryGetComponent<IMoveable>(out _myMovement);
+        EffectController.Instance.ApplyEffect(EffectType.Poison, this);
         _myMovement?.Initialize(_myPath);
     }
 

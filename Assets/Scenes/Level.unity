@@ -2829,7 +2829,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectsToPool:
   - effectType: 0
-    effectPrefab: {fileID: 6214497686550178882, guid: 5f6225a813c13a941a3a8a9352730f87, type: 3}
+    effectPrefab: {fileID: 2913437314586663855, guid: 89e1872a14d27534098e0bb0c486009d, type: 3}
+    initialPoolSize: 5
+  - effectType: 1
+    effectPrefab: {fileID: 2411737274372934019, guid: 5a9c2a25782c5704e9e43e3485f0b393, type: 3}
     initialPoolSize: 5
   poolParent: {fileID: 1411177670}
 --- !u!4 &1417916417 stripped
