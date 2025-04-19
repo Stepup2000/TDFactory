@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e244906bb6e332c4a9ad4a3cb452b25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  <speed>k__BackingField: 10
 --- !u!195 &7077732739433922805
 NavMeshAgent:
   m_ObjectHideFlags: 0
