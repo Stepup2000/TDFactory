@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 543085558278664775}
   - component: {fileID: 5983505034749712890}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Lightflash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
