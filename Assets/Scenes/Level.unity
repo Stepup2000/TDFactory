@@ -2834,6 +2834,9 @@ MonoBehaviour:
   - effectType: 1
     effectPrefab: {fileID: 2411737274372934019, guid: 5a9c2a25782c5704e9e43e3485f0b393, type: 3}
     initialPoolSize: 5
+  - effectType: 2
+    effectPrefab: {fileID: 1289108479611896561, guid: 21794d0c28ec60b448d3c6cf9f240c90, type: 3}
+    initialPoolSize: 5
   poolParent: {fileID: 1411177670}
 --- !u!4 &1417916417 stripped
 Transform:

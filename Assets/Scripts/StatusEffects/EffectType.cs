@@ -12,4 +12,9 @@ public enum EffectType
     /// A poison-based effect that deals low damage over a longer period of time.
     /// </summary>
     Poison,
+
+    /// <summary>
+    /// A ice-based effect that deals low damage at contanct and slows the enemy.
+    /// </summary>
+    Ice,
 }

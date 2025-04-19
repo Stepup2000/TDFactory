@@ -40,6 +40,7 @@ public class NavMeshEnemyMovement : MonoBehaviour, IMoveable
     public void AlterSpeed(float amount)
     {
         speed += amount;
+        _navMeshAgent.speed = speed;
     }
 
     /// <summary>
