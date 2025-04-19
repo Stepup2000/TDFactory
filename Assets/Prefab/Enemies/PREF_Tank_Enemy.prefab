@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: _speed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3704523027065868394, guid: 5e1545f0cfc454443a425160e9da1f7e, type: 3}
+      propertyPath: <speed>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4040857565525922579, guid: 5e1545f0cfc454443a425160e9da1f7e, type: 3}
       propertyPath: m_Name
       value: PREF_Tank_Enemy

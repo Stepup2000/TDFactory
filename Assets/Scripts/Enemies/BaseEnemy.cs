@@ -38,7 +38,6 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     [Tooltip("The total distance the enemy has travelled.")]
     public float travelledDistance { get; private set; }
 
-
     private Transform[] _myPath;
     private IMoveable _myMovement;
 
@@ -51,8 +50,9 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
         maxHealth *= Mathf.Pow(healthMultiplier, WaveController.Instance.GetWaveIndex());
         currentHealth = maxHealth;
         _myPath = pPath;
-        TryGetComponent<IMoveable>(out _myMovement);
+        TryGetComponent<IMoveable>(out _myMovement);        
         _myMovement?.Initialize(_myPath);
+        //EffectController.Instance.ApplyEffect(EffectType.Ice, this);
     }
 
     /// <summary>
@@ -88,9 +88,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     protected void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<EndPoint>(out EndPoint endPoint))
-        {
             Death();
-        }
     }
 
     /// <summary>

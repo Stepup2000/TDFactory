@@ -7,11 +7,11 @@ using UnityEngine.AI;
 /// </summary>
 public class NavMeshEnemyMovement : MonoBehaviour, IMoveable
 {
-    [SerializeField] private float _speed = 1f; // Movement speed of the enemy
+    [field: SerializeField] public float speed { get; set; }
 
-    private NavMeshAgent _navMeshAgent; // NavMeshAgent component for pathfinding
-    private Transform[] _myPath; // Array of waypoints defining the enemy's path
-    private int _waypointIndex = 0; // Index of the current waypoint
+    private NavMeshAgent _navMeshAgent;
+    private Transform[] _myPath;
+    private int _waypointIndex = 0;
 
     /// <summary>
     /// Initializes the enemy with a path and sets up the NavMeshAgent.
@@ -23,14 +23,24 @@ public class NavMeshEnemyMovement : MonoBehaviour, IMoveable
         TryGetComponent<NavMeshAgent>(out _navMeshAgent);
         if (_navMeshAgent != null)
         {
-            _navMeshAgent.autoBraking = false; // Disable auto braking to ensure continuous movement
-            _navMeshAgent.speed = _speed;
+            _navMeshAgent.autoBraking = false;
+            _navMeshAgent.speed = speed;
             SetCurrentWaypoint(_waypointIndex);
         }
         else
         {
             Debug.LogWarning("NavMeshAgent component not found on the enemy.");
         }
+    }
+
+    /// <summary>
+    /// Changes the speed based on the give amount.
+    /// </summary>
+    /// <param name="amount">The amount the speed will change.</param>
+    public void AlterSpeed(float amount)
+    {
+        speed += amount;
+        _navMeshAgent.speed = speed;
     }
 
     /// <summary>

@@ -10,4 +10,11 @@ public interface IMoveable
     /// </summary>
     /// <param name="path">An array of transforms representing the path to be followed.</param>
     void Initialize(Transform[] path);
+
+    void AlterSpeed(float amount);
+
+    /// <summary>
+    /// Gets or sets the speed for movement.
+    /// </summary>
+    float speed { get; set; }
 }
