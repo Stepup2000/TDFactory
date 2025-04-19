@@ -52,7 +52,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
         _myPath = pPath;
         TryGetComponent<IMoveable>(out _myMovement);        
         _myMovement?.Initialize(_myPath);
-        EffectController.Instance.ApplyEffect(EffectType.Ice, this);
+        //EffectController.Instance.ApplyEffect(EffectType.Ice, this);
     }
 
     /// <summary>
