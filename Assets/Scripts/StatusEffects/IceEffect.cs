@@ -10,7 +10,13 @@ public class IceEffect : BaseStatusEffect
     /// The amount the target will be slower (in percentage).
     /// </summary>
     [Range(0, 100)]
-    [SerializeField] private int freezeAmount;
+    [SerializeField] private int freezeAmount = 20;
+
+    /// <summary>
+    /// The minimum speed the target can be slowed to.
+    /// </summary>
+    [Range(0.1f, 100)]
+    [SerializeField] private float minimumSpeed = 1;
 
     private float appliedSpeedReduction;
     private IMoveable targetMoveable;
@@ -30,12 +36,18 @@ public class IceEffect : BaseStatusEffect
             if (moveable != null)
             {
                 float targetSpeed = moveable.speed;
-                float speedReduction = -(targetSpeed / 100) * freezeAmount;
-                moveable.AlterSpeed(speedReduction);
-                appliedSpeedReduction = speedReduction;
+                float speedReduction = (targetSpeed / 100) * freezeAmount;
+                float newSpeed = targetSpeed - speedReduction;
+
+                if (newSpeed >= minimumSpeed)
+                {
+                    moveable.AlterSpeed(-speedReduction);
+                    appliedSpeedReduction = -speedReduction;
+                }
             }
         }
     }
+
 
     /// <summary>
     /// Reapplies the speed to the target moveable.
