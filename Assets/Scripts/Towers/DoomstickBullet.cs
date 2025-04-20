@@ -33,9 +33,6 @@ public class DoomstickBullet : BaseBullet
         var effectTypes = System.Enum.GetValues(typeof(EffectType));
         EffectType selectedEffect = (EffectType)effectTypes.GetValue(Random.Range(0, effectTypes.Length));
 
-        Debug.Log($"DoomstickBullet selected random effect: {selectedEffect}");
-
         return selectedEffect;
     }
-
 }
