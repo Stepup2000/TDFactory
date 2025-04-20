@@ -39,7 +39,7 @@ public class BaseBullet : MonoBehaviour, IBullet
     /// Handles collision with other objects via trigger.
     /// </summary>
     /// <param name="other">The collider of the object the bullet has collided with.</param>
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         HandleTriggerCollision(other);
     }
@@ -64,7 +64,7 @@ public class BaseBullet : MonoBehaviour, IBullet
     /// <summary>
     /// Destroys the bullet by removing it from the game.
     /// </summary>
-    private void DestroySelf()
+    protected void DestroySelf()
     {
         Destroy(gameObject);
     }
@@ -72,7 +72,7 @@ public class BaseBullet : MonoBehaviour, IBullet
     /// <summary>
     /// Updates the bullet's position every frame by calling the Move method.
     /// </summary>
-    private void Update()
+    protected void Update()
     {
         Move();
     }
