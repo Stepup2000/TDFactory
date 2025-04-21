@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BaseStatusEffect : MonoBehaviour, IStatusEffect, IPoolableEffect
+public class BaseStatusEffect : MonoBehaviour, IStatusEffect, IPoolable
 {
     [field: SerializeField] public EffectType effectType { get; set; }
     [field: SerializeField] public float initialDamage { get; set; }

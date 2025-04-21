@@ -1,12 +1,18 @@
-public interface IPoolableEffect
+public interface IPoolable
 {
     /// <summary>
-    /// Method called when the effects spawns in.
+    /// Called when the object is taken from the pool.
     /// </summary>
     void OnSpawn();
 
     /// <summary>
-    /// Method called when the effect ends.
+    /// Called when the object is returned to the pool.
     /// </summary>
     void OnDespawn();
+
+    /// <summary>
+    /// Called to reset the object's internal state before reuse.
+    /// </summary>
+    void Reset();
 }
+
