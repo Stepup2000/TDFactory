@@ -13,6 +13,6 @@ public interface IPoolable
     /// <summary>
     /// Called to reset the object's internal state before reuse.
     /// </summary>
-    void Reset();
+    void ResetObject();
 }
 

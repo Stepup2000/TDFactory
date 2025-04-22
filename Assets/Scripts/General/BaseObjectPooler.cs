@@ -3,27 +3,14 @@ using UnityEngine;
 
 public abstract class BaseObjectPooler<T> : MonoBehaviour where T : MonoBehaviour, IPoolable
 {
-    [SerializeField] private GameObject prefab;
-    [SerializeField] private int initialPoolSize = 10;
-    [SerializeField] private Transform poolParent;
+    [SerializeField] protected GameObject prefab;
+    [SerializeField] protected int initialPoolSize = 10;
+    [SerializeField] protected Transform poolParent;
 
     protected readonly List<T> pool = new();
 
-    protected static BaseObjectPooler<T> instance;
-
-    public static BaseObjectPooler<T> Instance => instance;
-
     protected virtual void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Debug.LogWarning($"Duplicate instance of {typeof(T)} pooler found. Destroying this one.");
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
-
         if (prefab == null)
         {
             Debug.LogError($"Prefab is not assigned in {GetType().Name}. Disabling component.");
@@ -56,7 +43,7 @@ public abstract class BaseObjectPooler<T> : MonoBehaviour where T : MonoBehaviou
         {
             if (!obj.gameObject.activeInHierarchy)
             {
-                obj.Reset();
+                obj.ResetObject();
                 obj.OnSpawn();
                 return obj;
             }

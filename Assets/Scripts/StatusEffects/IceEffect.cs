@@ -44,6 +44,12 @@ public class IceEffect : BaseStatusEffect
                     moveable.AlterSpeed(-speedReduction);
                     appliedSpeedReduction = -speedReduction;
                 }
+                else
+                {
+                    float minReduction = targetSpeed - minimumSpeed;
+                    moveable.AlterSpeed(-minReduction);
+                    appliedSpeedReduction = -minReduction;
+                }
             }
         }
     }

@@ -18,11 +18,8 @@ public class BaseStatusEffect : MonoBehaviour, IStatusEffect, IPoolable
     {
         targetDamageable = target;
 
-        if (target is Component c)
-        {
-            target.TakeDamage(initialDamage);
-            StartCoroutine(EffectDurationTimer());
-        }
+        target.TakeDamage(initialDamage);
+        StartCoroutine(EffectDurationTimer());
     }
 
     /// <summary>
@@ -31,15 +28,16 @@ public class BaseStatusEffect : MonoBehaviour, IStatusEffect, IPoolable
     protected virtual IEnumerator EffectDurationTimer()
     {
         yield return new WaitForSeconds(duration);
-        ResetEffect();
+        ResetObject();
     }
 
     /// <summary>
     /// Called when the effect needs to be reset.
     /// </summary>
-    public virtual void ResetEffect()
+    public virtual void ResetObject()
     {
         returnToPoolCallback?.Invoke(this);
+        StopAllCoroutines();
     }
 
     /// <summary>
