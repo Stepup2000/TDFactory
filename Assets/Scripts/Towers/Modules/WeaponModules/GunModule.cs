@@ -158,7 +158,7 @@ public class GunModule : MonoBehaviour, IWeapon
     protected void ShowReloadIcon()
     {
         Vector3 positionOffset = new Vector3(1, 4, 0);
-        IconDisplayManager.Instance.ShowIcon(reloadIcon, transform.position + positionOffset, reloadDuration);
+        IconDisplayManager.Instance.ShowIcon(reloadIcon, transform.position + positionOffset, reloadDuration, true);
     }
 
     /// <summary>

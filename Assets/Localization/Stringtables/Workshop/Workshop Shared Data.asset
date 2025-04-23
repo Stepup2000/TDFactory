@@ -99,6 +99,10 @@ MonoBehaviour:
     m_Key: Timer
     m_Metadata:
       m_Items: []
+  - m_Id: 27973405001162752
+    m_Key: Doomstick
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

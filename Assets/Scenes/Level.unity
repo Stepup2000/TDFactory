@@ -1170,9 +1170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad30015e1b4121644b5ec725c72b6309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldCanvas: {fileID: 562113517}
-  iconPrefab: {fileID: 4574366891540998731, guid: 8ac7eab23553d184a8c5958bcc3d6389, type: 3}
+  prefab: {fileID: 4574366891540998731, guid: 8ac7eab23553d184a8c5958bcc3d6389, type: 3}
   initialPoolSize: 10
+  poolParent: {fileID: 562113514}
+  worldCanvas: {fileID: 562113517}
 --- !u!1001 &454698023
 PrefabInstance:
   m_ObjectHideFlags: 0

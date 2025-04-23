@@ -75,10 +75,11 @@ public abstract class BaseObjectPooler<T> : MonoBehaviour where T : MonoBehaviou
         GameObject obj = Instantiate(prefab, poolParent);
         obj.SetActive(false);
 
-        if (!obj.TryGetComponent(out T poolableComponent))
+        if (!obj.TryGetComponent(out T poolableComponent) && (poolableComponent = obj.GetComponentInChildren<T>()) == null)
         {
-            Debug.LogError($"Prefab does not have a component of type {typeof(T).Name}");
+            Debug.LogError($"Object {obj.name} does not contain a component of type {typeof(T)}.");
         }
+
 
         return poolableComponent;
     }
