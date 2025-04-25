@@ -54,10 +54,11 @@ public class FloatingTextController : BaseObjectPooler<FloatingTextPopup>
     /// <param name="position">The position to display the text.</param>
     /// <param name="color">The color of the text.</param>
     /// <param name="duration">How long the text should be visible.</param>
-    public void ShowTextPopup(string message, Vector3 position, Color color, float duration)
+    /// /// <param name="newDirection">The direction the pop goes to</param>
+    public void ShowTextPopup(string message, Vector3 position, Color color, float duration, Vector3 newDirection, float minimumFadeAlpha)
     {
         FloatingTextPopup popup = GetFromPool();
-        popup.SetupPopup(message, position, color, duration);
+        popup.SetupPopup(message, position, color, duration, newDirection, minimumFadeAlpha);
         StartCoroutine(ReturnToPoolAfterDelay(popup, duration));
     }
 

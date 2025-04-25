@@ -4933,9 +4933,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <effectType>k__BackingField: 1
-  <initialDamage>k__BackingField: 0.5
+  <initialDamage>k__BackingField: 5
   <duration>k__BackingField: 5
-  <dotDamage>k__BackingField: 0.2
+  <dotDamage>k__BackingField: 2
   <dotCooldown>k__BackingField: 1
 --- !u!1 &9159083299044759365
 GameObject:

@@ -24,7 +24,7 @@ public class IconDisplayManager : BaseObjectPooler<BaseIcon>
 
     [SerializeField] private Canvas worldCanvas;
 
-    private void Awake()
+    protected override void Awake()
     {
         if (instance != null && instance != this)
         {

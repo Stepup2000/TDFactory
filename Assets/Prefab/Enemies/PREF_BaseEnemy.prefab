@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c4adb632a694e48aa28a41aaf923c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <maxHealth>k__BackingField: 1
+  <maxHealth>k__BackingField: 10
   <healthMultiplier>k__BackingField: 1.01
   <spawnCost>k__BackingField: 10
   <heldMoney>k__BackingField: 5

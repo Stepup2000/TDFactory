@@ -11,8 +11,13 @@ public class FloatingTextPopup : MonoBehaviour, IPoolable
     [SerializeField, Tooltip("Speed at which the text popup will move.")]
     private float moveSpeed = 1f;
 
-    private TMP_Text text;
+    [SerializeField, Tooltip("The duration it takes for the popup to fully fade out.")]
     private float fadeDuration = 1f;
+
+    [SerializeField, Tooltip("The alpha the popup will reachwith the fadeout.")]
+    private float minimumFadeAlpha = 0f;
+
+    private TMP_Text text;
 
     private Coroutine moveCoroutine;
 
@@ -47,6 +52,7 @@ public class FloatingTextPopup : MonoBehaviour, IPoolable
         text.color = Color.white;
         fadeDuration = 1f;
         moveDirection = Vector3.up;
+        minimumFadeAlpha = 0;
     }
 
     /// <summary>
@@ -77,12 +83,16 @@ public class FloatingTextPopup : MonoBehaviour, IPoolable
     /// <param name="position">The world position to place the popup.</param>
     /// <param name="newColor">The color of the text.</param>
     /// <param name="newFadeDuration">The fade duration of the text.</param>
-    public void SetupPopup(string message, Vector3 position, Color newColor, float newFadeDuration)
+    /// <param name="newDirection">The direction the pop goes to.</param>
+    /// <param name="newMinimumFadeAlpha">The alpha the popup will reachwith the fadeout.</param>
+    public void SetupPopup(string message, Vector3 position, Color newColor, float newFadeDuration, Vector3 newDirection, float newMinimumFadeAlpha)
     {
         transform.position = position;
         text.text = message;
         text.color = newColor;
         fadeDuration = newFadeDuration;
+        moveDirection = newDirection;
+        minimumFadeAlpha = newMinimumFadeAlpha;
         StartMoving();
     }
 
@@ -99,7 +109,7 @@ public class FloatingTextPopup : MonoBehaviour, IPoolable
             transform.position += moveDirection.normalized * moveSpeed * Time.deltaTime;
 
             // Gradually fade out the text
-            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+            float alpha = Mathf.Lerp(1f, minimumFadeAlpha, elapsedTime / fadeDuration);
             text.color = new Color(initialColor.r, initialColor.g, initialColor.b, alpha);
 
             elapsedTime += Time.deltaTime;
