@@ -25,7 +25,6 @@ public class Laser : BaseBullet
                 {
                     foundDamageAble.TakeDamage(damage); // Apply damage to the enemy
                     _recentlyHitEnemies.Add(foundDamageAble); // Add to the list of recently hit enemies
-
                     // Optionally, remove from the list after a delay (currently commented out)
                     // StartCoroutine(RemoveFromHitList(foundDamageAble, _hitDelay));
                 }

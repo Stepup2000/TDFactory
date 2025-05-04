@@ -19,7 +19,6 @@ public class DoomstickBullet : BaseBullet
 
                 EffectType randomEffect = GetRandomEffect();
                 EffectController.Instance.ApplyEffect(randomEffect, foundDamageAble);
-
                 DestroySelf();
             }
         }

@@ -19,9 +19,4 @@ public interface IStatusEffect
     /// Executes the code related to the effect.
     /// </summary>
     void ApplyEffect(IDamageable target);
-
-    /// <summary>
-    /// Executes when the effects duration is over.
-    /// </summary>
-    void ResetEffect();
 }
