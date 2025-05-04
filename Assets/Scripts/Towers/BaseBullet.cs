@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class BaseBullet : MonoBehaviour, IBullet
 {
@@ -14,7 +15,8 @@ public class BaseBullet : MonoBehaviour, IBullet
     /// </summary>
     [field: SerializeField] public float damage { get; set; }
 
-    [SerializeField] private float _lifeTime = 2;
+    [SerializeField] protected float _lifeTime = 2;
+    [SerializeField] protected VisualEffect impactVFXPrefab;
 
     /// <summary>
     /// Initializes the bullet with a given damage value and sets a timer to destroy it after a certain lifetime.
@@ -56,6 +58,9 @@ public class BaseBullet : MonoBehaviour, IBullet
             if (foundDamageAble.IsStillAlive())
             {
                 foundDamageAble.TakeDamage(damage);
+                if (impactVFXPrefab != null)
+                    Instantiate(impactVFXPrefab, transform.position, Quaternion.identity);                    
+
                 DestroySelf();
             }
         }

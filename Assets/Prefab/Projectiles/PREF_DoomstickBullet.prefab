@@ -81,3 +81,4 @@ MonoBehaviour:
   <speed>k__BackingField: 100
   <damage>k__BackingField: 1
   _lifeTime: 2
+  impactVFXPrefab: {fileID: 2396967469110005505, guid: 5c02a7b946c74e64587534dc6efd812f, type: 3}
