@@ -71,7 +71,7 @@ public class MoneyController : MonoBehaviour
         if (pEvent.amount >= 0) newcolor = Color.green;
         else newcolor = Color.red;
 
-        FloatingTextController.Instance.ShowTextPopup("$" + pEvent.amount, pEvent.position, newcolor, 1f, Vector3.up, 0);
+        FloatingTextController.Instance.ShowTextPopup("$" + pEvent.amount, pEvent.position, 1, newcolor, 1f, Vector3.up, 0);
     }
 
     /// <summary>

@@ -81,14 +81,16 @@ public class FloatingTextPopup : MonoBehaviour, IPoolable
     /// </summary>
     /// <param name="message">The message to display.</param>
     /// <param name="position">The world position to place the popup.</param>
+    /// <param name="newSpeed">The speed the popup moves with.</param>
     /// <param name="newColor">The color of the text.</param>
     /// <param name="newFadeDuration">The fade duration of the text.</param>
     /// <param name="newDirection">The direction the pop goes to.</param>
     /// <param name="newMinimumFadeAlpha">The alpha the popup will reachwith the fadeout.</param>
-    public void SetupPopup(string message, Vector3 position, Color newColor, float newFadeDuration, Vector3 newDirection, float newMinimumFadeAlpha)
+    public void SetupPopup(string message, Vector3 position, float newSpeed,Color newColor, float newFadeDuration, Vector3 newDirection, float newMinimumFadeAlpha)
     {
-        transform.position = position;
         text.text = message;
+        transform.position = position;
+        moveSpeed = newSpeed;
         text.color = newColor;
         fadeDuration = newFadeDuration;
         moveDirection = newDirection;

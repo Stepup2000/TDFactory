@@ -50,16 +50,18 @@ public class FloatingTextController : BaseObjectPooler<FloatingTextPopup>
     /// <summary>
     /// Displays a text popup with the specified message, position, color, and duration.
     /// </summary>
-    /// <param name="message">The text to display.</param>
-    /// <param name="position">The position to display the text.</param>
-    /// <param name="color">The color of the text.</param>
-    /// <param name="duration">How long the text should be visible.</param>
-    /// /// <param name="newDirection">The direction the pop goes to</param>
-    public void ShowTextPopup(string message, Vector3 position, Color color, float duration, Vector3 newDirection, float minimumFadeAlpha)
+    /// <param name="message">The message to display.</param>
+    /// <param name="position">The world position to place the popup.</param>
+    /// <param name="newSpeed">The speed the popup moves with.</param>
+    /// <param name="newColor">The color of the text.</param>
+    /// <param name="newFadeDuration">The fade duration of the text.</param>
+    /// <param name="newDirection">The direction the pop goes to.</param>
+    /// <param name="newMinimumFadeAlpha">The alpha the popup will reachwith the fadeout.</param>
+    public void ShowTextPopup(string message, Vector3 position, float newSpeed, Color newColor, float newFadeDuration, Vector3 newDirection, float newMinimumFadeAlpha)
     {
         FloatingTextPopup popup = GetFromPool();
-        popup.SetupPopup(message, position, color, duration, newDirection, minimumFadeAlpha);
-        StartCoroutine(ReturnToPoolAfterDelay(popup, duration));
+        popup.SetupPopup(message, position, newSpeed, newColor, newFadeDuration, newDirection, newMinimumFadeAlpha);
+        StartCoroutine(ReturnToPoolAfterDelay(popup, newFadeDuration));
     }
 
     /// <summary>

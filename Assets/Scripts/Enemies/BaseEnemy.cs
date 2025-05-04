@@ -68,13 +68,12 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
         }
 
         Vector3 randomDirection = Quaternion.Euler(0, Random.Range(0f, 360f), 0) * Vector3.forward;
-        FloatingTextController.Instance.ShowTextPopup("" + amount, transform.position, Color.red, 0.5f, randomDirection, 0f);
+        FloatingTextController.Instance.ShowTextPopup("" + amount, transform.position, 7.5f, Color.red, 0.5f, randomDirection, 0f);
 
         currentHealth -= amount;
         if (!IsStillAlive())
-        {
             Death();
-        }
+
         OnHealthChanged?.Invoke(currentHealth, maxHealth);        
     }
 
