@@ -49,7 +49,7 @@ public class Tower : MonoBehaviour, ISerializationCallbackReceiver
         _stats = new Dictionary<string, float>()
         {
             { PRICE_STAT, 100f },
-            { DAMAGE_STAT, 1f },
+            { DAMAGE_STAT, 10f },
             { RANGE_STAT, 5f },
             { RELOADSPEED_STAT, 0.1f }
         };

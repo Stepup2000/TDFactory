@@ -6,10 +6,10 @@ public class EffectController : MonoBehaviour
     [Header("Effects to preload")]
     [SerializeField] private List<EffectData> effectsToPool;
 
-    // Internal dictionary for effect pools using enums as keys
     private Dictionary<EffectType, Queue<BaseStatusEffect>> effectPools = new();
 
-    // Optional parent transform for organizing pooled objects
+    private Dictionary<EffectType, BaseStatusEffect> prefabLookup = new();
+
     [SerializeField] private Transform poolParent;
 
     private static EffectController instance;
@@ -51,14 +51,22 @@ public class EffectController : MonoBehaviour
 
             for (int i = 0; i < data.initialPoolSize; i++)
             {
+                if (data.effectPrefab == null)
+                {
+                    Debug.LogError($"Effect prefab for type {data.effectType} is null.");
+                    continue;
+                }
+
                 BaseStatusEffect effect = Instantiate(data.effectPrefab, poolParent);
                 effect.returnToPoolCallback = ReturnToPool;
                 effect.OnDespawn();
                 queue.Enqueue(effect);
             }
 
-            // Store the pool with the corresponding enum key
             effectPools[data.effectType] = queue;
+
+            if (!prefabLookup.ContainsKey(data.effectType))
+                prefabLookup[data.effectType] = data.effectPrefab;
         }
     }
 
@@ -75,7 +83,20 @@ public class EffectController : MonoBehaviour
             return;
         }
 
-        BaseStatusEffect effect = pool.Count > 0 ? pool.Dequeue() : Instantiate(GetPrefab(effectType), poolParent);
+        BaseStatusEffect effect;
+
+        if (pool.Count > 0)
+        {
+            effect = pool.Dequeue();
+        }
+        else
+        {
+            BaseStatusEffect prefab = GetPrefab(effectType);
+            if (prefab == null) return;
+
+            effect = Instantiate(prefab, poolParent);
+        }
+
         effect.returnToPoolCallback = ReturnToPool;
         effect.OnSpawn();
         effect.ApplyEffect(target);
@@ -85,41 +106,37 @@ public class EffectController : MonoBehaviour
             effect.transform.position = targetComponent.transform.position;
             effect.transform.SetParent(targetComponent.transform);
         }
-            
     }
 
     /// <summary>
     /// Returns an effect back to its pool.
     /// </summary>
+    /// <param name="effect">The effect to return.</param>
     private void ReturnToPool(BaseStatusEffect effect)
     {
-        effect.OnDespawn(); // Cleanup effect
+        effect.OnDespawn();
 
-        // Assuming BaseStatusEffect has an 'EffectType' property
-        if (effectPools.TryGetValue(effect.effectType, out var pool))  // Directly use effectType to find the correct pool
+        if (effectPools.TryGetValue(effect.effectType, out var pool))
         {
-            pool.Enqueue(effect); // Return effect to the pool
-            effect.transform.SetParent(transform); // Set parent back to controller
+            pool.Enqueue(effect);
+            effect.transform.SetParent(poolParent != null ? poolParent : transform);
         }
         else
         {
-            // No pool for this effect type found; destroy the effect
             Debug.LogWarning($"Effect of type {effect.GetType()} was not part of any known pool.");
             Destroy(effect.gameObject);
         }
     }
 
-
     /// <summary>
     /// Gets the prefab associated with a given effect type.
     /// </summary>
+    /// <param name="effectType">The effect type to get the prefab for.</param>
+    /// <returns>The corresponding BaseStatusEffect prefab.</returns>
     private BaseStatusEffect GetPrefab(EffectType effectType)
     {
-        foreach (var data in effectsToPool)
-        {
-            if (data.effectType == effectType)
-                return data.effectPrefab;
-        }
+        if (prefabLookup.TryGetValue(effectType, out var prefab))
+            return prefab;
 
         Debug.LogError($"No prefab registered for effect: {effectType}");
         return null;

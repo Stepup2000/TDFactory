@@ -102,6 +102,10 @@ MonoBehaviour:
     m_Localized: Timer
     m_Metadata:
       m_Items: []
+  - m_Id: 27973405001162752
+    m_Localized: Doomstick
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

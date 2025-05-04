@@ -5044,6 +5044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <effectType>k__BackingField: 2
-  <initialDamage>k__BackingField: 0.5
+  <initialDamage>k__BackingField: 5
   <duration>k__BackingField: 3
   freezeAmount: 50
+  minimumSpeed: 1

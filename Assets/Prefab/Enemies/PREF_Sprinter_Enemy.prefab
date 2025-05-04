@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597993601307505162, guid: 5e1545f0cfc454443a425160e9da1f7e, type: 3}
       propertyPath: <maxHealth>k__BackingField
-      value: 0.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5597993601307505162, guid: 5e1545f0cfc454443a425160e9da1f7e, type: 3}
       propertyPath: <spawnCost>k__BackingField
