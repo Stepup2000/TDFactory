@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8280159983855602351}
   - component: {fileID: 2245669752244778123}
   - component: {fileID: 4973602095527509517}
+  - component: {fileID: 5118195536501831263}
   m_Layer: 0
   m_Name: PREF_MainCamera
   m_TagString: MainCamera
@@ -151,3 +152,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraName: MainCamera
+--- !u!114 &5118195536501831263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519197232431571510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89e55e94cdbdb74ab2a7a70ed849247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vignetteMaterial: {fileID: 2100000, guid: c0bf1b700c7e1b64db713c52938cef78, type: 2}
+  transitionDuration: 2
+  offValue: 8
+  offTransitionMultiplier: 2

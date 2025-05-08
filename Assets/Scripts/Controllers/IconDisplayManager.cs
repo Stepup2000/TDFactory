@@ -41,7 +41,6 @@ public class IconDisplayManager : BaseObjectPooler<BaseIcon>
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject);
 
         InitializePool();
     }

@@ -21,7 +21,7 @@ public class PlayerDamageEffect : MonoBehaviour
     void Start()
     {
         CacheStartValue();
-        ApplyInstantValue();
+        ApplyInitialState();
     }
 
     void Update()
@@ -103,13 +103,15 @@ public class PlayerDamageEffect : MonoBehaviour
     }
 
     /// <summary>
-    /// Applies the target VignettePower immediately (no animation).
+    /// Immediately sets the shader's VignettePower based on the current toggle state (on or off).
+    /// Called at startup to ensure visual state matches logic.
     /// </summary>
-    private void ApplyInstantValue()
+    private void ApplyInitialState()
     {
         currentValue = toggled ? startValue : offValue;
         vignetteMaterial.SetFloat("_VignettePower", currentValue);
     }
+
 
     /// <summary>
     /// Resets the VignettePower to its original "on" value when the object is destroyed.
