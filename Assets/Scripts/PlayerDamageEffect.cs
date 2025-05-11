@@ -18,6 +18,31 @@ public class PlayerDamageEffect : MonoBehaviour
     private float currentValue;
     private float autoTurnOffTime = 0f;
 
+    private static PlayerDamageEffect instance;
+
+    /// <summary>
+    /// Provides access to the singleton instance of PlayerDamageEffect.
+    /// Ensures only one instance exists and persists across scenes.
+    /// </summary>
+    public static PlayerDamageEffect Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<PlayerDamageEffect>();
+
+                if (instance == null)
+                {
+                    GameObject singletonObject = new GameObject(typeof(PlayerDamageEffect).Name);
+                    instance = singletonObject.AddComponent<PlayerDamageEffect>();
+                }
+            }
+
+            return instance;
+        }
+    }
+
     void Start()
     {
         CacheStartValue();
@@ -28,7 +53,7 @@ public class PlayerDamageEffect : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            Toggle(!toggled, 2);
+            ToggleHitEffect(!toggled, 0.2f);
         }
 
         AnimateVignette();
@@ -48,7 +73,7 @@ public class PlayerDamageEffect : MonoBehaviour
     /// </summary>
     /// <param name="turnOn">True to turn on the effect, false to turn it off.</param>
     /// <param name="duration">Optional duration in seconds for how long the effect lasts before turning off automatically.</param>
-    public void Toggle(bool turnOn, float duration = -1f)
+    public void ToggleHitEffect(bool turnOn, float duration = -1f)
     {
         if (toggled == turnOn)
             return;
@@ -97,7 +122,7 @@ public class PlayerDamageEffect : MonoBehaviour
             autoTurnOffTime -= Time.deltaTime;
             if (autoTurnOffTime <= 0f)
             {
-                Toggle(false);
+                ToggleHitEffect(false);
             }
         }
     }
@@ -119,5 +144,6 @@ public class PlayerDamageEffect : MonoBehaviour
     private void OnDestroy()
     {
         vignetteMaterial.SetFloat("_VignettePower", startValue);
+        ToggleHitEffect(false);
     }
 }

@@ -90,7 +90,10 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     protected void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<EndPoint>(out EndPoint endPoint))
+        {
+            PlayerDamageEffect.Instance.ToggleHitEffect(true, 0.2f);
             Death();
+        }
     }
 
     /// <summary>
